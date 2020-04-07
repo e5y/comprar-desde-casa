@@ -5,7 +5,7 @@
 
 <Layout>
     <h1>Agregá tu negocio</h1>
-    <Info>Si tenés un negocio y hacés delivery, podés inscribirte para aparecer en los listados de Pedime Lo Que Quieras.</Info>
+    <Info>Si tenés un negocio y hacés delivery, podés inscribirte para aparecer en los listados de Comprá desde Casa.</Info>
     <form>
         <input type="text" name="name" placeholder="Nombre del negocio *">
         <input type="text" name="name" placeholder="Nombre del titular *">

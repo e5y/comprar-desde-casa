@@ -2,9 +2,13 @@
     <h1>La Naranja se Pasea</h1>
     <h2>Verdulería</h2>
     <section class="buttons">
+         <a href="https://wa.me/543512584752">
+            <i class="fab fa-whatsapp"></i>
+            Hablar ahora
+        </a>
         <a href="tel:+54 351 2584752">
             <i class="fas fa-phone"></i>
-            +54 351 2584752
+            Llamar ahora
         </a>
         <a href="https://google.com">
             <i class="fas fa-link"></i>
@@ -45,5 +49,10 @@
         color: #1e4cf5;
         text-decoration: none;
         margin: .25rem 0;
+    }
+
+    .business .buttons a i {
+        margin-right: .25rem;
+        width: 1rem;
     }
 </style>
