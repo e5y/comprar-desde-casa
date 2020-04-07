@@ -3,5 +3,5 @@
 </script>
 
 <Layout>
-    Home
+NearMe
 </Layout>
