@@ -10,7 +10,7 @@
     <Link to="about">About</Link>
   </nav>
   <div>
-    <Route path="about/:id" component="{About}" />
+    <Route path="about" component="{About}" />
     <Route path="/"><Home /></Route>
   </div>
 </Router>
