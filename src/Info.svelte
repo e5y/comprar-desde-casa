@@ -51,6 +51,8 @@
   }
   .info .close-icon {
     margin-left: 0.5rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.8rem;
   }
 </style>
 
