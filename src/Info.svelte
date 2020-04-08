@@ -1,3 +1,27 @@
+<script>
+  import { fade } from "svelte/transition";
+
+  export let type;
+
+  let icon;
+
+  switch (type) {
+    case "success":
+      icon = "fas fa-check";
+      break;
+    case "error":
+      icon = "fas fa-times-circle";
+      break;
+    default:
+      icon = "fas fa-info-circle";
+  }
+
+  let open = true;
+  const close = () => {
+    open = false;
+  };
+</script>
+
 <style>
   .info {
     background: rgba(0, 0, 0, 0.1);
@@ -7,20 +31,35 @@
     display: flex;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   }
+
+  .info.success {
+    background-color: #b5ff95;
+  }
+
+  .info.error {
+    background-color: #ff9595;
+  }
+
   .info p {
     margin: 0;
   }
   :global(.info a) {
     color: black;
   }
-  .info i {
+  .info .icon {
     margin-right: 0.5rem;
+  }
+  .info .close-icon {
+    margin-left: 0.5rem;
   }
 </style>
 
-<section class="info">
-  <i class="fas fa-info-circle" />
-  <p>
-    <slot />
-  </p>
-</section>
+{#if open}
+  <section class="info {type}" out:fade>
+    <i class="{icon} icon" />
+    <p>
+      <slot />
+    </p>
+    <i class="fas fa-times close-icon" on:click={close} />
+  </section>
+{/if}

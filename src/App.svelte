@@ -32,7 +32,7 @@
 
 <Router>
   <Route path="/agregar-negocio">
-    <AddBusiness {db} {geo} />
+    <AddBusiness {db} {geo} {categories} />
   </Route>
   <Route path="/cerca/:category" let:params>
     <NearMe category={params.category} {db} {geo} />
