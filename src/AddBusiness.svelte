@@ -5,6 +5,9 @@
   import AddBusinessForm from "./AddBusinessForm.svelte";
 
   let sent = false;
+  const onFormSent = () => {
+    sent = true;
+  };
 
   export let db;
   export let geo;
@@ -26,11 +29,11 @@
   {#if categories}
     {#if sent}
       <Info type="success">
-        Tu negocio fue enviado y está en revisión, te notificaremos a {form.owner_email}
+        Tu negocio fue enviado y está en revisión, te enviaremos un correo
         cuando sea aprobado.
       </Info>
     {:else}
-      <AddBusinessForm {db} {geo} {categories} />
+      <AddBusinessForm {db} {geo} {categories} on:sent={onFormSent} />
     {/if}
   {:else}
     <Loader />

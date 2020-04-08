@@ -72,10 +72,9 @@
       <Business business={currentBusiness} />
       <Map {points} />
     {:else}
-      <Info>
-        No encontramos negocios.
-        <br />
-        <Link to="/">Volver al inicio</Link>
+      <Info type="error">
+        No encontramos negocios cerca.
+        <Link to="/">Volver</Link>
       </Info>
     {/if}
   {:else}

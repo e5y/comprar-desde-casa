@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { googleMapsLoaded } from "./stores";
+  import { createEventDispatcher } from "svelte";
   const form = {
     owner_name: "",
     owner_email: "",
@@ -29,9 +30,11 @@
     });
   };
 
+  const dispatch = createEventDispatcher();
+
   const sendForm = () => {
     db.collection("pending_businesses").add(form);
-    sent = true;
+    dispatch("sent");
   };
 
   onMount(() => {

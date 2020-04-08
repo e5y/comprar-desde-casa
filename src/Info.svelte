@@ -1,7 +1,5 @@
 <script>
-  import { fade } from "svelte/transition";
-
-  export let type;
+  export let type = "regular";
 
   let icon;
 
@@ -50,14 +48,14 @@
     margin-right: 0.5rem;
   }
   .info .close-icon {
-    margin-left: 0.5rem;
+    margin-left: auto;
     color: rgba(0, 0, 0, 0.5);
     font-size: 0.8rem;
   }
 </style>
 
 {#if open}
-  <section class="info {type}" out:fade>
+  <section class="info {type}">
     <i class="{icon} icon" />
     <p>
       <slot />

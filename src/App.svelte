@@ -4,6 +4,7 @@
   import Home from "./Home.svelte";
   import NearMe from "./NearMe.svelte";
   import AddBusiness from "./AddBusiness.svelte";
+  import Admin from "./Admin.svelte";
   import * as geofirex from "geofirex";
 
   firebase.initializeApp({
@@ -31,6 +32,9 @@
 </script>
 
 <Router>
+  <Route path="/admin">
+    <Admin {db} {geo} {categories} />
+  </Route>
   <Route path="/agregar-negocio">
     <AddBusiness {db} {geo} {categories} />
   </Route>
