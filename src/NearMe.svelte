@@ -2,7 +2,9 @@
     import Layout from "./Layout.svelte";
     import Business from "./Business.svelte";
     import Map from "./Map.svelte";
+
     export let category;
+    export let db;
 </script>
 
 <Layout>

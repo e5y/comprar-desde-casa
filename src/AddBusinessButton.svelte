@@ -1,43 +1,43 @@
 <script>
-    import { Link } from "svelte-routing";
+  import { Link } from "svelte-routing";
 </script>
 
-<li>
-    <Link to="/agregar-negocio">
-        <i class="fas fa-plus-circle"></i>
-        Agregá tu negocio
-    </Link>
-</li>
-
 <style>
-    li {
-        position: relative;
-        width: calc( 50% - .25rem );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: black;
-        border-radius: 10px;
-        min-height: 100px;
-        background-size: cover;
-        margin-bottom: .5rem;
-        color: white;
-        font-weight: 500;
-        text-shadow: 1px 1px 5px rgba(0,0,0,.2);
-        box-shadow: 0 1px 5px rgba(0,0,0,.2);
-        font-size: 1.25rem;
-        text-align: center;
-    }
-    :global(li a) {
-        color: white;
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        padding: 1rem;
-        font-size: 1rem;
-    }
-    :global(li a i) {
-        margin-bottom: .5rem;
-        font-size: 2rem;
-    }
+  li {
+    position: relative;
+    width: calc(50% - 0.25rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    border-radius: 10px;
+    min-height: 100px;
+    background-size: cover;
+    margin-bottom: 0.5rem;
+    color: white;
+    font-weight: 500;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1.25rem;
+    text-align: center;
+  }
+  :global(li a) {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  :global(li a i) {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+  }
 </style>
+
+<li>
+  <Link to="/agregar-negocio">
+    <i class="fas fa-plus-circle" />
+    Agregá tu negocio
+  </Link>
+</li>
