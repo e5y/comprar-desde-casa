@@ -20,6 +20,7 @@
     font-weight: 500;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
   }
   :global(li a) {
     font-size: 1.25rem;

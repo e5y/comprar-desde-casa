@@ -33,7 +33,7 @@
   };
 
   const sendForm = () => {
-    db.collection("businesses").add(form);
+    db.collection("pending_businesses").add(form);
   };
 
   onMount(() => {

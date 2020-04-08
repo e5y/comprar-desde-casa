@@ -12,7 +12,7 @@
 
 <Layout>
   <Info>
-    Podés seleccionar una categoría o bien buscar
+    Podés seleccionar un rubro o bien buscar
     <Link to="/cerca/todos">todos los negocios cerca tuyo</Link>
   </Info>
   {#if categories}

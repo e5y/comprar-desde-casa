@@ -25,6 +25,7 @@
     categories = await db
       .collection("categories")
       .where("visible", "==", true)
+      .orderBy("order")
       .get();
   });
 </script>

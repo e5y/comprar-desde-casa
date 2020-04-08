@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { Link } from "svelte-routing";
   import Layout from "./Layout.svelte";
   import Loader from "./Loader.svelte";
   import Business from "./Business.svelte";
@@ -20,8 +21,10 @@
     };
     const firestoreQuery =
       category === "todos"
-        ? db.collection("businesses")
-        : db.collection("businesses").where("category", "==", category);
+        ? db.collection("approved_businesses")
+        : db
+            .collection("approved_businesses")
+            .where("category", "==", category);
     const geoQuery = geo
       .query(firestoreQuery)
       .within(
@@ -69,7 +72,11 @@
       <Business business={currentBusiness} />
       <Map {points} />
     {:else}
-      <Info>No encontramos negocios para esa categoría</Info>
+      <Info>
+        No encontramos negocios.
+        <br />
+        <Link to="/">Volver al inicio</Link>
+      </Info>
     {/if}
   {:else}
     <Loader />
