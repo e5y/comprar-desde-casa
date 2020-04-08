@@ -1,3 +1,29 @@
+<script>
+  const arrayToDays = array => {
+    const days = [
+      "lunes",
+      "martes",
+      "miércoles",
+      "jueves",
+      "viernes",
+      "sábados",
+      "domingos"
+    ];
+    return array.map(i => days[i]);
+  };
+
+  const makeCommaSeparatedString = (arr, useOxfordComma) => {
+    const listStart = arr.slice(0, -1).join(", ");
+    const listEnd = arr.slice(-1);
+    const conjunction =
+      arr.length <= 1 ? "" : useOxfordComma && arr.length > 2 ? ", y " : " y ";
+
+    return [listStart, listEnd].join(conjunction);
+  };
+
+  export let business;
+</script>
+
 <style>
   .business {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
@@ -32,27 +58,50 @@
     margin: 0.25rem 0;
   }
 
-  .business .buttons a i {
+  .business .buttons a i,
+  .radius i {
     margin-right: 0.25rem;
     width: 1rem;
+  }
+
+  .radius {
+    display: flex;
+  }
+
+  .radius i {
+    margin-right: 1rem;
+  }
+
+  .description {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
   }
 </style>
 
 <article class="business">
-  <h1>La Naranja se Pasea</h1>
-  <h2>Verdulería</h2>
+  <h1>{business.name}</h1>
+  <h2>{business.category}</h2>
+  <p class="radius">
+    <i class="fas fa-biking" />
+    Entrega los {makeCommaSeparatedString(arrayToDays(business.delivery_days))}
+    en un radio de {business.delivery_radius} km
+  </p>
+  <p class="description">{business.description}</p>
   <section class="buttons">
-    <a href="https://wa.me/543512584752">
-      <i class="fab fa-whatsapp" />
-      Hablar ahora
-    </a>
-    <a href="tel:+54 351 2584752">
+    {#if business.whatsapp}
+      <a href="https://wa.me/{business.phone.replace(/\D+/g, '')}">
+        <i class="fab fa-whatsapp" />
+        Hablar ahora
+      </a>
+    {/if}
+    <a href="tel:{business.phone}">
       <i class="fas fa-phone" />
       Llamar ahora
     </a>
-    <a href="https://google.com">
+    <a href={business.url}>
       <i class="fas fa-link" />
-      delasalaalcomedor.com.ar
+      {business.url.replace(/(^\w+:|^)\/\//, '')}
     </a>
   </section>
 </article>

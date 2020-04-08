@@ -4,6 +4,7 @@
   import Home from "./Home.svelte";
   import NearMe from "./NearMe.svelte";
   import AddBusiness from "./AddBusiness.svelte";
+  import * as geofirex from "geofirex";
 
   firebase.initializeApp({
     apiKey: "AIzaSyCeMIytvcgakZJfwf1B-8qfujq7b9VPZqk",
@@ -17,19 +18,23 @@
   });
 
   const db = firebase.firestore();
+  const geo = geofirex.init(firebase);
 
   let categories;
   onMount(async () => {
-    categories = await db.collection("categories").get();
+    categories = await db
+      .collection("categories")
+      .where("visible", "==", true)
+      .get();
   });
 </script>
 
 <Router>
   <Route path="/agregar-negocio">
-    <AddBusiness {db} />
+    <AddBusiness {db} {geo} />
   </Route>
   <Route path="/cerca/:category" let:params>
-    <NearMe category={params.category} {db} />
+    <NearMe category={params.category} {db} {geo} />
   </Route>
   <Route path="/">
     <Home {categories} />

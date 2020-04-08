@@ -21,7 +21,8 @@
     font-size: 1.25rem;
     text-align: center;
   }
-  :global(li a) {
+  :global(li a),
+  :global(.add-business-button a) {
     color: white;
     text-decoration: none;
     display: flex;
@@ -35,7 +36,7 @@
   }
 </style>
 
-<li>
+<li class="add-business-button">
   <Link to="/agregar-negocio">
     <i class="fas fa-plus-circle" />
     Agregá tu negocio

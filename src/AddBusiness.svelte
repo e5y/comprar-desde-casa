@@ -1,8 +1,47 @@
 <script>
   import Layout from "./Layout.svelte";
   import Info from "./Info.svelte";
+  import { onMount } from "svelte";
+  import { googleMapsLoaded } from "./stores";
+
+  const form = {
+    owner_name: "",
+    owner_email: "",
+    name: "",
+    position: null,
+    location: "",
+    phone: "",
+    whatsapp: false,
+    category: "",
+    delivery_days: [],
+    delivery_radius: "",
+    description: "",
+    url: ""
+  };
+
+  const setupInput = () => {
+    const input = document.querySelector("input[name=location]");
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      form.position = geo.point(
+        place.geometry.location.lat(),
+        place.geometry.location.lng()
+      );
+      form.location = place.name;
+    });
+  };
+
+  const sendForm = () => {
+    db.collection("businesses").add(form);
+  };
+
+  onMount(() => {
+    googleMapsLoaded.subscribe(loaded => loaded === true && setupInput());
+  });
 
   export let db;
+  export let geo;
 </script>
 
 <style>
@@ -69,75 +108,131 @@
   </Info>
   <form>
     <section class="form-section">
-      <input type="text" name="name" placeholder="Nombre del titular *" />
-      <input type="text" name="name" placeholder="Correo electrónico *" />
+      <input
+        type="text"
+        name="owner_name"
+        placeholder="Nombre del titular *"
+        bind:value={form.owner_name} />
+      <input
+        type="email"
+        name="owner_email"
+        placeholder="Correo electrónico *"
+        bind:value={form.owner_email} />
     </section>
     <section class="form-section">
-      <input type="text" name="name" placeholder="Nombre del negocio *" />
-      <input type="text" name="name" placeholder="Ubicación *" />
-      <input type="text" name="name" placeholder="Teléfono *" />
+      <input
+        type="text"
+        name="name"
+        placeholder="Nombre del negocio *"
+        bind:value={form.name} />
+      <input type="text" name="location" placeholder="Ubicación *" />
+      <input
+        type="tel"
+        name="phone"
+        placeholder="Teléfono *"
+        bind:value={form.phone} />
       <label>
-        <input type="checkbox" name="name" />
+        <input type="checkbox" name="whatsapp" bind:checked={form.whatsapp} />
         ¿Se atiende por WhatsApp?
       </label>
     </section>
     <section class="form-section">
-      <label for="categories">Categoría *</label>
-      <select id="categories">
-        <option>Verdulería</option>
-        <option>Carnicería</option>
-        <option>Congelado</option>
-        <option>Almacén</option>
-        <option>Farmacia</option>
-        <option>Elaborados</option>
-        <option>Ferretería</option>
-        <option>Bebidas</option>
-        <option>Electrónica</option>
-        <option>Otro</option>
+      <label for="category">Categoría *</label>
+      <select id="category" bind:value={form.category}>
+        <option value="verdulerias">Verdulería</option>
+        <option value="carnicerias">Carnicería</option>
+        <option value="congelados">Congelado</option>
+        <option value="almacenes">Almacén</option>
+        <option value="farmacias">Farmacia</option>
+        <option value="elaborados">Elaborados</option>
+        <option value="ferreterias">Ferretería</option>
+        <option value="bebidas">Bebidas</option>
+        <option value="electronica">Electrónica</option>
+        <option value="otros">Otros</option>
       </select>
     </section>
     <section class="form-section">
       <label>Días de delivery</label>
       <section class="days">
         <label>
-          <input type="checkbox" name="name" />
+          <input
+            type="checkbox"
+            name="delivery_days"
+            bind:group={form.delivery_days}
+            value="0" />
           L
         </label>
         <label>
-          <input type="checkbox" name="name" />
+          <input
+            type="checkbox"
+            name="delivery_days"
+            bind:group={form.delivery_days}
+            value="1" />
           M
         </label>
         <label>
-          <input type="checkbox" name="name" />
+          <input
+            type="checkbox"
+            name="delivery_days"
+            bind:group={form.delivery_days}
+            value="2" />
           Mi
         </label>
         <label>
-          <input type="checkbox" name="name" />
+          <input
+            type="checkbox"
+            name="delivery_days"
+            bind:group={form.delivery_days}
+            value="3" />
           J
         </label>
         <label>
-          <input type="checkbox" name="name" />
+          <input
+            type="checkbox"
+            name="delivery_days"
+            bind:group={form.delivery_days}
+            value="4" />
           V
         </label>
         <label>
-          <input type="checkbox" name="name" />
+          <input
+            type="checkbox"
+            name="delivery_days"
+            bind:group={form.delivery_days}
+            value="5" />
           S
         </label>
         <label>
-          <input type="checkbox" name="name" />
+          <input
+            type="checkbox"
+            name="delivery_days"
+            bind:group={form.delivery_days}
+            value="6" />
           D
         </label>
       </section>
-      <input type="number" placeholder="Radio de entrega (km)" />
+      <input
+        type="number"
+        placeholder="Radio de entrega (km)"
+        name="delivery_radius"
+        bind:value={form.delivery_radius} />
     </section>
     <section class="form-section">
       <textarea
-        name="name"
+        name="description"
         placeholder="Breve descripción del negocio"
         maxlength="300"
-        rows="8" />
-      <input type="text" name="name" placeholder="Tienda online o sitio web" />
+        rows="8"
+        bind:value={form.description} />
+      <input
+        type="url"
+        name="url"
+        placeholder="Tienda online o sitio web"
+        bind:value={form.url} />
     </section>
-    <input type="submit" value="Inscribirme" />
+    <input
+      type="submit"
+      value="Inscribirme"
+      on:click|once|preventDefault={sendForm} />
   </form>
 </Layout>

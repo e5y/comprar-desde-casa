@@ -16,6 +16,8 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "geofirex": "^0.1.0",
+    "rxjs": "^6.5.5",
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.4.2"
   }

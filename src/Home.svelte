@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { Link } from "svelte-routing";
   import Layout from "./Layout.svelte";
   import BusinessCategories from "./BusinessCategories.svelte";
