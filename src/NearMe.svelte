@@ -4,6 +4,7 @@
   import Loader from "./Loader.svelte";
   import Business from "./Business.svelte";
   import Map from "./Map.svelte";
+  import Info from "./Info.svelte";
   import { get } from "geofirex";
 
   const radius = 5;
@@ -56,16 +57,20 @@
 
 <Layout>
   {#if results}
-    {#if category === 'todos'}
-      <h1>Cerca mío</h1>
+    {#if results.length}
+      {#if category === 'todos'}
+        <h1>Cerca mío</h1>
+      {:else}
+        <h1>
+          <span class="category">{category}</span>
+          cerca mío
+        </h1>
+      {/if}
+      <Business business={currentBusiness} />
+      <Map {points} />
     {:else}
-      <h1>
-        <span class="category">{category}</span>
-        cerca mío
-      </h1>
+      <Info>No encontramos negocios para esa categoría</Info>
     {/if}
-    <Business business={currentBusiness} />
-    <Map {points} />
   {:else}
     <Loader />
   {/if}
