@@ -1,12 +1,13 @@
 <script>
   import { onMount } from "svelte";
   import { Link } from "svelte-routing";
+  import { get } from "geofirex";
   import Layout from "./Layout.svelte";
   import Loader from "./Loader.svelte";
   import Business from "./Business.svelte";
   import Map from "./Map.svelte";
   import Info from "./Info.svelte";
-  import { get } from "geofirex";
+  import { googleMapsLoaded } from "./stores.js";
 
   const radius = 5;
   let results, currentBusiness, points;
@@ -34,12 +35,26 @@
       );
     results = await get(geoQuery);
     currentBusiness = results[0];
-    points = results.map(business => ({
-      lat: business.position.geopoint.latitude,
-      lng: business.position.geopoint.longitude,
-      id: business.id
-    }));
+    points = [
+      {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+        id: "user",
+        category: "user"
+      },
+      ...results.map(business => ({
+        category: business.category,
+        lat: business.position.geopoint.latitude,
+        lng: business.position.geopoint.longitude,
+        id: business.id
+      }))
+    ];
     console.log(results);
+  };
+
+  const selectBusiness = e => {
+    const id = e.detail.id;
+    currentBusiness = results.find(result => result.id === id);
   };
 
   onMount(async () => navigator.geolocation.getCurrentPosition(fetchResults));
@@ -69,8 +84,10 @@
           cerca mío
         </h1>
       {/if}
+      {#if $googleMapsLoaded}
+        <Map {points} on:markerClicked={selectBusiness} />
+      {/if}
       <Business business={currentBusiness} />
-      <Map {points} />
     {:else}
       <Info type="error">
         No encontramos negocios cerca.

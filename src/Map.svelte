@@ -1,17 +1,47 @@
+<script>
+  import { onMount, createEventDispatcher } from "svelte";
+  let random = Math.random() * 10;
+  export let points;
+
+  const dispatch = createEventDispatcher();
+
+  onMount(() => {
+    const element = document.getElementById(`map-${random}`);
+
+    const map = new google.maps.Map(element);
+
+    const bounds = new google.maps.LatLngBounds();
+    points.forEach((point, i) => {
+      const position = { lat: point.lat, lng: point.lng };
+      const marker = new google.maps.Marker({
+        position,
+        map,
+        icon: {
+          url: `/markers/${point.category}.png`,
+          size: new google.maps.Size(50, 50),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(25, 50)
+        }
+      });
+      if (i !== 0)
+        marker.addListener("click", () => {
+          dispatch("markerClicked", { id: point.id });
+        });
+      bounds.extend(position);
+    });
+
+    map.fitBounds(bounds);
+  });
+</script>
+
 <style>
-  iframe {
+  .map {
     width: 100%;
     height: 300px;
     border-radius: 7px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
   }
 </style>
 
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.8389961776074!2d-64.18216238430371!3d-31.446099104837444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a2e4549f42a1%3A0xcfb7e5d37c07e305!2sMarcelo%20Garlot%202940%2C%20X5016FKH%20C%C3%B3rdoba!5e0!3m2!1sen!2sar!4v1586245780888!5m2!1sen!2sar"
-  frameborder="0"
-  title="Mapa"
-  style="border:0;"
-  allowfullscreen=""
-  aria-hidden="false"
-  tabindex="0" />
+<div id="map-{random}" class="map" />
