@@ -41,20 +41,33 @@
   .controls .dissaprove {
     background: #ff9595;
   }
+
+  .business-moderator {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 700px) {
+    .business-moderator {
+      width: calc(50% - 2rem);
+      margin: 1rem;
+    }
+  }
 </style>
 
-<Business {business} />
-<section class="controls">
-  {#if collection === 'rejected_businesses' || collection === 'pending_businesses'}
-    <button class="approve" on:click={onApprove}>
-      <i class="fas fa-check" />
-      Aprobar
-    </button>
-  {/if}
-  {#if collection === 'approved_businesses' || collection === 'pending_businesses'}
-    <button class="dissaprove" on:click={onReject}>
-      <i class="fas fa-times" />
-      Desaprobar
-    </button>
-  {/if}
+<section class="business-moderator">
+  <Business {business} />
+  <section class="controls">
+    {#if collection === 'rejected_businesses' || collection === 'pending_businesses'}
+      <button class="approve" on:click={onApprove}>
+        <i class="fas fa-check" />
+        Aprobar
+      </button>
+    {/if}
+    {#if collection === 'approved_businesses' || collection === 'pending_businesses'}
+      <button class="dissaprove" on:click={onReject}>
+        <i class="fas fa-times" />
+        Desaprobar
+      </button>
+    {/if}
+  </section>
 </section>

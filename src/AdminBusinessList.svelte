@@ -54,15 +54,24 @@
   };
 </script>
 
+<style>
+  .business-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>
+
 {#if businesses}
   {#if businesses.length}
-    {#each businesses as business}
-      <BusinessModerator
-        {business}
-        {collection}
-        on:approved={onApproved}
-        on:rejected={onRejected} />
-    {/each}
+    <section class="business-list">
+      {#each businesses as business}
+        <BusinessModerator
+          {business}
+          {collection}
+          on:approved={onApproved}
+          on:rejected={onRejected} />
+      {/each}
+    </section>
   {:else}
     <Info type="error">No se encontraron negocios.</Info>
   {/if}

@@ -27,7 +27,8 @@
     text-align: center;
     display: flex;
     justify-content: space-between;
-    margin: 1rem;
+    margin: 1rem auto;
+    max-width: 1024px;
   }
   :global(nav a),
   :global(nav a:visited) {
@@ -44,6 +45,33 @@
   :global(nav a:hover i),
   :global(nav a:focus i) {
     transform: scale(1.1);
+  }
+
+  @media screen and (min-width: 400px) {
+    nav {
+      justify-content: center;
+    }
+    :global(nav a) {
+      margin: 0 0.5rem;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    nav {
+      justify-content: flex-start;
+      margin: 0;
+    }
+    :global(nav a) {
+      margin: 0 1rem;
+    }
+    .logo {
+      margin: 1rem;
+    }
   }
 
   .topbar {
@@ -69,19 +97,19 @@
   }
 </style>
 
+{#if $loggedIn}
+  <section class="topbar">
+    <span>
+      <i class="fas fa-cogs" />
+      <Link to="/admin">Ir al panel de administración</Link>
+    </span>
+    <button on:click={logOut}>
+      <i class="fas fa-sign-out-alt" />
+      Salir
+    </button>
+  </section>
+{/if}
 <header>
-  {#if $loggedIn}
-    <section class="topbar">
-      <span>
-        <i class="fas fa-cogs" />
-        <Link to="/admin">Ir al panel de administración</Link>
-      </span>
-      <button on:click={logOut}>
-        <i class="fas fa-sign-out-alt" />
-        Salir
-      </button>
-    </section>
-  {/if}
   <section class="logo">
     <Link to="/">
       <img alt src="/logo.png" />

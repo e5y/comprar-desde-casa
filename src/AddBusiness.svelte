@@ -29,8 +29,8 @@
   </Info>
   {#if $loggedIn}
     <Info type="warning">
-      Usted está logueado como administrador, al enviar el formulario el negocio
-      se aprobará de manera instantánea.
+      Estás logueado como administrador, al enviar el formulario el negocio se
+      aprobará de manera instantánea
     </Info>
   {/if}
   {#if categories}

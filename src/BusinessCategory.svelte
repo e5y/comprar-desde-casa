@@ -25,6 +25,18 @@
   :global(li a) {
     font-size: 1.25rem;
   }
+
+  @media screen and (min-width: 700px) {
+    li {
+      width: calc(33% - 0.25rem);
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    li {
+      width: calc(25% - 0.25rem);
+    }
+  }
 </style>
 
 <li

@@ -21,6 +21,19 @@
     font-size: 1.25rem;
     text-align: center;
   }
+
+  @media screen and (min-width: 700px) {
+    li {
+      width: calc(33% - 0.25rem);
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    li {
+      width: calc(25% - 0.25rem);
+    }
+  }
+
   :global(li a),
   :global(.add-business-button a) {
     color: white;

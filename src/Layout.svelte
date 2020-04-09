@@ -6,6 +6,15 @@
 <style>
   .content {
     padding: 1rem;
+    max-width: 1024px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .content {
+      padding: 2rem 1rem;
+    }
   }
 </style>
 
