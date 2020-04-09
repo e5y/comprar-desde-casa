@@ -109,6 +109,7 @@
       type="text"
       name="owner_name"
       placeholder="Nombre del titular *"
+      maxlength="50"
       bind:value={form.owner_name} />
     <input
       type="email"
@@ -121,12 +122,14 @@
       type="text"
       name="name"
       placeholder="Nombre del negocio *"
+      maxlength="50"
       bind:value={form.name} />
     <input type="text" name="location" placeholder="Ubicación *" />
     <input
       type="tel"
       name="phone"
       placeholder="Teléfono *"
+      maxlength="50"
       bind:value={form.phone} />
     <label>
       <input type="checkbox" name="whatsapp" bind:checked={form.whatsapp} />
@@ -205,6 +208,7 @@
       type="number"
       placeholder="Radio de entrega (km)"
       name="delivery_radius"
+      max="100"
       bind:value={form.delivery_radius} />
   </section>
   <section class="form-section">
