@@ -55,7 +55,7 @@
     <AddBusiness {db} {geo} {categories} />
   </Route>
   <Route path="/cerca/:category" let:params>
-    <NearMe category={params.category} {db} {geo} />
+    <NearMe category={params.category} {db} {geo} {categories} />
   </Route>
   <Route path="/">
     <Home {categories} />

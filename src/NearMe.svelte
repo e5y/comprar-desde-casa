@@ -9,6 +9,11 @@
   import Info from "./Info.svelte";
   import { googleMapsLoaded } from "./stores.js";
 
+  export let category;
+  export let categories;
+  export let db;
+  export let geo;
+
   const radius = 5;
   let results, currentBusiness, points;
 
@@ -58,10 +63,6 @@
   };
 
   onMount(async () => navigator.geolocation.getCurrentPosition(fetchResults));
-
-  export let category;
-  export let db;
-  export let geo;
 </script>
 
 <style>
@@ -80,7 +81,9 @@
         <h1>Cerca mío</h1>
       {:else}
         <h1>
-          <span class="category">{category}</span>
+          <span class="category">
+            {categories.docs.find(c => c.id === category).data().name}
+          </span>
           cerca mío
         </h1>
       {/if}
