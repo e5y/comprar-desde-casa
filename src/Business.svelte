@@ -90,16 +90,18 @@
   <p class="description">{business.description}</p>
   <section class="buttons">
     {#if business.whatsapp}
-      <a href="https://wa.me/{business.phone.replace(/\D+/g, '')}">
+      <a
+        href="https://wa.me/{business.phone.replace(/\D+/g, '')}"
+        target="_blank">
         <i class="fab fa-whatsapp" />
         Hablar ahora
       </a>
     {/if}
-    <a href="tel:{business.phone}">
+    <a href="tel:{business.phone}" target="_blank">
       <i class="fas fa-phone" />
       Llamar ahora
     </a>
-    <a href={business.url}>
+    <a href={business.url} target="_blank">
       <i class="fas fa-link" />
       {business.url.replace(/(^\w+:|^)\/\//, '')}
     </a>
