@@ -18,6 +18,13 @@
   let results, currentBusiness, points;
 
   const fetchResults = async position => {
+    // TODO: Remove this (forcing location on desktop)
+    position = {
+      coords: {
+        latitude: -31.4472377,
+        longitude: -64.1848462
+      }
+    };
     const firestoreQuery =
       category === "todos"
         ? db.collection("approved_businesses")
@@ -32,7 +39,6 @@
         "position"
       );
     results = await get(geoQuery);
-    currentBusiness = results[0];
     points = [
       {
         lat: position.coords.latitude,
@@ -52,7 +58,6 @@
   const selectBusiness = e => {
     const id = e.detail.id;
     currentBusiness = results.find(result => result.id === id);
-    document.querySelector(".business").scrollIntoView();
   };
 
   onMount(async () => navigator.geolocation.getCurrentPosition(fetchResults));
@@ -83,7 +88,9 @@
       {#if $googleMapsLoaded}
         <Map {points} on:markerClicked={selectBusiness} />
       {/if}
-      <Business business={currentBusiness} />
+      {#if currentBusiness}
+        <Business business={currentBusiness} />
+      {/if}
     {:else}
       <Info type="error">
         No encontramos negocios cerca.

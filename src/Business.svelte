@@ -36,6 +36,13 @@
     font-size: 1.15rem;
     margin: 0;
     margin-bottom: 0.25rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .business h1 img {
+    width: 2rem;
   }
 
   .business h2 {
@@ -80,7 +87,10 @@
 </style>
 
 <article class="business">
-  <h1>{business.name}</h1>
+  <h1>
+    {business.name}
+    <img src="/markers/{business.category}.png" alt />
+  </h1>
   <h2>{business.category}</h2>
   <p class="radius">
     <i class="fas fa-biking" />
@@ -101,9 +111,11 @@
       <i class="fas fa-phone" />
       Llamar ahora
     </a>
-    <a href={business.url} target="_blank">
-      <i class="fas fa-link" />
-      {business.url.replace(/(^\w+:|^)\/\//, '')}
-    </a>
+    {#if business.url}
+      <a href={business.url} target="_blank">
+        <i class="fas fa-link" />
+        {business.url.replace(/(^\w+:|^)\/\//, '')}
+      </a>
+    {/if}
   </section>
 </article>
