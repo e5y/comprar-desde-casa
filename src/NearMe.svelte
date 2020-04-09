@@ -49,12 +49,12 @@
         id: business.id
       }))
     ];
-    console.log(results);
   };
 
   const selectBusiness = e => {
     const id = e.detail.id;
     currentBusiness = results.find(result => result.id === id);
+    document.querySelector(".business").scrollIntoView();
   };
 
   onMount(async () => navigator.geolocation.getCurrentPosition(fetchResults));
