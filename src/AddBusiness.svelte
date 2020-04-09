@@ -3,6 +3,7 @@
   import Info from "./Info.svelte";
   import Loader from "./Loader.svelte";
   import AddBusinessForm from "./AddBusinessForm.svelte";
+  import { loggedIn } from "./stores.js";
 
   let sent = false;
   const onFormSent = () => {
@@ -26,6 +27,12 @@
     Si tenés un negocio y hacés delivery, podés inscribirte para aparecer en los
     listados de Comprá desde Casa
   </Info>
+  {#if $loggedIn}
+    <Info type="warning">
+      Usted está logueado como administrador, al enviar el formulario el negocio
+      se aprobará de manera instantánea.
+    </Info>
+  {/if}
   {#if categories}
     {#if sent}
       <Info type="success">

@@ -1,11 +1,11 @@
 <script>
+  import { onMount } from "svelte";
+  import { loggedIn } from "./stores.js";
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
   import Layout from "./Layout.svelte";
   import AdminBusinessList from "./AdminBusinessList.svelte";
 
   export let db;
-  export let geo;
-  export let categories;
 
   let pending, approved, rejected;
 
@@ -24,6 +24,39 @@
         break;
     }
   };
+
+  let loading = true;
+
+  const logOut = async () => {
+    loggedIn.set(false);
+    await firebase.auth().signOut();
+    initFirebaseUI(true);
+  };
+
+  const initFirebaseUI = force => {
+    const ui =
+      firebaseui.auth.AuthUI.getInstance() ||
+      new firebaseui.auth.AuthUI(firebase.auth());
+    const uiConfig = {
+      callbacks: {
+        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+          return false;
+        },
+        uiShown: function() {
+          loading = false;
+        }
+      },
+      credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+      signInFlow: "popup",
+      signInSuccessUrl: "/admin",
+      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID]
+    };
+    if (!$loggedIn) {
+      ui.start("#firebaseui-auth-container", uiConfig);
+    }
+  };
+
+  onMount(initFirebaseUI);
 </script>
 
 <style>
@@ -33,48 +66,66 @@
   :global(.svelte-tabs) {
     font-size: 0.9rem;
   }
+  .logout-button {
+    background: none;
+    color: #4f81e5;
+    font-size: 1rem;
+    border: 0;
+  }
 </style>
 
 <Layout>
-  <h1>Administrador</h1>
-  <Tabs>
-    <TabList>
-      <Tab>
-        <i class="fas fa-clock" />
-        Pendientes
-      </Tab>
-      <Tab>
-        <i class="fas fa-check" />
-        Aprobados
-      </Tab>
-      <Tab>
-        <i class="fas fa-times" />
-        Rechazados
-      </Tab>
-    </TabList>
+  <h1>
+    Administrador
+    {#if $loggedIn}
+      <button class="logout-button" on:click={logOut}>
+        <i class="fas fa-sign-out-alt" />
+        Salir
+      </button>
+    {/if}
+  </h1>
+  {#if $loggedIn}
+    <Tabs>
+      <TabList>
+        <Tab>
+          <i class="fas fa-clock" />
+          Pendientes
+        </Tab>
+        <Tab>
+          <i class="fas fa-check" />
+          Aprobados
+        </Tab>
+        <Tab>
+          <i class="fas fa-times" />
+          Rechazados
+        </Tab>
+      </TabList>
 
-    <TabPanel>
-      <AdminBusinessList
-        collection="pending_businesses"
-        {db}
-        businesses={pending}
-        on:load={onListLoad} />
-    </TabPanel>
+      <TabPanel>
+        <AdminBusinessList
+          collection="pending_businesses"
+          {db}
+          businesses={pending}
+          on:load={onListLoad} />
+      </TabPanel>
 
-    <TabPanel>
-      <AdminBusinessList
-        collection="approved_businesses"
-        {db}
-        businesses={approved}
-        on:load={onListLoad} />
-    </TabPanel>
+      <TabPanel>
+        <AdminBusinessList
+          collection="approved_businesses"
+          {db}
+          businesses={approved}
+          on:load={onListLoad} />
+      </TabPanel>
 
-    <TabPanel>
-      <AdminBusinessList
-        collection="rejected_businesses"
-        {db}
-        businesses={rejected}
-        on:load={onListLoad} />
-    </TabPanel>
-  </Tabs>
+      <TabPanel>
+        <AdminBusinessList
+          collection="rejected_businesses"
+          {db}
+          businesses={rejected}
+          on:load={onListLoad} />
+      </TabPanel>
+    </Tabs>
+  {:else}
+    <div id="firebaseui-auth-container" />
+  {/if}
 </Layout>

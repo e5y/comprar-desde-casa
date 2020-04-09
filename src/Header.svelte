@@ -1,5 +1,7 @@
 <script>
   import { Link } from "svelte-routing";
+  import { loggedIn } from "./stores.js";
+  import { logOut } from "./utils.js";
 </script>
 
 <style>
@@ -43,9 +45,43 @@
   :global(nav a:focus i) {
     transform: scale(1.1);
   }
+
+  .topbar {
+    background: #ff9595;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .topbar button {
+    background: none;
+    text-decoration: underline;
+    border: 0;
+  }
+
+  :global(.topbar a),
+  :global(.topbar a:visited) {
+    text-decoration: none;
+    color: black;
+  }
 </style>
 
 <header>
+  {#if $loggedIn}
+    <section class="topbar">
+      <span>
+        <i class="fas fa-cogs" />
+        <Link to="/admin">Ir al panel de administración</Link>
+      </span>
+      <button on:click={logOut}>
+        <i class="fas fa-sign-out-alt" />
+        Salir
+      </button>
+    </section>
+  {/if}
   <section class="logo">
     <Link to="/">
       <img alt src="/logo.png" />

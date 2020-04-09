@@ -10,6 +10,9 @@
     case "error":
       icon = "fas fa-times-circle";
       break;
+    case "warning":
+      icon = "fas fa-exclamation-triangle";
+      break;
     default:
       icon = "fas fa-info-circle";
   }
@@ -36,6 +39,10 @@
 
   .info.error {
     background-color: #ff9595;
+  }
+
+  .info.warning {
+    background-color: #ffed95;
   }
 
   .info p {

@@ -1,7 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import { googleMapsLoaded } from "./stores";
+  import { googleMapsLoaded, loggedIn } from "./stores";
   import { createEventDispatcher } from "svelte";
+
+  export let db;
+  export let geo;
+  export let categories;
+
   const form = {
     owner_name: "",
     owner_email: "",
@@ -10,7 +15,7 @@
     location: "",
     phone: "",
     whatsapp: false,
-    category: "",
+    category: categories.docs[0].id,
     delivery_days: [],
     delivery_radius: "",
     description: "",
@@ -33,17 +38,17 @@
   const dispatch = createEventDispatcher();
 
   const sendForm = () => {
-    db.collection("pending_businesses").add(form);
+    const collection = $loggedIn ? "approved_businesses" : "pending_businesses";
+    db.collection(collection).add({
+      ...form,
+      createdAt: firebase.firestore.Timestamp.now()
+    });
     dispatch("sent");
   };
 
   onMount(() => {
     googleMapsLoaded.subscribe(loaded => loaded === true && setupInput());
   });
-
-  export let db;
-  export let geo;
-  export let categories;
 </script>
 
 <style>

@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { Router, Link, Route } from "svelte-routing";
+  import { loggedIn } from "./stores.js";
   import Home from "./Home.svelte";
   import NearMe from "./NearMe.svelte";
   import AddBusiness from "./AddBusiness.svelte";
@@ -29,11 +30,26 @@
       .orderBy("order")
       .get();
   });
+
+  onMount(() => {
+    firebase.auth().onAuthStateChanged(
+      function(user) {
+        if (user) {
+          loggedIn.set(true);
+        } else {
+          loggedIn.set(false);
+        }
+      },
+      function(error) {
+        console.log(error);
+      }
+    );
+  });
 </script>
 
 <Router>
   <Route path="/admin">
-    <Admin {db} {geo} {categories} />
+    <Admin {db} />
   </Route>
   <Route path="/agregar-negocio">
     <AddBusiness {db} {geo} {categories} />
