@@ -1,3 +1,10 @@
+<script>
+  import { eventPWA } from "./stores.js";
+  const installPWA = () => {
+    $eventPWA.prompt();
+  };
+</script>
+
 <style>
   footer {
     color: black;
@@ -19,6 +26,16 @@
   .authors a img {
     max-height: 2.5rem;
   }
+  .pwa {
+    margin-top: 2rem;
+  }
+
+  .pwa button {
+    background: none;
+    border: 0;
+    font-family: Roboto;
+    font-size: 1rem;
+  }
 </style>
 
 <footer>
@@ -31,4 +48,12 @@
       <img alt="MultiPhone" src="/authors/multiphone.png" />
     </a>
   </section>
+  {#if eventPWA}
+    <section class="pwa">
+      <button on:click={installPWA}>
+        <i class="fas fa-archive" />
+        Instalar Aplicación
+      </button>
+    </section>
+  {/if}
 </footer>

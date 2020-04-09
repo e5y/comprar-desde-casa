@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { Router, Link, Route } from "svelte-routing";
-  import { loggedIn } from "./stores.js";
+  import { loggedIn, eventPWA } from "./stores.js";
   import Home from "./Home.svelte";
   import NearMe from "./NearMe.svelte";
   import AddBusiness from "./AddBusiness.svelte";
@@ -32,6 +32,11 @@
   });
 
   onMount(() => {
+    window.addEventListener("beforeinstallprompt", e => {
+      e.preventDefault();
+      eventPWA.set(e);
+    });
+
     firebase.auth().onAuthStateChanged(
       function(user) {
         if (user) {

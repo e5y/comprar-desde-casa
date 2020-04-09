@@ -9,6 +9,7 @@
     max-width: 1024px;
     margin: 0 auto;
     width: 100%;
+    box-sizing: border-box;
   }
 
   @media screen and (min-width: 1024px) {
