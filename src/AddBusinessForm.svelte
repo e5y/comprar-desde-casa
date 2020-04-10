@@ -82,13 +82,14 @@
   .days {
     display: flex;
     margin-bottom: 0.5rem;
+    max-width: 300px;
   }
 
   .days label {
     flex: 1;
     display: flex;
     margin: 0;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
 
@@ -100,6 +101,11 @@
   input[type="submit"] {
     background: black;
     color: white;
+  }
+  .field-description {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0;
   }
 </style>
 
@@ -118,6 +124,7 @@
       required
       placeholder="Correo electrónico *"
       bind:value={form.owner_email} />
+    <p class="field-description">Ni tu nombre ni tu correo serán visibles</p>
   </section>
   <section class="form-section">
     <input
@@ -208,6 +215,10 @@
         D
       </label>
     </section>
+    <p class="field-description" style="margin-bottom: 1rem;">
+      Tildá los días en los que repartís los pedidos
+    </p>
+
     <input
       type="number"
       placeholder="Radio de entrega (km) *"
@@ -215,6 +226,10 @@
       required
       max="100"
       bind:value={form.delivery_radius} />
+    <p class="field-description">
+      El radio de entrega en kilómetros desde tu local
+    </p>
+
   </section>
   <section class="form-section">
     <textarea
@@ -229,6 +244,9 @@
       name="url"
       placeholder="Tienda online o sitio web"
       bind:value={form.url} />
+    <p class="field-description">
+      Un enlace a su sitio web o perfil de redes sociales
+    </p>
   </section>
   <input type="submit" value="Inscribirme" />
 </form>
