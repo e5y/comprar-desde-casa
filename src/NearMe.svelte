@@ -18,13 +18,6 @@
   let results, currentBusiness, points;
 
   const fetchResults = async position => {
-    // TODO: Remove this (forcing location on desktop)
-    position = {
-      coords: {
-        latitude: -31.4472377,
-        longitude: -64.1848462
-      }
-    };
     const firestoreQuery =
       category === "todos"
         ? db.collection("approved_businesses")

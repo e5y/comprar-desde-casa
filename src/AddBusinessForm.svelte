@@ -103,17 +103,19 @@
   }
 </style>
 
-<form>
+<form on:submit|preventDefault={sendForm}>
   <section class="form-section">
     <input
       type="text"
       name="owner_name"
       placeholder="Nombre del titular *"
+      required
       maxlength="50"
       bind:value={form.owner_name} />
     <input
       type="email"
       name="owner_email"
+      required
       placeholder="Correo electrónico *"
       bind:value={form.owner_email} />
   </section>
@@ -122,6 +124,7 @@
       type="text"
       name="name"
       placeholder="Nombre del negocio *"
+      required
       maxlength="50"
       bind:value={form.name} />
     <input type="text" name="location" placeholder="Ubicación *" />
@@ -129,6 +132,7 @@
       type="tel"
       name="phone"
       placeholder="Teléfono *"
+      required
       maxlength="50"
       bind:value={form.phone} />
     <label>
@@ -138,7 +142,7 @@
   </section>
   <section class="form-section">
     <label for="category">Categoría *</label>
-    <select id="category" bind:value={form.category}>
+    <select id="category" bind:value={form.category} required>
       {#each categories.docs as category}
         <option value={category.id}>{category.data().name}</option>
       {/each}
@@ -206,8 +210,9 @@
     </section>
     <input
       type="number"
-      placeholder="Radio de entrega (km)"
+      placeholder="Radio de entrega (km) *"
       name="delivery_radius"
+      required
       max="100"
       bind:value={form.delivery_radius} />
   </section>
@@ -215,6 +220,7 @@
     <textarea
       name="description"
       placeholder="Breve descripción del negocio"
+      required
       maxlength="300"
       rows="8"
       bind:value={form.description} />
@@ -224,8 +230,5 @@
       placeholder="Tienda online o sitio web"
       bind:value={form.url} />
   </section>
-  <input
-    type="submit"
-    value="Inscribirme"
-    on:click|once|preventDefault={sendForm} />
+  <input type="submit" value="Inscribirme" />
 </form>
