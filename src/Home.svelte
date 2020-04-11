@@ -11,9 +11,12 @@
 </script>
 
 <Layout>
-  <Info>
-    Podés seleccionar un rubro o bien buscar
-    <Link to="/cerca/todos">todos los negocios cerca tuyo</Link>
+  <Info id="quedate-en-casa" type="primary" rest="1m">
+    Quedate en tu casa y encontrá acá todos los negocios con delivery cerca tuyo
+  </Info>
+  <Info id="si-tenes-un-negocio" type="primary" icon="fas fa-store" rest="1m">
+    Si tenés un negocio que hace envíos, sumalo sin ningún costo ni comisión por
+    venta
   </Info>
   {#if categories}
     <BusinessCategories>

@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "geofirex": "^0.1.0",
+    "js-cookie": "^2.2.1",
     "rxjs": "^6.5.5",
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.4.2",
-    "svelte-tabs": "^1.1.0"
+    "svelte-tabs": "^1.1.0",
+    "timestring": "^6.0.0"
   }
 }

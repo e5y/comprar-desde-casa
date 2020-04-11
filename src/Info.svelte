@@ -1,25 +1,44 @@
 <script>
+  import Cookies from "js-cookie";
+  import timestring from "timestring";
+
   export let type = "regular";
+  export let rest;
+  export let id;
+  export let icon;
 
-  let icon;
-
-  switch (type) {
-    case "success":
-      icon = "fas fa-check";
-      break;
-    case "error":
-      icon = "fas fa-times-circle";
-      break;
-    case "warning":
-      icon = "fas fa-exclamation-triangle";
-      break;
-    default:
-      icon = "fas fa-info-circle";
+  if (!icon) {
+    switch (type) {
+      case "success":
+        icon = "fas fa-check";
+        break;
+      case "error":
+        icon = "fas fa-times-circle";
+        break;
+      case "warning":
+        icon = "fas fa-exclamation-triangle";
+        break;
+      default:
+        icon = "fas fa-info-circle";
+    }
   }
 
   let open = true;
+
+  if (id && rest) {
+    const cookie = Cookies.get(`info-${id}`);
+    if (cookie) {
+      open = false;
+    }
+  }
+
   const close = () => {
     open = false;
+    if (id && rest) {
+      const expires = new Date(new Date().getTime() + timestring(rest, "ms"));
+      console.log(expires);
+      Cookies.set(`info-${id}`, "resting", { expires });
+    }
   };
 </script>
 
@@ -43,6 +62,16 @@
 
   .info.warning {
     background-color: #ffed95;
+  }
+
+  .info.primary {
+    background-color: #ffad42;
+    background-color: #ff9001;
+    color: white;
+  }
+
+  .info.primary .close-icon {
+    color: rgba(0, 0, 0, 0.2);
   }
 
   .info p {
