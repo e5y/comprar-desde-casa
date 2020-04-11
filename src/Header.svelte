@@ -117,7 +117,7 @@
       Cerca mío
     </Link>
     <Link to="/agregar-negocio">
-      <i class="fas fa-plus-circle" />
+      <i class="fas fa-plus-circle" style="color: #ff9001;" />
       Agregar negocio
     </Link>
   </nav>

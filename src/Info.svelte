@@ -65,7 +65,6 @@
   }
 
   .info.primary {
-    background-color: #ffad42;
     background-color: #ff9001;
     color: white;
   }
