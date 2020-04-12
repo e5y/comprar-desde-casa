@@ -21,7 +21,13 @@
     return [listStart, listEnd].join(conjunction);
   };
 
+  const getCategoryNameById = id => {
+    const category = categories.docs.find(doc => doc.id === id);
+    return category ? category.data().name : "";
+  };
+
   export let business;
+  export let categories;
 </script>
 
 <style>
@@ -91,7 +97,7 @@
     {business.name}
     <img src="/markers/{business.category}.png" alt />
   </h1>
-  <h2>{business.category}</h2>
+  <h2>{getCategoryNameById(business.category)}</h2>
   <p class="radius">
     <i class="fas fa-biking" />
     Entrega los {makeCommaSeparatedString(arrayToDays(business.delivery_days))}

@@ -14,10 +14,10 @@
   }
 
   .logo {
-    max-width: 200px;
+    max-width: 150px;
     display: block;
     margin: auto;
-    margin-top: 1rem;
+    margin-top: 0.25rem;
     width: 80%;
   }
   .logo img {
@@ -27,14 +27,15 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    margin: 1rem auto;
+    margin: 0.5rem auto;
     max-width: 1024px;
+    font-size: 0.9rem;
   }
   :global(nav a),
   :global(nav a:visited) {
     color: black;
     text-decoration: none;
-    margin: 0 0.5rem;
+    margin: 0 0.75rem;
   }
 
   :global(nav a i) {

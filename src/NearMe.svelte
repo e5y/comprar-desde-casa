@@ -16,8 +16,9 @@
 
   const radius = 5;
   let results, currentBusiness, points;
+  let showingAll = false;
 
-  const fetchResults = async position => {
+  const fetchResults = async (position, r) => {
     const firestoreQuery =
       category === "todos"
         ? db.collection("approved_businesses")
@@ -28,9 +29,10 @@
       .query(firestoreQuery)
       .within(
         geo.point(position.coords.latitude, position.coords.longitude),
-        radius,
+        r || radius,
         "position"
       );
+    results = null;
     results = await get(geoQuery);
     points = [
       {
@@ -53,6 +55,13 @@
     currentBusiness = results.find(result => result.id === id);
   };
 
+  const viewAll = () => {
+    showingAll = true;
+    navigator.geolocation.getCurrentPosition(position =>
+      fetchResults(position, 100)
+    );
+  };
+
   onMount(async () => navigator.geolocation.getCurrentPosition(fetchResults));
 </script>
 
@@ -62,6 +71,21 @@
   }
   .category {
     text-transform: capitalize;
+  }
+  .showing-results {
+    text-align: center;
+    margin: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .showing-results button {
+    background: #ff9001;
+    color: white;
+    border: 0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 7px;
+    font-family: Roboto;
+    margin: 0.5rem 0.25rem;
   }
 </style>
 
@@ -82,8 +106,14 @@
       {#if $googleMapsLoaded}
         <Map {points} on:markerClicked={selectBusiness} />
       {/if}
+      {#if !showingAll}
+        <section class="showing-results">
+          Mostrando resultados en un radio de {radius} km
+          <button on:click={viewAll}>Ver todos</button>
+        </section>
+      {/if}
       {#if currentBusiness}
-        <Business business={currentBusiness} />
+        <Business business={currentBusiness} {categories} />
       {/if}
     {:else}
       <Info type="error">
