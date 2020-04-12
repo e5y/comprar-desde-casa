@@ -54,7 +54,7 @@
 
 <Router>
   <Route path="/admin">
-    <Admin {db} />
+    <Admin {db} {categories} />
   </Route>
   <Route path="/agregar-negocio">
     <AddBusiness {db} {geo} {categories} />

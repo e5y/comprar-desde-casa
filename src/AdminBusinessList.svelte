@@ -7,6 +7,7 @@
   export let db;
   export let collection;
   export let businesses;
+  export let categories;
 
   const mapDocToBusiness = doc => {
     return {
@@ -68,6 +69,7 @@
         <BusinessModerator
           {business}
           {collection}
+          {categories}
           on:approved={onApproved}
           on:rejected={onRejected} />
       {/each}

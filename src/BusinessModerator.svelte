@@ -3,6 +3,7 @@
   import Business from "./Business.svelte";
   export let business;
   export let collection;
+  export let categories;
 
   const dispatch = createEventDispatcher();
   const onApprove = () => {
@@ -55,7 +56,7 @@
 </style>
 
 <section class="business-moderator">
-  <Business {business} />
+  <Business {business} {categories} />
   <section class="controls">
     {#if collection === 'rejected_businesses' || collection === 'pending_businesses'}
       <button class="approve" on:click={onApprove}>
