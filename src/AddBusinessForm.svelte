@@ -245,7 +245,25 @@
       placeholder="Tienda online o sitio web"
       bind:value={form.url} />
     <p class="field-description">
-      Un enlace a su sitio web o perfil de redes sociales
+      Un enlace a su sitio web o perfil de redes sociales.
+    </p>
+    <p class="field-description" style="font-size:.7rem">
+      Ej.
+      <a
+        target="_blank"
+        href="https://grupoeon.com.ar"
+        style="display:inline-flex;">
+        <b>https://</b>
+        grupoeon.com.ar
+      </a>
+      ó
+      <a
+        target="_blank"
+        href="https://instagram.com/grupo.eon"
+        style="display:inline-flex;">
+        <b>https://</b>
+        instagram.com/grupo.eon
+      </a>
     </p>
   </section>
   <input type="submit" value="Inscribirme" />
