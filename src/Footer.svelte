@@ -44,7 +44,7 @@
     <a href="https://grupoeon.com.ar" target="_blank">
       <img alt="Grupo EON" src="/authors/grupoeon.png" />
     </a>
-    <a href="https://www.multiphone.net" target="_blank">
+    <a href="https://www.instagram.com/multiphone_cba" target="_blank">
       <img
         alt="MultiPhone"
         src="/authors/multiphone.png"
