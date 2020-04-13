@@ -102,7 +102,9 @@
           cerca mío
         </h1>
       {/if}
-      <Info>Tocá un negocio en el mapa para ver su información disponible</Info>
+      <Info id="toca-un-negocio" rest="1d">
+        Tocá un negocio en el mapa para ver su información disponible
+      </Info>
       {#if $googleMapsLoaded}
         <Map {points} on:markerClicked={selectBusiness} />
       {/if}

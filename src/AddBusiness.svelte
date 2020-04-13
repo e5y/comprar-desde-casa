@@ -23,7 +23,7 @@
 
 <Layout>
   <h1>Agregá tu negocio</h1>
-  <Info>
+  <Info id="agrega-tu-negocio" rest="1d">
     Si tenés un negocio y hacés delivery, podés inscribirte para aparecer en los
     listados de Comprá desde Casa
   </Info>
