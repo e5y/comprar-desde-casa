@@ -20,6 +20,7 @@
     const snapshot = await db
       .collection(collection)
       .orderBy("createdAt", "desc")
+      .limit(10)
       .get();
     dispatch("load", {
       collection,

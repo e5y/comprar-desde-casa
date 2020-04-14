@@ -3,6 +3,7 @@
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
   import { loggedIn } from "../stores.js";
   import Layout from "../Layout/Layout.svelte";
+  import Info from "../Utility/Info.svelte";
   import AdminBusinessList from "./AdminBusinessList.svelte";
 
   export let db;
@@ -86,6 +87,11 @@
     {/if}
   </h1>
   {#if $loggedIn}
+    <Info id="admin-query-limit-notice" rest="1d">
+      Cada pestaña muestra un máximo de 10 resultados en orden de creación (los
+      primeros en registrarse aparecen primero). Esto será así hasta implementar
+      el paginado.
+    </Info>
     <Tabs>
       <TabList>
         <Tab>
