@@ -1,11 +1,11 @@
 <script>
   import { Link } from "svelte-routing";
-  import Layout from "./Layout.svelte";
+  import Layout from "../Layout/Layout.svelte";
+  import AddBusinessButton from "../AddBusiness/AddBusinessButton.svelte";
+  import Loader from "../Utility/Loader.svelte";
+  import Info from "../Utility/Info.svelte";
   import BusinessCategories from "./BusinessCategories.svelte";
   import BusinessCategory from "./BusinessCategory.svelte";
-  import AddBusinessButton from "./AddBusinessButton.svelte";
-  import Loader from "./Loader.svelte";
-  import Info from "./Info.svelte";
 
   export let categories;
 </script>

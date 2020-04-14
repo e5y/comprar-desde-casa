@@ -1,7 +1,7 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import Loader from "./Loader.svelte";
-  import Info from "./Info.svelte";
+  import Loader from "../Utility/Loader.svelte";
+  import Info from "../Utility/Info.svelte";
   import BusinessModerator from "./BusinessModerator.svelte";
 
   export let db;

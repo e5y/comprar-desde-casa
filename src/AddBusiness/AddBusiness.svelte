@@ -1,9 +1,9 @@
 <script>
-  import Layout from "./Layout.svelte";
-  import Info from "./Info.svelte";
-  import Loader from "./Loader.svelte";
-  import AddBusinessForm from "./AddBusinessForm.svelte";
-  import { loggedIn } from "./stores.js";
+  import Layout from "../Layout/Layout.svelte";
+  import Info from "../Utility/Info.svelte";
+  import Loader from "../Utility/Loader.svelte";
+  import AddBusinessForm from "../AddBusiness/AddBusinessForm.svelte";
+  import { loggedIn } from "../stores.js";
 
   let sent = false;
   const onFormSent = () => {

@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
-  import { loggedIn } from "./stores.js";
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
-  import Layout from "./Layout.svelte";
+  import { loggedIn } from "../stores.js";
+  import Layout from "../Layout/Layout.svelte";
   import AdminBusinessList from "./AdminBusinessList.svelte";
 
   export let db;

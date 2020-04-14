@@ -2,12 +2,12 @@
   import { onMount } from "svelte";
   import { Link } from "svelte-routing";
   import { get } from "geofirex";
-  import Layout from "./Layout.svelte";
-  import Loader from "./Loader.svelte";
-  import Business from "./Business.svelte";
+  import Layout from "../Layout/Layout.svelte";
+  import Loader from "../Utility/Loader.svelte";
+  import Business from "../Business/Business.svelte";
+  import Info from "../Utility/Info.svelte";
+  import { googleMapsLoaded } from "../stores.js";
   import Map from "./Map.svelte";
-  import Info from "./Info.svelte";
-  import { googleMapsLoaded } from "./stores.js";
 
   export let category;
   export let categories;

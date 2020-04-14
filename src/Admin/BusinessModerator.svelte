@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Business from "./Business.svelte";
+  import Business from "../Business/Business.svelte";
   export let business;
   export let collection;
   export let categories;

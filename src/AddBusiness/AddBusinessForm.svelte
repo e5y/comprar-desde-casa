@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { googleMapsLoaded, loggedIn } from "./stores";
+  import { googleMapsLoaded, loggedIn } from "../stores";
   import { createEventDispatcher } from "svelte";
 
   export let db;

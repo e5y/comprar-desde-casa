@@ -2,10 +2,10 @@
   import { onMount } from "svelte";
   import { Router, Link, Route } from "svelte-routing";
   import { loggedIn, eventPWA } from "./stores.js";
-  import Home from "./Home.svelte";
-  import NearMe from "./NearMe.svelte";
-  import AddBusiness from "./AddBusiness.svelte";
-  import Admin from "./Admin.svelte";
+  import Home from "./Home/Home.svelte";
+  import NearMe from "./NearMe/NearMe.svelte";
+  import AddBusiness from "./AddBusiness/AddBusiness.svelte";
+  import Admin from "./Admin/Admin.svelte";
   import * as geofirex from "geofirex";
 
   firebase.initializeApp({

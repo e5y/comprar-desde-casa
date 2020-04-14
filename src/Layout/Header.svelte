@@ -1,9 +1,9 @@
 <script>
-  import { loggedIn } from "./stores.js";
-  import { logOut } from "./utils.js";
+  import { loggedIn } from "../stores.js";
+  import { logOut } from "../utils.js";
   import { link } from "svelte-routing";
 
-  import Sticky from "./Sticky.svelte";
+  import Sticky from "../Utility/Sticky.svelte";
 </script>
 
 <style>
