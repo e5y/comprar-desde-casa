@@ -1,51 +1,125 @@
 <script>
-  import { Link } from "svelte-routing";
   import { loggedIn } from "./stores.js";
   import { logOut } from "./utils.js";
+  import { link } from "svelte-routing";
+
+  import Sticky from "./Sticky.svelte";
 </script>
 
 <style>
   header {
     background: white;
-    position: sticky;
-    top: 0;
-    z-index: 1;
+    z-index: 99;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+  }
+
+  header.sticky {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 1rem;
+  }
+
+  @media screen and (min-width: 800px) {
+    header.sticky {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .logo {
-    max-width: 150px;
+    max-width: 175px;
     display: block;
     margin: auto;
     margin-top: 0.25rem;
     width: 80%;
   }
+
+  .sticky .logo {
+    max-width: 40px;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 800px) {
+    .sticky .logo {
+      max-width: 175px;
+      margin: 1rem;
+    }
+  }
+
   .logo img {
     width: 100%;
   }
+
+  .logo .icon-image {
+    display: none;
+  }
+
+  .sticky .logo .icon-image {
+    display: block;
+  }
+
+  .sticky .logo .logo-image {
+    display: none;
+  }
+
+  @media screen and (min-width: 800px) {
+    .sticky .logo .icon-image {
+      display: none;
+    }
+    .sticky .logo .logo-image {
+      display: block;
+    }
+  }
+
   nav {
     text-align: center;
     display: flex;
     justify-content: center;
     margin: 0.5rem auto;
     max-width: 1024px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
-  :global(nav a),
-  :global(nav a:visited) {
+
+  nav a,
+  nav a:visited {
     color: black;
     text-decoration: none;
     margin: 0 0.75rem;
   }
 
-  :global(nav a i) {
+  .sticky nav a {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+  }
+
+  @media screen and (min-width: 800px) {
+    .sticky nav a {
+      display: inline;
+      margin: 0 0.75rem;
+    }
+  }
+
+  nav a i {
     transform: scale(1);
     transition: 0.1s ease;
   }
 
-  :global(nav a:active i),
-  :global(nav a:hover i),
-  :global(nav a:focus i) {
+  .sticky nav i {
+    margin-bottom: 0.25rem;
+  }
+
+  @media screen and (min-width: 800px) {
+    .sticky nav i {
+      margin-bottom: 0;
+    }
+  }
+
+  nav a:active i,
+  nav a:hover i,
+  nav a:focus i {
     transform: scale(1.1);
   }
 
@@ -59,7 +133,7 @@
       justify-content: flex-start;
       margin: 0;
     }
-    :global(nav a) {
+    nav a {
       margin: 0 1rem;
     }
     .logo {
@@ -83,8 +157,8 @@
     border: 0;
   }
 
-  :global(.topbar a),
-  :global(.topbar a:visited) {
+  .topbar a,
+  .topbar a:visited {
     text-decoration: none;
     color: black;
   }
@@ -94,7 +168,7 @@
   <section class="topbar">
     <span>
       <i class="fas fa-cogs" />
-      <Link to="/admin">Ir al panel de administración</Link>
+      <a use:link href="/admin">Ir al panel de administración</a>
     </span>
     <button on:click={logOut}>
       <i class="fas fa-sign-out-alt" />
@@ -102,24 +176,28 @@
     </button>
   </section>
 {/if}
-<header>
-  <section class="logo">
-    <Link to="/">
-      <img alt src="/logo.png" />
-    </Link>
-  </section>
-  <nav>
-    <Link to="/">
-      <i class="fas fa-home" />
-      Inicio
-    </Link>
-    <Link to="/cerca/todos">
-      <i class="fas fa-map-marker-alt" />
-      Cerca mío
-    </Link>
-    <Link to="/agregar-negocio">
-      <i class="fas fa-plus-circle" style="color: #ff9001;" />
-      Agregar negocio
-    </Link>
-  </nav>
-</header>
+<Sticky let:sticky>
+  <header class:sticky>
+    <section class="logo">
+      <a use:link href="/">
+        <img class="icon-image" alt src="/favicon.png" />
+        <img class="logo-image" alt src="/logo.png" />
+      </a>
+    </section>
+    <nav>
+      <a use:link href="/">
+        <i class="fas fa-home" />
+        Inicio
+      </a>
+      <a use:link href="/cerca/todos">
+        <i class="fas fa-map-marker-alt" />
+        Cerca mío
+      </a>
+      <a use:link href="/agregar-negocio">
+        <i class="fas fa-plus-circle" />
+        Agregar
+        {#if !sticky}negocio{/if}
+      </a>
+    </nav>
+  </header>
+</Sticky>

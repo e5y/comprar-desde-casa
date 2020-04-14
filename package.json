@@ -20,6 +20,7 @@
     "js-cookie": "^2.2.1",
     "rxjs": "^6.5.5",
     "sirv-cli": "^0.4.4",
+    "stickybits": "^3.7.6",
     "svelte-routing": "^1.4.2",
     "svelte-tabs": "^1.1.0",
     "timestring": "^6.0.0"
