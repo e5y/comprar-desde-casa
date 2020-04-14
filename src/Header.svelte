@@ -20,14 +20,6 @@
     padding: 0.25rem 1rem;
   }
 
-  @media screen and (min-width: 800px) {
-    header.sticky {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
   .logo {
     max-width: 175px;
     display: block;
@@ -39,13 +31,6 @@
   .sticky .logo {
     max-width: 40px;
     margin: 0;
-  }
-
-  @media screen and (min-width: 800px) {
-    .sticky .logo {
-      max-width: 175px;
-      margin: 1rem;
-    }
   }
 
   .logo img {
@@ -62,15 +47,6 @@
 
   .sticky .logo .logo-image {
     display: none;
-  }
-
-  @media screen and (min-width: 800px) {
-    .sticky .logo .icon-image {
-      display: none;
-    }
-    .sticky .logo .logo-image {
-      display: block;
-    }
   }
 
   nav {
@@ -95,13 +71,6 @@
     margin: 0 1rem;
   }
 
-  @media screen and (min-width: 800px) {
-    .sticky nav a {
-      display: inline;
-      margin: 0 0.75rem;
-    }
-  }
-
   nav a i {
     transform: scale(1);
     transition: 0.1s ease;
@@ -111,34 +80,10 @@
     margin-bottom: 0.25rem;
   }
 
-  @media screen and (min-width: 800px) {
-    .sticky nav i {
-      margin-bottom: 0;
-    }
-  }
-
   nav a:active i,
   nav a:hover i,
   nav a:focus i {
     transform: scale(1.1);
-  }
-
-  @media screen and (min-width: 800px) {
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    nav {
-      justify-content: flex-start;
-      margin: 0;
-    }
-    nav a {
-      margin: 0 1rem;
-    }
-    .logo {
-      margin: 1rem;
-    }
   }
 
   .topbar {
@@ -161,6 +106,46 @@
   .topbar a:visited {
     text-decoration: none;
     color: black;
+  }
+
+  @media screen and (min-width: 800px) {
+    header.sticky {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sticky .logo {
+      max-width: 175px;
+      margin: 1rem;
+    }
+    .sticky .logo .icon-image {
+      display: none;
+    }
+    .sticky .logo .logo-image {
+      display: block;
+    }
+    .sticky nav a {
+      display: inline;
+      margin: 0 0.75rem;
+    }
+    .sticky nav i {
+      margin-bottom: 0;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    nav {
+      justify-content: flex-start;
+      margin: 0;
+    }
+    nav a {
+      margin: 0 1rem;
+    }
+    .logo {
+      margin: 1rem;
+    }
   }
 </style>
 
