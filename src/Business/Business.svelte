@@ -120,7 +120,7 @@
     {#if business.url}
       <a href={business.url} target="_blank">
         <i class="fas fa-link" />
-        {business.url.replace(/(^\w+:|^)\/\//, '')}
+        Ver sitio web
       </a>
     {/if}
   </section>
