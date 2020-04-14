@@ -62,7 +62,7 @@
   nav a:visited {
     color: black;
     text-decoration: none;
-    margin: 0 0.75rem;
+    margin: 0 0.5rem;
   }
 
   .sticky nav a {

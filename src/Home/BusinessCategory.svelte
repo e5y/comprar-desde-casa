@@ -22,8 +22,11 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     text-align: center;
   }
-  :global(li a) {
+  .business-category :global(a) {
     font-size: 1.25rem;
+    color: white;
+    text-decoration: none;
+    padding: 0 1rem;
   }
 
   @media screen and (min-width: 700px) {

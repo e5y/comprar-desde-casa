@@ -34,7 +34,7 @@
   }
 
   .add-business-button :global(li a),
-  .add-business-button :global(.add-business-button a) {
+  .add-business-button :global(a) {
     color: white;
     text-decoration: none;
     display: flex;
