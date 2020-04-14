@@ -6,6 +6,7 @@
   import Loader from "../Utility/Loader.svelte";
   import Business from "../Business/Business.svelte";
   import Info from "../Utility/Info.svelte";
+  import Popup from "../Utility/Popup.svelte";
   import { googleMapsLoaded } from "../stores.js";
   import Map from "./Map.svelte";
 
@@ -14,7 +15,7 @@
   export let db;
   export let geo;
 
-  const radius = 5;
+  const radius = 10;
   let results, currentBusiness, points;
   let showingAll = false;
 
@@ -58,7 +59,7 @@
   const viewAll = () => {
     showingAll = true;
     navigator.geolocation.getCurrentPosition(position =>
-      fetchResults(position, 100)
+      fetchResults(position, 650)
     );
   };
 
@@ -108,19 +109,25 @@
       {#if $googleMapsLoaded}
         <Map {points} on:markerClicked={selectBusiness} />
       {/if}
-      {#if !showingAll}
-        <section class="showing-results">
-          Mostrando resultados en un radio de {radius} km
+      <section class="showing-results">
+        Mostrando
+        <b>{results.length}</b>
+        negocios
+        {#if !showingAll}
+          en un radio de {radius} km
           <button on:click={viewAll}>Ver todos</button>
-        </section>
-      {/if}
+        {/if}
+      </section>
       {#if currentBusiness}
-        <Business business={currentBusiness} {categories} />
+        <Popup>
+          <Business business={currentBusiness} {categories} />
+        </Popup>
       {/if}
     {:else}
-      <Info type="error">
-        No encontramos negocios cerca.
-        <Link to="/">Volver</Link>
+      <Info type="warning">
+        Aún no hay negocios cargados cerca tuyo. Mirá todos los negocios
+        cargados
+        <button on:click={viewAll}>haciendo click aquí</button>
       </Info>
     {/if}
   {:else}

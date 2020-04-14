@@ -76,9 +76,7 @@
   .info p {
     margin: 0;
   }
-  :global(.info a) {
-    color: black;
-  }
+
   .info .icon {
     margin-right: 0.5rem;
   }
@@ -86,6 +84,19 @@
     margin-left: auto;
     color: rgba(0, 0, 0, 0.5);
     font-size: 0.8rem;
+    padding-left: 0.5rem;
+  }
+  .info :global(a) {
+    color: black;
+  }
+  .info :global(button) {
+    color: black;
+    text-decoration: underline;
+    background: 0;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    border: 0;
   }
 </style>
 
