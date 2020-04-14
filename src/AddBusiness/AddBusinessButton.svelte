@@ -33,8 +33,8 @@
     }
   }
 
-  :global(li a),
-  :global(.add-business-button a) {
+  .add-business-button :global(li a),
+  .add-business-button :global(.add-business-button a) {
     color: white;
     text-decoration: none;
     display: flex;
@@ -42,7 +42,7 @@
     padding: 1rem;
     font-size: 1rem;
   }
-  :global(li a i) {
+  .add-business-button :global(li a i) {
     margin-bottom: 0.5rem;
     font-size: 2rem;
   }

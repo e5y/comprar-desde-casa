@@ -16,7 +16,7 @@
   export let geo;
 
   const radius = 10;
-  let results, currentBusiness, points;
+  let results, currentBusiness, points, error;
   let showingAll = false;
 
   const fetchResults = async (position, r) => {
@@ -67,7 +67,13 @@
     currentBusiness = null;
   };
 
-  onMount(async () => navigator.geolocation.getCurrentPosition(fetchResults));
+  const errorHandler = err => {
+    error = err;
+  };
+
+  onMount(async () =>
+    navigator.geolocation.getCurrentPosition(fetchResults, errorHandler)
+  );
 </script>
 
 <style>
@@ -91,6 +97,21 @@
     border-radius: 7px;
     font-family: Roboto;
     margin: 0.5rem 0.25rem;
+  }
+
+  .enable-location {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .enable-location a {
+    padding: 0;
+    font-size: 1rem;
+  }
+
+  .enable-location i {
+    width: 1rem;
   }
 </style>
 
@@ -134,6 +155,30 @@
         <button on:click={viewAll}>haciendo click aquí</button>
       </Info>
     {/if}
+  {:else if error}
+    <Info type="error">
+      ¡Oh no! Parece que no tenés habilitada tu ubicación. Revisá la
+      configuración de tu dispositivo para ver los negocios que estén cerca
+      <b style="margin-top: .5rem;display: inline-block;">
+        Cómo habilitar tu ubicación:
+      </b>
+      <ul class="enable-location">
+        <li>
+          <i class="fab fa-android" />
+          <a
+            target="_blank"
+            href="https://support.google.com/nexus/answer/3467281?hl=es">
+            En Android
+          </a>
+        </li>
+        <li>
+          <i class="fab fa-apple" />
+          <a target="_blank" href="https://support.apple.com/es-lamr/HT207092">
+            En iOS (iPhone/iPad)
+          </a>
+        </li>
+      </ul>
+    </Info>
   {:else}
     <Loader />
   {/if}
