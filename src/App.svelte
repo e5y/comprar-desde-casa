@@ -5,6 +5,7 @@
   import Home from "./Home/Home.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
   import AddBusiness from "./AddBusiness/AddBusiness.svelte";
+  import EditBusiness from "./EditBusiness/EditBusiness.svelte";
   import Admin from "./Admin/Admin.svelte";
   import * as geofirex from "geofirex";
 
@@ -58,6 +59,9 @@
   </Route>
   <Route path="/agregar-negocio">
     <AddBusiness {db} {geo} {categories} />
+  </Route>
+  <Route path="/editar-negocio/:id" let:params>
+    <EditBusiness {db} {geo} {categories} id={params.id} />
   </Route>
   <Route path="/cerca/:category" let:params>
     <NearMe category={params.category} {db} {geo} {categories} />

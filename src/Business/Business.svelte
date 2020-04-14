@@ -1,4 +1,7 @@
 <script>
+  import { link } from "svelte-routing";
+  import { loggedIn } from "../stores.js";
+
   const arrayToDays = array => {
     const days = [
       "lunes",
@@ -45,6 +48,13 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+  }
+
+  .business h1 a {
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
   }
 
   .business h1 img {
@@ -94,7 +104,15 @@
 
 <article class="business">
   <h1>
-    {business.name}
+    <span>
+      {business.name}
+      {#if $loggedIn}
+        <a use:link href="/editar-negocio/{business.id}">
+          <i class="fas fa-edit" />
+          Editar
+        </a>
+      {/if}
+    </span>
     <img src="/markers/{business.category}.png" alt />
   </h1>
   <h2>{getCategoryNameById(business.category)}</h2>
