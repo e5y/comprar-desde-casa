@@ -63,6 +63,10 @@
     );
   };
 
+  const clearCurrentBusiness = () => {
+    currentBusiness = null;
+  };
+
   onMount(async () => navigator.geolocation.getCurrentPosition(fetchResults));
 </script>
 
@@ -119,7 +123,7 @@
         {/if}
       </section>
       {#if currentBusiness}
-        <Popup>
+        <Popup on:close={clearCurrentBusiness}>
           <Business business={currentBusiness} {categories} />
         </Popup>
       {/if}
