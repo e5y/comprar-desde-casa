@@ -41,6 +41,11 @@
     flex-direction: column;
     padding: 1rem;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
   }
   .add-business-button :global(li a i) {
     margin-bottom: 0.5rem;
