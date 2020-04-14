@@ -23,6 +23,7 @@
   .popup {
     position: absolute;
     width: 90vw;
+    max-width: 1024px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
