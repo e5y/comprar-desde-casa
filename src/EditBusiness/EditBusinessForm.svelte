@@ -153,7 +153,9 @@
       <section class="form-section">
         <label for="category">Categoría *</label>
         <select id="category" bind:value={form.category} required>
-          {#each categories.docs as category}
+          {#each categories.docs.sort((a, b) =>
+            a.data().name.localeCompare(b.data().name)
+          ) as category}
             <option value={category.id}>{category.data().name}</option>
           {/each}
         </select>

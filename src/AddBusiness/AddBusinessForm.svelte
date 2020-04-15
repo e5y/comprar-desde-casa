@@ -8,6 +8,10 @@
   export let geo;
   export let categories;
 
+  const sortedCategories = categories.docs.sort((a, b) => {
+    return a.data().name.localeCompare(b.data().name);
+  });
+
   const form = {
     owner_name: "",
     owner_email: "",
@@ -16,7 +20,7 @@
     location: "",
     phone: "",
     whatsapp: false,
-    category: categories.docs[0].id,
+    category: sortedCategories.id,
     delivery_days: [],
     delivery_radius: "",
     description: "",
@@ -151,7 +155,7 @@
   <section class="form-section">
     <label for="category">Categoría *</label>
     <select id="category" bind:value={form.category} required>
-      {#each categories.docs as category}
+      {#each sortedCategories as category}
         <option value={category.id}>{category.data().name}</option>
       {/each}
     </select>
