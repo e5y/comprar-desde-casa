@@ -7,7 +7,7 @@
   import Business from "../Business/Business.svelte";
   import Info from "../Utility/Info.svelte";
   import Popup from "../Utility/Popup.svelte";
-  import { googleMapsLoaded } from "../stores.js";
+  import { googleMapsLoaded, loggedIn } from "../stores.js";
   import Map from "./Map.svelte";
 
   export let category;
@@ -19,7 +19,7 @@
   let results, currentBusiness, points, error;
   let showingAll = false;
 
-  const fetchResults = async (position, r) => {
+  const fetchResults = async (position, showAll) => {
     const firestoreQuery =
       category === "todos"
         ? db.collection("approved_businesses")
@@ -30,7 +30,7 @@
       .query(firestoreQuery)
       .within(
         geo.point(position.coords.latitude, position.coords.longitude),
-        r || radius,
+        showAll ? 650 : radius,
         "position"
       );
     results = null;
@@ -136,7 +136,9 @@
       {/if}
       <section class="showing-results">
         Mostrando
-        <b>{results.length}</b>
+        {#if $loggedIn}
+          <b>{results.length}</b>
+        {:else}todos los{/if}
         negocios
         {#if !showingAll}
           en un radio de {radius} km
@@ -150,9 +152,11 @@
       {/if}
     {:else}
       <Info type="warning">
-        Aún no hay negocios cargados cerca tuyo. Mirá todos los negocios
-        cargados
-        <button on:click={viewAll}>haciendo click aquí</button>
+        Aún no hay negocios cargados cerca tuyo.
+        {#if !showingAll}
+          Mirá todos los negocios cargados
+          <button on:click={viewAll}>haciendo click aquí</button>
+        {/if}
       </Info>
     {/if}
   {:else if error}
