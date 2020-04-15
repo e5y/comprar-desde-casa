@@ -8,7 +8,12 @@
   onMount(() => {
     const element = document.getElementById(`map-${random}`);
 
-    const map = new google.maps.Map(element);
+    const map = new google.maps.Map(element, {
+      disableDefaultUI: true,
+      scaleControl: true,
+      zoomControl: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
     const bounds = new google.maps.LatLngBounds();
     points.forEach((point, i) => {
@@ -37,10 +42,15 @@
 <style>
   .map {
     width: 100%;
-    height: 300px;
+    height: 400px;
     border-radius: 7px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     margin-bottom: 1rem;
+  }
+  @media screen and (min-width: 1000px) {
+    .map {
+      height: 600px;
+    }
   }
 </style>
 
