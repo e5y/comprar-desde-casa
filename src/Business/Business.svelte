@@ -29,6 +29,15 @@
     return category ? category.data().name : "";
   };
 
+  const normalizePhone = phone => {
+    let digits = phone.replace(/\D+/g, "");
+    if (!digits.startsWith("54")) digits = `54${digits}`;
+    return digits;
+  };
+
+  const whatsAppMessage =
+    "¡Hola! Te encontré en Comprar Desde Casa (https://comprardesdecasa.com.ar), te quería solicitar información sobre tu negocio.";
+
   export let business;
   export let categories;
 </script>
@@ -125,7 +134,7 @@
   <section class="buttons">
     {#if business.whatsapp}
       <a
-        href="https://wa.me/{business.phone.replace(/\D+/g, '')}"
+        href="https://wa.me/{normalizePhone(business.phone)}?text={encodeURIComponent(whatsAppMessage)}"
         target="_blank">
         <i class="fab fa-whatsapp" />
         Hablar ahora
