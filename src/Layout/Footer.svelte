@@ -41,10 +41,12 @@
 <footer>
   <section>Un aporte de</section>
   <section class="authors">
-    <a href="https://grupoeon.com.ar" target="_blank">
+    <a href="https://grupoeon.com.ar?ref=comprardesdecasa" target="_blank">
       <img alt="Grupo EON" src="/authors/grupoeon.png" />
     </a>
-    <a href="https://www.instagram.com/multiphone_cba" target="_blank">
+    <a
+      href="https://www.instagram.com/multiphone_cba?ref=comprardesdecasa"
+      target="_blank">
       <img
         alt="MultiPhone"
         src="/authors/multiphone.png"

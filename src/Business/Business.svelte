@@ -136,7 +136,7 @@
       Llamar ahora
     </a>
     {#if business.url}
-      <a href={business.url} target="_blank">
+      <a href={`${business.url}?ref=comprardesdecasa`} target="_blank">
         <i class="fas fa-link" />
         Ver sitio web
       </a>
