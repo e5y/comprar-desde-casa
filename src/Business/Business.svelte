@@ -114,7 +114,7 @@
 <article class="business">
   <h1>
     <span>
-      {business.name}
+      {business.name || 'Nombre del negocio'}
       {#if $loggedIn}
         <a use:link href="/editar-negocio/{business.id}">
           <i class="fas fa-edit" />
@@ -127,10 +127,12 @@
   <h2>{getCategoryNameById(business.category)}</h2>
   <p class="radius">
     <i class="fas fa-biking" />
-    Entrega los {makeCommaSeparatedString(arrayToDays(business.delivery_days))}
-    en un radio de {business.delivery_radius} km
+    Entrega los {makeCommaSeparatedString(arrayToDays(business.delivery_days)) || '<días>'}
+    en un radio de {business.delivery_radius || '<radio>'} km
   </p>
-  <p class="description">{business.description}</p>
+  <p class="description">
+    {business.description || 'Insertá una breve descripción del negocio..'}
+  </p>
   <section class="buttons">
     {#if business.whatsapp}
       <a

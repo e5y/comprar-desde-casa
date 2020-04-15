@@ -2,6 +2,8 @@
   import { onMount, createEventDispatcher } from "svelte";
   import { googleMapsLoaded, loggedIn } from "../stores";
 
+  import Business from "../Business/Business.svelte";
+
   export let db;
   export let geo;
   export let categories;
@@ -264,6 +266,13 @@
         instagram.com/grupo.eon
       </a>
     </p>
+  </section>
+  <section>
+    <h2 style="font-size: 1.15rem: margin 0;">Previsualización</h2>
+    <p class="field-description" style="margin-bottom: 1rem;">
+      Así se verá tu negocio cuando un usuario lo abra
+    </p>
+    <Business business={form} {categories} />
   </section>
   <input type="submit" value="Inscribirme" />
 </form>
