@@ -54,8 +54,8 @@
   {#if eventPWA}
     <section class="pwa">
       <button on:click={installPWA}>
-        <i class="fas fa-archive" />
-        Instalar Aplicación
+        <i class="fas fa-mobile-alt" style="margin-right: .25rem;" />
+        Agregar al Inicio
       </button>
     </section>
   {/if}
