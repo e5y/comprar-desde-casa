@@ -1,5 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
+  import { navigate } from "svelte-routing";
 
   import Loader from "../Utility/Loader.svelte";
   import Info from "../Utility/Info.svelte";
@@ -44,6 +45,18 @@
       .doc(id)
       .set(form);
     dispatch("sent");
+  };
+
+  const deleteBusiness = async () => {
+    const confirmed = window.confirm(
+      "¿Estás seguro de que querés borrar el negocio?"
+    );
+    if (confirmed) {
+      db.collection("approved_businesses")
+        .doc(id)
+        .delete();
+      navigate("/");
+    }
   };
 </script>
 
@@ -100,6 +113,18 @@
         background: black;
         color: white;
       }
+
+      .delete-business {
+        background: red;
+        color: white;
+        width: 100%;
+        border-radius: 7px;
+        border: 0;
+        font-size: 1rem;
+        font-family: Roboto;
+        padding: 1rem;
+      }
+
       .field-description {
         font-size: 0.9rem;
         color: rgba(0, 0, 0, 0.7);
@@ -271,7 +296,10 @@
           </a>
         </p>
       </section>
-      <input type="submit" value="Editar" />
+      <button type="button" class="delete-business" on:click={deleteBusiness}>
+        Borrar negocio
+      </button>
+      <input type="submit" value="Editar negocio" />
     </form>
   {:else}
     <Info type="error">No hay ningún documento con ese ID</Info>
