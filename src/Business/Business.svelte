@@ -142,7 +142,7 @@
         Hablar ahora
       </a>
     {/if}
-    <a href="tel:{business.phone}" target="_blank">
+    <a href="tel:{business.phone}">
       <i class="fas fa-phone" />
       Llamar ahora
     </a>
