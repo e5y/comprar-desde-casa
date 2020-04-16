@@ -26,8 +26,18 @@
   .authors a img {
     max-height: 2.5rem;
   }
-  .pwa {
+
+  .social-media {
     margin-top: 2rem;
+    font-size: 1rem;
+  }
+
+  .social-media a {
+    text-decoration: none;
+  }
+
+  .pwa {
+    margin-top: 1rem;
   }
 
   .pwa button {
@@ -51,6 +61,12 @@
         alt="MultiPhone"
         src="/authors/multiphone.png"
         style="max-height: 3.5rem;" />
+    </a>
+  </section>
+  <section class="social-media">
+    <i class="fab fa-instagram" />
+    <a href="https://www.instagram.com/comprardesdecasa/" target="_blank">
+      comprardesdecasa
     </a>
   </section>
   {#if eventPWA}
