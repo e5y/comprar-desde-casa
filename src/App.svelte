@@ -1,11 +1,12 @@
 <script>
   import { onMount } from "svelte";
   import { Router, Link, Route } from "svelte-routing";
-  import { loggedIn, eventPWA } from "./stores.js";
+  import { loggedIn, categories, geo, db, eventPWA } from "./stores.js";
+  import { Categories } from "./classes/Categories.js";
   import Home from "./Home/Home.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
-  import AddBusiness from "./AddBusiness/AddBusiness.svelte";
-  import EditBusiness from "./EditBusiness/EditBusiness.svelte";
+  import AddBusiness from "./Business/AddBusiness.svelte";
+  import EditBusiness from "./Business/EditBusiness.svelte";
   import Admin from "./Admin/Admin.svelte";
   import * as geofirex from "geofirex";
 
@@ -20,16 +21,17 @@
     measurementId: "G-SKMV86KYJH"
   });
 
-  const db = firebase.firestore();
-  const geo = geofirex.init(firebase);
+  $db = firebase.firestore();
+  $geo = geofirex.init(firebase);
 
-  let categories;
   onMount(async () => {
-    categories = await db
-      .collection("categories")
-      .where("visible", "==", true)
-      .orderBy("order")
-      .get();
+    $categories = new Categories(
+      await $db
+        .collection("categories")
+        .where("visible", "==", true)
+        .orderBy("order")
+        .get()
+    );
   });
 
   onMount(() => {
@@ -58,10 +60,10 @@
     <Admin {db} {categories} />
   </Route>
   <Route path="/agregar-negocio">
-    <AddBusiness {db} {geo} {categories} />
+    <AddBusiness />
   </Route>
   <Route path="/editar-negocio/:id" let:params>
-    <EditBusiness {db} {geo} {categories} id={params.id} />
+    <EditBusiness id={params.id} />
   </Route>
   <Route path="/cerca/:category" let:params>
     <NearMe category={params.category} {db} {geo} {categories} />

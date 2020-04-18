@@ -3,8 +3,8 @@
   import timestring from "timestring";
 
   export let type = "regular";
-  export let rest;
-  export let id;
+  export let rest = null;
+  export let id = null;
   export let icon;
 
   if (!icon) {

@@ -1,6 +1,6 @@
 <script>
   import { loggedIn } from "../stores.js";
-  import { logOut } from "../utils.js";
+  import { logOut } from "../utilities.js";
   import { link } from "svelte-routing";
 
   import Sticky from "../Utility/Sticky.svelte";
