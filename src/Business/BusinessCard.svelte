@@ -103,7 +103,12 @@
   {#if business.delivery_days && business.delivery_radius}
     <p class="delivery-info">
       <i class="fas fa-biking" />
-      Entrega los {business.delivery_days_hr} en un radio de {business.delivery_radius_hr}
+      <span>
+        Entrega los
+        <b>{business.delivery_days_hr}</b>
+        en un radio de
+        <b>{business.delivery_radius_hr}</b>
+      </span>
     </p>
   {/if}
   <p class="description">{business.description}</p>

@@ -9,6 +9,7 @@
   import NearMe from "./NearMe/NearMe.svelte";
   import AddBusiness from "./Business/AddBusiness.svelte";
   import EditBusiness from "./Business/EditBusiness.svelte";
+  import BusinessProfile from "./Business/BusinessProfile.svelte";
   import Admin from "./Admin/Admin.svelte";
 
   import * as geofirex from "geofirex";
@@ -61,6 +62,9 @@
 <Router>
   <Route path="/admin">
     <Admin />
+  </Route>
+  <Route path="/negocio/:id" let:params>
+    <BusinessProfile id={params.id} />
   </Route>
   <Route path="/agregar-negocio">
     <AddBusiness />

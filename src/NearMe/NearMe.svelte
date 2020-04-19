@@ -30,6 +30,8 @@
     all = false,
     radius = 10;
 
+  const originalPathname = window.location.pathname;
+
   const fetchBusinesses = async () => {
     try {
       position = await getPosition();
@@ -69,10 +71,15 @@
       );
     });
 
-  const openBusiness = ({ detail: { id } }) =>
-    (business = businesses.find(b => b.id === id));
+  const openBusiness = ({ detail: { id } }) => {
+    business = businesses.find(b => b.id === id);
+    history.replaceState(null, document.title, `/negocio/${business.id}`);
+  };
 
-  const clearBusiness = () => (business = null);
+  const clearBusiness = () => {
+    business = null;
+    history.replaceState(null, document.title, originalPathname);
+  };
 
   onMount(fetchBusinesses);
 </script>

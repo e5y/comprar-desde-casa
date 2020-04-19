@@ -71,7 +71,7 @@ export class Business {
     }
 
     get delivery_radius_hr() {
-        return `${this.delivery_radius}km`;
+        return `${this.delivery_radius} km`;
     }
 
     get permalink() {
