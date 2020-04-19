@@ -1,7 +1,7 @@
 <script>
   import { Link } from "svelte-routing";
 
-  import { categories } from "../stores.js";
+  import { categories, eventPWA } from "../stores.js";
 
   import Layout from "../Layout/Layout.svelte";
   import Loader from "../Utility/Loader.svelte";
@@ -21,6 +21,13 @@
   <h1>¿Qué buscás?</h1>
   {#if $categories}
     <BusinessCategories {categories} />
+    {#if eventPWA}
+      <Info icon="fas fa-mobile-alt">
+        Agreganos a tu inicio y usá el sitio como cualquier otra app de
+        Android/iOS.
+        <a href="#">Agregar al inicio</a>
+      </Info>
+    {/if}
   {:else}
     <Loader />
   {/if}

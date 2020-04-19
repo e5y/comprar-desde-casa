@@ -13,7 +13,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: -0.5rem;
+    margin-bottom: 1rem;
   }
 </style>
 
