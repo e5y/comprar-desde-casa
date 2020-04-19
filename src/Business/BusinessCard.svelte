@@ -79,6 +79,7 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     list-style: none;
+    word-break: break-all;
   }
 </style>
 
@@ -88,7 +89,7 @@
       <h1>
         {business.name}
         {#if $loggedIn}
-          <a href="/editar-negocio/{business.id}">
+          <a href="/editar-negocio/{business.id}" style="min-width: 4rem;">
             <i class="fas fa-edit" />
             Editar
           </a>
