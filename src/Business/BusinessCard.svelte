@@ -3,6 +3,7 @@
   import WhatsAppButton from "./Buttons/WhatsAppButton.svelte";
   import PhoneButton from "./Buttons/PhoneButton.svelte";
   import WebsiteButton from "./Buttons/WebsiteButton.svelte";
+  import ShareButton from "./Buttons/ShareButton.svelte";
 
   export let business;
 </script>
@@ -140,5 +141,6 @@
     {#if business.url}
       <WebsiteButton url={business.url} />
     {/if}
+    <ShareButton {business} />
   </section>
 </article>

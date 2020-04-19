@@ -16,9 +16,13 @@
 
 <style>
   a {
-    color: #1e4cf5;
     text-decoration: none;
-    margin: 0.25rem 0;
+    margin: 0.15rem 0;
+    background: #1e4cf5;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    text-align: center;
   }
 
   a i {
