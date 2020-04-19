@@ -1,5 +1,5 @@
 <script>
-  import { Link } from "svelte-routing";
+  import { link } from "svelte-routing";
 </script>
 
 <style>
@@ -33,8 +33,7 @@
     }
   }
 
-  .add-business-button :global(li a),
-  .add-business-button :global(a) {
+  li a {
     color: white;
     text-decoration: none;
     display: flex;
@@ -47,15 +46,15 @@
     width: 100%;
     height: 100%;
   }
-  .add-business-button :global(li a i) {
+  li a i {
     margin-bottom: 0.5rem;
     font-size: 2rem;
   }
 </style>
 
 <li class="add-business-button">
-  <Link to="/agregar-negocio">
+  <a use:link href="/agregar-negocio">
     <i class="fas fa-plus-circle" />
     Agregá tu negocio
-  </Link>
+  </a>
 </li>
