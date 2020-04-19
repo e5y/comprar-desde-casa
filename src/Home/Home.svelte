@@ -1,13 +1,13 @@
 <script>
   import { Link } from "svelte-routing";
+
+  import { categories } from "../stores.js";
+
   import Layout from "../Layout/Layout.svelte";
-  import AddBusinessButton from "../AddBusiness/AddBusinessButton.svelte";
   import Loader from "../Utility/Loader.svelte";
   import Info from "../Utility/Info.svelte";
-  import BusinessCategories from "./BusinessCategories.svelte";
-  import BusinessCategory from "./BusinessCategory.svelte";
 
-  export let categories;
+  import BusinessCategories from "./BusinessCategories.svelte";
 </script>
 
 <Layout>
@@ -19,13 +19,8 @@
     venta
   </Info>
   <h1>¿Qué buscás?</h1>
-  {#if categories}
-    <BusinessCategories>
-      {#each categories.docs as category}
-        <BusinessCategory {category} />
-      {/each}
-      <AddBusinessButton />
-    </BusinessCategories>
+  {#if $categories}
+    <BusinessCategories {categories} />
   {:else}
     <Loader />
   {/if}

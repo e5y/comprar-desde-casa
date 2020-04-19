@@ -1,13 +1,16 @@
 <script>
   import { onMount } from "svelte";
   import { Router, Link, Route } from "svelte-routing";
+
   import { loggedIn, categories, geo, db, eventPWA } from "./stores.js";
   import { Categories } from "./classes/Categories.js";
+
   import Home from "./Home/Home.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
   import AddBusiness from "./Business/AddBusiness.svelte";
   import EditBusiness from "./Business/EditBusiness.svelte";
   import Admin from "./Admin/Admin.svelte";
+
   import * as geofirex from "geofirex";
 
   firebase.initializeApp({
@@ -57,7 +60,7 @@
 
 <Router>
   <Route path="/admin">
-    <Admin {db} {categories} />
+    <Admin />
   </Route>
   <Route path="/agregar-negocio">
     <AddBusiness />
@@ -66,9 +69,9 @@
     <EditBusiness id={params.id} />
   </Route>
   <Route path="/cerca/:category" let:params>
-    <NearMe category={params.category} {db} {geo} {categories} />
+    <NearMe category={params.category} />
   </Route>
   <Route path="/">
-    <Home {categories} />
+    <Home />
   </Route>
 </Router>

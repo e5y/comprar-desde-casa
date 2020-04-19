@@ -1,5 +1,6 @@
 <script>
   import { Link } from "svelte-routing";
+
   export let category;
 </script>
 
@@ -48,8 +49,6 @@
   }
 </style>
 
-<li
-  class="business-category"
-  style="background-image:url({category.data().img})">
-  <Link to="/cerca/{category.id}">{category.data().name}</Link>
+<li class="business-category" style="background-image:url({category.img})">
+  <Link to="/cerca/{category.id}">{category.name}</Link>
 </li>

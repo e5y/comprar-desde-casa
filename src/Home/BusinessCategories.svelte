@@ -1,3 +1,10 @@
+<script>
+  import BusinessCategory from "./BusinessCategory.svelte";
+  import AddBusinessButton from "../Business/AddbusinessButton.svelte";
+
+  export let categories;
+</script>
+
 <style>
   ul {
     list-style: none;
@@ -11,5 +18,8 @@
 </style>
 
 <ul class="business-categories">
-  <slot />
+  {#each $categories as category}
+    <BusinessCategory {category} />
+  {/each}
+  <AddBusinessButton />
 </ul>
