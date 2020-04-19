@@ -4,7 +4,7 @@ import { categories } from "../stores.js";
 import { arrayToDays, makeCommaSeparatedString, randBetween } from "../utilities.js";
 
 export class Business {
-    constructor(business) {
+    constructor(business, raw = false) {
         Object.assign(this, {
             owner_name: "",
             owner_email: "",
@@ -22,12 +22,16 @@ export class Business {
 
         this._rand = randBetween(10000, 99999);
 
-        if (business) {
+        if (business && !raw) {
             if (!business.exists) throw new Error("Business doesn't exist.");
             this._id = business.id;
             const data = business.data();
             Object.assign(this, data);
-        }
+        } else if (business) {
+            this._id = business.id;
+            delete business.id;
+            Object.assign(this, business)
+        };
     }
 
     get id() {

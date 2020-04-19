@@ -68,6 +68,9 @@
   <Route path="/editar-negocio/:id" let:params>
     <EditBusiness id={params.id} />
   </Route>
+  <Route path="/cerca/todos">
+    <NearMe category="todos" />
+  </Route>
   <Route path="/cerca/:category" let:params>
     <NearMe category={params.category} />
   </Route>

@@ -1,79 +1,80 @@
 <script>
   import { onMount } from "svelte";
-  import { Link } from "svelte-routing";
-  import { get } from "geofirex";
+
+  import {
+    googleMapsLoaded,
+    loggedIn,
+    categories,
+    db,
+    geo
+  } from "../stores.js";
+
+  import { Businesses } from "../classes/Businesses.js";
+
   import Layout from "../Layout/Layout.svelte";
   import Loader from "../Utility/Loader.svelte";
-  import Business from "../Business/Business.svelte";
   import Info from "../Utility/Info.svelte";
   import Popup from "../Utility/Popup.svelte";
-  import { googleMapsLoaded, loggedIn } from "../stores.js";
+
+  import BusinessCard from "../Business/BusinessCard.svelte";
   import Map from "./Map.svelte";
 
+  import { get } from "geofirex";
+
   export let category;
-  export let categories;
-  export let db;
-  export let geo;
 
-  const radius = 10;
-  let results, currentBusiness, points, error;
-  let showingAll = false;
+  let businesses,
+    business,
+    position,
+    error = false,
+    all = false,
+    radius = 10;
 
-  const fetchResults = async (position, showAll) => {
-    const firestoreQuery =
+  const fetchBusinesses = async () => {
+    try {
+      position = await getPosition();
+    } catch {
+      return;
+    }
+
+    businesses = null;
+
+    const query =
       category === "todos"
-        ? db.collection("approved_businesses")
-        : db
+        ? $db.collection("approved_businesses")
+        : $db
             .collection("approved_businesses")
             .where("category", "==", category);
-    const geoQuery = geo
-      .query(firestoreQuery)
+
+    const geoQuery = $geo
+      .query(query)
       .within(
-        geo.point(position.coords.latitude, position.coords.longitude),
-        showAll ? 650 : radius,
+        $geo.point(position.coords.latitude, position.coords.longitude),
+        all ? 650 : radius,
         "position"
       );
-    results = null;
-    results = await get(geoQuery);
-    points = [
-      {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-        id: "user",
-        category: "user"
-      },
-      ...results.map(business => ({
-        category: business.category,
-        lat: business.position.geopoint.latitude,
-        lng: business.position.geopoint.longitude,
-        id: business.id
-      }))
-    ];
+
+    // TODO: Remove Geofirex and replace with Geofirestore-js, will break Businesses and Business classes
+    businesses = new Businesses(await get(geoQuery), true);
   };
 
-  const selectBusiness = e => {
-    const id = e.detail.id;
-    currentBusiness = results.find(result => result.id === id);
-  };
+  const viewAll = () => (all = true && fetchBusinesses());
 
-  const viewAll = () => {
-    showingAll = true;
-    navigator.geolocation.getCurrentPosition(position =>
-      fetchResults(position, 650)
-    );
-  };
+  const getPosition = () =>
+    new Promise((res, rej) => {
+      navigator.geolocation.getCurrentPosition(
+        position => res(position),
+        e => rej(e),
+        { enableHighAccuracy: true }
+      );
+    });
 
-  const clearCurrentBusiness = () => {
-    currentBusiness = null;
-  };
+  const openBusiness = ({ detail: { id } }) =>
+    (business = businesses.find(b => b.id === id));
 
-  const errorHandler = err => {
-    error = err;
-  };
+  const clearBusiness = () => (business = null);
 
-  onMount(async () =>
-    navigator.geolocation.getCurrentPosition(fetchResults, errorHandler)
-  );
+  onMount(fetchBusinesses);
 </script>
 
 <style>
@@ -116,50 +117,54 @@
 </style>
 
 <Layout>
-  {#if results}
-    {#if results.length}
-      {#if category === 'todos'}
-        <h1>Cerca mío</h1>
-      {:else}
+  {#if position}
+    {#if businesses}
+      {#if businesses.length}
         <h1>
-          <span class="category">
-            {categories.docs.find(c => c.id === category).data().name}
-          </span>
-          cerca mío
+          {#if category === 'todos'}
+            Cerca mío
+          {:else}
+            <span class="category">
+              {$categories.find(c => c.id === category).name}
+            </span>
+            cerca mío
+          {/if}
         </h1>
-      {/if}
-      <Info id="toca-un-negocio" rest="1d">
-        Tocá un negocio en el mapa para ver su información disponible
-      </Info>
-      {#if $googleMapsLoaded}
-        <Map {points} on:markerClicked={selectBusiness} />
-      {/if}
-      <section class="showing-results">
-        Mostrando
-        {#if $loggedIn}
-          <b>{results.length}</b>
-        {:else}todos los{/if}
-        negocios
-        {#if !showingAll}
-          en un radio de {radius} km
-          <button on:click={viewAll}>Ver todos</button>
+        <Info id="toca-un-negocio" rest="1d">
+          Tocá un negocio en el mapa para ver su información disponible
+        </Info>
+        {#if $googleMapsLoaded}
+          <Map {businesses} {position} on:marker={openBusiness} />
         {/if}
-      </section>
-      {#if currentBusiness}
-        <Popup on:close={clearCurrentBusiness}>
-          <Business business={currentBusiness} {categories} />
-        </Popup>
+        <section class="showing-results">
+          Mostrando
+          {#if $loggedIn}
+            <b>{businesses.length}</b>
+          {:else}todos los{/if}
+          negocios
+          {#if !all}
+            en un radio de {radius} km
+            <button on:click={viewAll}>Ver todos</button>
+          {/if}
+        </section>
+        {#if business}
+          <Popup on:close={clearBusiness}>
+            <BusinessCard {business} />
+          </Popup>
+        {/if}
+      {:else}
+        <Info type="warning">
+          Aún no hay negocios cargados cerca tuyo.
+          {#if !all}
+            Mirá todos los negocios cargados
+            <button on:click={viewAll}>haciendo click aquí</button>
+          {/if}
+        </Info>
       {/if}
     {:else}
-      <Info type="warning">
-        Aún no hay negocios cargados cerca tuyo.
-        {#if !showingAll}
-          Mirá todos los negocios cargados
-          <button on:click={viewAll}>haciendo click aquí</button>
-        {/if}
-      </Info>
+      <Loader />
     {/if}
-  {:else if error}
+  {:else}
     <Info type="error">
       ¡Oh no! Parece que no tenés habilitada tu ubicación. Revisá la
       configuración de tu dispositivo para ver los negocios que estén cerca
@@ -183,8 +188,5 @@
         </li>
       </ul>
     </Info>
-  {:else}
-    <Loader />
   {/if}
-
 </Layout>
