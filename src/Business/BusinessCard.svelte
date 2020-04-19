@@ -96,7 +96,7 @@
       </h1>
       <h2>{business.category_hr}</h2>
     </div>
-    <img src={business.marker} alt />
+    <img src={business.marker} alt loading="lazy" />
   </header>
   {#if business.delivery_days && business.delivery_radius}
     <p class="delivery-info">

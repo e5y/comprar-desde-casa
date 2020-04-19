@@ -166,8 +166,8 @@
   <header class:sticky>
     <section class="logo">
       <a use:link href="/">
-        <img class="icon-image" alt src="/favicon.png" />
-        <img class="logo-image" alt src="/logo.png" />
+        <img class="icon-image" alt src="/favicon.png" loading="lazy" />
+        <img class="logo-image" alt src="/logo.png" loading="lazy" />
       </a>
     </section>
     <nav>

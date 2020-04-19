@@ -52,7 +52,7 @@
   <section>Un aporte de</section>
   <section class="authors">
     <a href="https://grupoeon.com.ar?ref=comprardesdecasa" target="_blank">
-      <img alt="Grupo EON" src="/authors/grupoeon.png" />
+      <img alt="Grupo EON" src="/authors/grupoeon.png" loading="lazy" />
     </a>
     <a
       href="https://www.instagram.com/multiphone_cba?ref=comprardesdecasa"
@@ -60,7 +60,8 @@
       <img
         alt="MultiPhone"
         src="/authors/multiphone.png"
-        style="max-height: 3.5rem;" />
+        style="max-height: 3.5rem;"
+        loading="lazy" />
     </a>
   </section>
   <section class="social-media">
