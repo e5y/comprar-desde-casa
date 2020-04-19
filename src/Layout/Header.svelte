@@ -87,25 +87,26 @@
   }
 
   .topbar {
-    background: #ff9595;
+    background: var(--primary);
     width: 100%;
     padding: 0.5rem 1rem;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     text-align: center;
+    color: white;
   }
 
   .topbar button {
     background: none;
-    text-decoration: underline;
     border: 0;
+    color: white;
   }
 
   .topbar a,
   .topbar a:visited {
     text-decoration: none;
-    color: black;
+    color: white;
   }
 
   @media screen and (min-width: 800px) {
