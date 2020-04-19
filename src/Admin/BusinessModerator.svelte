@@ -1,14 +1,19 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Business from "../Business/Business.svelte";
+
+  import { categories } from "../stores.js";
+
+  import BusinessCard from "../Business/BusinessCard.svelte";
+
   export let business;
   export let collection;
-  export let categories;
 
   const dispatch = createEventDispatcher();
+
   const onApprove = () => {
     dispatch("approved", { business, collection });
   };
+
   const onReject = () => {
     dispatch("rejected", { business, collection });
   };
@@ -56,7 +61,7 @@
 </style>
 
 <section class="business-moderator">
-  <Business {business} {categories} />
+  <BusinessCard {business} />
   <section class="controls">
     {#if collection === 'rejected_businesses' || collection === 'pending_businesses'}
       <button class="approve" on:click={onApprove}>

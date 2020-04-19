@@ -1,35 +1,31 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
+
+  import { db } from "../stores.js";
+  import { Businesses } from "../classes/Businesses.js";
+
   import Loader from "../Utility/Loader.svelte";
   import Info from "../Utility/Info.svelte";
+
   import BusinessModerator from "./BusinessModerator.svelte";
 
-  export let db;
   export let collection;
   export let businesses;
-  export let categories;
-
-  const mapDocToBusiness = doc => {
-    return {
-      id: doc.id,
-      ...doc.data()
-    };
-  };
 
   const fetchBusinesses = async () => {
-    const snapshot = await db
+    const results = await $db
       .collection(collection)
       .orderBy("createdAt", "desc")
       .limit(10)
       .get();
+
     dispatch("load", {
       collection,
-      businesses: snapshot.docs.map(mapDocToBusiness)
+      businesses: new Businesses(results)
     });
   };
 
   const dispatch = createEventDispatcher();
-  onMount(fetchBusinesses);
 
   const onApproved = e => {
     const { id, ...data } = e.detail.business;
@@ -54,6 +50,8 @@
       .delete();
     fetchBusinesses();
   };
+
+  onMount(fetchBusinesses);
 </script>
 
 <style>
@@ -70,7 +68,6 @@
         <BusinessModerator
           {business}
           {collection}
-          {categories}
           on:approved={onApproved}
           on:rejected={onRejected} />
       {/each}

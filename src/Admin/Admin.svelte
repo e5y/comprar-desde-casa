@@ -1,13 +1,13 @@
 <script>
   import { onMount } from "svelte";
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
-  import { loggedIn } from "../stores.js";
+
+  import { loggedIn, db, categories } from "../stores.js";
+
   import Layout from "../Layout/Layout.svelte";
   import Info from "../Utility/Info.svelte";
-  import AdminBusinessList from "./AdminBusinessList.svelte";
 
-  export let db;
-  export let categories;
+  import AdminBusinessList from "./AdminBusinessList.svelte";
 
   let pending, approved, rejected;
 
@@ -111,8 +111,6 @@
       <TabPanel>
         <AdminBusinessList
           collection="pending_businesses"
-          {db}
-          {categories}
           businesses={pending}
           on:load={onListLoad} />
       </TabPanel>
@@ -120,8 +118,6 @@
       <TabPanel>
         <AdminBusinessList
           collection="approved_businesses"
-          {db}
-          {categories}
           businesses={approved}
           on:load={onListLoad} />
       </TabPanel>
@@ -129,8 +125,6 @@
       <TabPanel>
         <AdminBusinessList
           collection="rejected_businesses"
-          {db}
-          {categories}
           businesses={rejected}
           on:load={onListLoad} />
       </TabPanel>
