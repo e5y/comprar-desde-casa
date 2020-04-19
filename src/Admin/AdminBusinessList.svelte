@@ -73,7 +73,7 @@
       {/each}
     </section>
   {:else}
-    <Info type="error">No se encontraron negocios.</Info>
+    <Info type="error">No se encontraron negocios</Info>
   {/if}
 {:else}
   <Loader />

@@ -65,7 +65,7 @@
   h1 {
     margin-top: 0;
   }
-  :global(.svelte-tabs) {
+  :global(.svelte-tabs .svelte-tabs__tab) {
     font-size: 0.9rem;
   }
   .logout-button {

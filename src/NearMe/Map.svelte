@@ -8,6 +8,7 @@
 
   export let businesses;
   export let position;
+  export let type;
 
   let element, map;
 
@@ -79,9 +80,23 @@
 
 <style>
   div {
-    height: 400px;
     width: 100%;
+    height: 400px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+  }
+  div.compact {
+    height: 200px;
+  }
+  @media screen and (min-width: 1000px) {
+    div {
+      height: 600px;
+    }
+    div.compact {
+      height: 400px;
+    }
   }
 </style>
 
-<div bind:this={element} />
+<div class={type} bind:this={element} />

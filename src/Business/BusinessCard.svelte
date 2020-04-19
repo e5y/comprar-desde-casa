@@ -138,14 +138,16 @@
       {/if}
     </ul>
   {/if}
-  <section class="buttons">
-    {#if business.whatsapp}
-      <WhatsAppButton phone={business.phone} />
-    {/if}
-    <PhoneButton phone={business.phone} />
-    {#if business.url}
-      <WebsiteButton url={business.url} />
-    {/if}
-    <ShareButton {business} />
-  </section>
+  {#if !window.location.pathname.includes('/admin')}
+    <section class="buttons">
+      {#if business.whatsapp}
+        <WhatsAppButton phone={business.phone} />
+      {/if}
+      <PhoneButton phone={business.phone} />
+      {#if business.url}
+        <WebsiteButton url={business.url} />
+      {/if}
+      <ShareButton {business} />
+    </section>
+  {/if}
 </article>
