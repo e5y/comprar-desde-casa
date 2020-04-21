@@ -1,7 +1,7 @@
 <script>
   import { loggedIn, categories, db } from "../stores.js";
 
-  import { Business } from "../classes/business.js";
+  import { Business } from "../classes/Business.js";
 
   import Layout from "../Layout/Layout.svelte";
   import BusinessForm from "./BusinessForm.svelte";
