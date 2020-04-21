@@ -8,6 +8,10 @@
   import Info from "../Utility/Info.svelte";
 
   import BusinessCategories from "./BusinessCategories.svelte";
+
+  const installPWA = () => {
+    $eventPWA.prompt();
+  };
 </script>
 
 <Layout>
@@ -21,11 +25,11 @@
   <h1>¿Qué buscás?</h1>
   {#if $categories}
     <BusinessCategories {categories} />
-    {#if eventPWA}
+    {#if $eventPWA}
       <Info icon="fas fa-mobile-alt">
         Agreganos a tu inicio y usá el sitio como cualquier otra app de
         Android/iOS.
-        <a href="#">Agregar al inicio</a>
+        <button on:click={installPWA}>Agregar al inicio</button>
       </Info>
     {/if}
   {:else}
