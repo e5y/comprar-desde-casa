@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { link } from "svelte-routing";
+  import { link, navigate } from "svelte-routing";
 
   import { loggedIn, db } from "../stores.js";
   import { Business } from "../classes/Business.js";
@@ -16,12 +16,23 @@
   let business;
   let sent = false;
 
-  const editBusiness = () => {
-    $db
+  const editBusiness = async () => {
+    await $db
       .collection("approved_businesses")
       .doc(id)
       .set(business.export);
     sent = true;
+  };
+
+  const deleteBusiness = async () => {
+    const confirmed = confirm("¿Estás seguro de que querés borrar el negocio?");
+    if (confirmed) {
+      await $db
+        .collection("approved_businesses")
+        .doc(id)
+        .delete();
+      navigate("/");
+    }
   };
 
   onMount(async () => {
@@ -43,6 +54,18 @@
   h1 {
     margin-top: 0;
   }
+  .delete-business {
+    font-family: Roboto;
+    padding: 1rem;
+    border: 2px solid red;
+    border-radius: 7px;
+    margin: 0.25rem 0;
+    width: 100%;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background: red;
+    color: white;
+  }
 </style>
 
 <Layout>
@@ -56,6 +79,7 @@
         on:submit={editBusiness}
         submitText="Editar" />
       <BusinessCard {business} />
+      <button class="delete-business" on:click={deleteBusiness}>Borrar</button>
     {:else}
       <Loader />
     {/if}
