@@ -1,6 +1,6 @@
 <script>
   import BusinessCategory from "./BusinessCategory.svelte";
-  import AddBusinessButton from "../Business/AddbusinessButton.svelte";
+  import AddBusinessButton from "../Business/AddBusinessButton.svelte";
 
   export let categories;
 </script>
