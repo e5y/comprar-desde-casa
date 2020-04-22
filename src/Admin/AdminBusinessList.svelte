@@ -30,10 +30,12 @@
   const onApproved = e => {
     const { id, ...data } = e.detail.business;
     const collection = e.detail.collection;
-    db.collection("approved_businesses")
+    $db
+      .collection("approved_businesses")
       .doc(id)
       .set(data);
-    db.collection(collection)
+    $db
+      .collection(collection)
       .doc(id)
       .delete();
     fetchBusinesses();
@@ -42,10 +44,12 @@
   const onRejected = e => {
     const { id, ...data } = e.detail.business;
     const collection = e.detail.collection;
-    db.collection("rejected_businesses")
+    $db
+      .collection("rejected_businesses")
       .doc(id)
       .set(data);
-    db.collection(collection)
+    $db
+      .collection(collection)
       .doc(id)
       .delete();
     fetchBusinesses();
