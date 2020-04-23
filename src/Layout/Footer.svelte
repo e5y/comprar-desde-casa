@@ -95,7 +95,7 @@
             alt="Grupo EON"
             src="/authors/grupoeon.png"
             loading="lazy"
-            style="max-height: 3rem;" />
+            style="max-height: 3.5rem;" />
         </a>
       </li>
       <li>
