@@ -20,19 +20,19 @@ jobs:
       - name: List Public Folder
         run: ls -la public
       - name: Archive App Artifact
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
           name: public
           path: public
-      - name: Archive Firebase (same artifact)
-        uses: actions/upload-artifact@master
+      - name: Archive Firebase (root artifact)
+        uses: actions/upload-artifact@v2
         with:
-          name: public
+          name: root
           path: firebase.*
-      - name: Archive Firebase Functions (same artifact)
-        uses: actions/upload-artifact@master
+      - name: Archive Firebase Functions (root artifact)
+        uses: actions/upload-artifact@v2
         with:
-          name: public
+          name: root
           path: functions
   deploy:
     name: Deploy
@@ -43,10 +43,16 @@ jobs:
         uses: actions/checkout@master
         with:
           ref: dev
-      - name: Download Artifact
-        uses: actions/download-artifact@master
+      - name: Download App Artifact
+        uses: actions/download-artifact@v2
         with:
           name: public
+          path: public
+      - name: Download Root Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: root
+          path: .
       - name: List Public Folder
         run: ls -la public
       - name: Install Firebase Functions
