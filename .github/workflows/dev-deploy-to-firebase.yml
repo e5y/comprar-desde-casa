@@ -36,6 +36,6 @@ jobs:
         with:
           name: public
       - name: Deploy to Firebase
-        run: npm install firebase-tools && firebase deploy
+        run: npm install firebase-tools && ./node_modules/.bin/firebase deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }} 
