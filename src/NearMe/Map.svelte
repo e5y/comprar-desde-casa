@@ -8,7 +8,7 @@
 
   export let businesses;
   export let position;
-  export let type;
+  export let type = "default";
 
   let element, map;
 
