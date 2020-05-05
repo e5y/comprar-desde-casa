@@ -10,13 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@dev
+        uses: actions/checkout@master
+        with:
+          ref: dev
       - name: Install Dependencies
         run: npm install
       - name: Build
         run: npm run build
       - name: Archive Artifact
-        uses: actions/upload-artifact@dev
+        uses: actions/upload-artifact@master
         with:
           name: public
           path: public
@@ -26,9 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@dev
+        uses: actions/checkout@master
+        with:
+          ref: dev
       - name: Download Artifact
-        uses: actions/download-artifact@dev
+        uses: actions/download-artifact@master
         with:
           name: public
       - name: Deploy to Firebase
