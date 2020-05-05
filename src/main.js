@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged(
 		}
 	},
 	function (error) {
-		console.log(error);
+		console.log('❌ Firebase Auth state change detection failed', error);
 	}
 );
 
@@ -43,9 +43,9 @@ firebase.auth().onAuthStateChanged(
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function () {
 		navigator.serviceWorker.register('/sw.js').then(function (registration) {
-			console.log('ServiceWorker registration successful with scope: ', registration.scope);
+			console.log('✔️ Service Worker registered successfully', registration.scope);
 		}, function (err) {
-			console.log('ServiceWorker registration failed: ', err);
+			console.log('❌ Service Worker failed to be registered', err);
 		});
 	});
 }

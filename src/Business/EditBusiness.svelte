@@ -45,7 +45,7 @@
       );
     } catch (e) {
       // TODO: Handle errors better 😢
-      console.error(e);
+      console.error("❌ Business could not be fetched", e);
     }
   });
 </script>

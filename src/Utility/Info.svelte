@@ -36,7 +36,6 @@
     open = false;
     if (id && rest) {
       const expires = new Date(new Date().getTime() + timestring(rest, "ms"));
-      console.log(expires);
       Cookies.set(`info-${id}`, "resting", { expires });
     }
   };
