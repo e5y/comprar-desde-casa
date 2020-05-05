@@ -1,8 +1,6 @@
 import { googleMapsLoaded, db, geo, eventPWA, loggedIn } from "./stores.js";
 import { config } from "./config.js";
 
-console.log(config, process.env);
-
 import App from './App.svelte';
 
 import * as geofirex from "geofirex";
@@ -17,10 +15,9 @@ window.initMap = () => {
 /**
  * Firebase & Geofirex setup
  */
-const firebaseConfig = config.firebase;
 
 if (!firebase.apps.length) {
-	firebase.initializeApp(firebaseConfig);
+	firebase.initializeApp(config.firebase);
 }
 
 firebase.analytics();
