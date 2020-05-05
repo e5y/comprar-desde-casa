@@ -17,11 +17,21 @@ jobs:
         run: npm install && cd functions && npm install && cd ..
       - name: Build
         run: npm run build
-      - name: Archive Artifact
+      - name: Archive App Artifact
         uses: actions/upload-artifact@master
         with:
           name: public
           path: public
+      - name: Archive Firebase
+        uses: actions/upload-artifact@master
+        with:
+          name: public
+          path: firebase.*
+      - name: Archive Firebase functions
+        uses: actions/upload-artifact@master
+        with:
+          name: public
+          path: functions
   deploy:
     name: Deploy
     needs: build
