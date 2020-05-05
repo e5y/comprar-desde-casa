@@ -12,22 +12,6 @@
   import BusinessProfile from "./Business/BusinessProfile.svelte";
   import Admin from "./Admin/Admin.svelte";
 
-  import * as geofirex from "geofirex";
-
-  firebase.initializeApp({
-    apiKey: "AIzaSyCeMIytvcgakZJfwf1B-8qfujq7b9VPZqk",
-    authDomain: "pedime-lo-que-quieras.firebaseapp.com",
-    databaseURL: "https://pedime-lo-que-quieras.firebaseio.com",
-    projectId: "pedime-lo-que-quieras",
-    storageBucket: "pedime-lo-que-quieras.appspot.com",
-    messagingSenderId: "691587000634",
-    appId: "1:691587000634:web:89da965bca31e21a688803",
-    measurementId: "G-SKMV86KYJH"
-  });
-
-  $db = firebase.firestore();
-  $geo = geofirex.init(firebase);
-
   onMount(async () => {
     $categories = new Categories(
       await $db
@@ -35,26 +19,6 @@
         .where("visible", "==", true)
         .orderBy("order")
         .get()
-    );
-  });
-
-  onMount(() => {
-    window.addEventListener("beforeinstallprompt", e => {
-      e.preventDefault();
-      eventPWA.set(e);
-    });
-
-    firebase.auth().onAuthStateChanged(
-      function(user) {
-        if (user) {
-          loggedIn.set(true);
-        } else {
-          loggedIn.set(false);
-        }
-      },
-      function(error) {
-        console.log(error);
-      }
     );
   });
 </script>

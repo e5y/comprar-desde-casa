@@ -1,15 +1,48 @@
+import { googleMapsLoaded, db, geo, eventPWA, loggedIn } from "./stores.js";
+import { config } from "./config.js";
+
+console.log(config, process.env);
+
 import App from './App.svelte';
-import { googleMapsLoaded } from "./stores.js";
 
-const app = new App({
-	target: document.body,
+import * as geofirex from "geofirex";
 
-});
-
+/**
+ * Google Maps setup
+ */
 window.initMap = () => {
 	googleMapsLoaded.set(true);
 }
 
+/**
+ * Firebase & Geofirex setup
+ */
+const firebaseConfig = config.firebase;
+
+if (!firebase.apps.length) {
+	firebase.initializeApp(firebaseConfig);
+}
+
+firebase.analytics();
+db.set(firebase.firestore());
+geo.set(geofirex.init(firebase));
+
+firebase.auth().onAuthStateChanged(
+	function (user) {
+		if (user) {
+			loggedIn.set(true);
+		} else {
+			loggedIn.set(false);
+		}
+	},
+	function (error) {
+		console.log(error);
+	}
+);
+
+/**
+ * Service Worker setup
+ */
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function () {
 		navigator.serviceWorker.register('/sw.js').then(function (registration) {
@@ -20,21 +53,20 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
-// Your web app's Firebase configuration
-var firebaseConfig = {
-	apiKey: "AIzaSyCeMIytvcgakZJfwf1B-8qfujq7b9VPZqk",
-	authDomain: "pedime-lo-que-quieras.firebaseapp.com",
-	databaseURL: "https://pedime-lo-que-quieras.firebaseio.com",
-	projectId: "pedime-lo-que-quieras",
-	storageBucket: "pedime-lo-que-quieras.appspot.com",
-	messagingSenderId: "691587000634",
-	appId: "1:691587000634:web:89da965bca31e21a688803",
-	measurementId: "G-SKMV86KYJH"
-};
-if (!firebase.apps.length) {
-	firebase.initializeApp(firebaseConfig);
-}
-firebase.analytics();
+/**
+ * PWA setup
+ */
+window.addEventListener("beforeinstallprompt", e => {
+	e.preventDefault();
+	eventPWA.set(e);
+});
+
+/**
+ * Svelte setup
+ */
+const app = new App({
+	target: document.body,
+});
 
 export default app;
 
