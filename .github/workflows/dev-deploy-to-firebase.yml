@@ -14,7 +14,7 @@ jobs:
         with:
           ref: dev
       - name: Install Dependencies
-        run: npm install && cd functions && npm install && cd ..
+        run: npm install
       - name: Build
         run: npm run build
       - name: Archive App Artifact
@@ -22,12 +22,12 @@ jobs:
         with:
           name: public
           path: public
-      - name: Archive Firebase
+      - name: Archive Firebase (same artifact)
         uses: actions/upload-artifact@master
         with:
           name: public
           path: firebase.*
-      - name: Archive Firebase functions
+      - name: Archive Firebase Functions (same artifact)
         uses: actions/upload-artifact@master
         with:
           name: public
@@ -45,6 +45,8 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: public
+      - name: Install Firebase Functions
+        run: cd functions && npm install
       - name: Deploy to Firebase
         run: npm install firebase-tools && ./node_modules/.bin/firebase deploy
         env:
