@@ -1,0 +1,59 @@
+name: DEV - Deploy to Firebase
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: List Public Folder
+        run: ls -la public
+      - name: Archive App Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: public
+          path: public
+      - name: Archive Firebase (root artifact)
+        uses: actions/upload-artifact@v2
+        with:
+          name: root
+          path: firebase.*
+      - name: Archive Firebase Functions (root artifact)
+        uses: actions/upload-artifact@v2
+        with:
+          name: root
+          path: functions
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Download App Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: public
+          path: public
+      - name: Download Root Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: root
+          path: .
+      - name: List Public Folder
+        run: ls -la public
+      - name: Install Firebase Functions
+        run: cd functions && npm install && cd ..
+      - name: Deploy to Firebase
+        run: npm install firebase-tools && ./node_modules/.bin/firebase deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }} 
