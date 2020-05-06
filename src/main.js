@@ -22,7 +22,7 @@ console.groupCollapsed('Build');
 console.group('General');
 console.table({
 	Environment: config.environment,
-	Deployment: config.deployment
+	Version: config.version
 });
 console.groupEnd();
 

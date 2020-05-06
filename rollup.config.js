@@ -7,6 +7,13 @@ import { terser } from 'rollup-plugin-terser';
 
 import dotenv from "dotenv";
 
+dotenv.config();
+
+const relevantEnv = Object.fromEntries(
+	Object.entries(process.env)
+		.filter(([key]) => key.startsWith("CDC_"))
+);
+
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
@@ -19,7 +26,7 @@ export default {
 	},
 	plugins: [
 		replace({
-			"process.env": JSON.stringify(dotenv.config().parsed)
+			"process.env": JSON.stringify(relevantEnv)
 		}),
 		svelte({
 			// enable run-time checks when not in production
