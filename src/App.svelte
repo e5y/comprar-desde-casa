@@ -26,7 +26,7 @@
 
 <svelte:head>
   <title>
-    {config.environment !== 'production' && `[${config.environment}] `}
+    {config.environment !== 'production' ? `[${config.environment}] ` : ''}
     {config.title}
   </title>
 </svelte:head>
