@@ -74,6 +74,10 @@
   .authors ul img {
     margin: 0 1rem;
   }
+  /* Sadly this depends on the Navigation component. */
+  footer {
+    margin-bottom: 3.5rem;
+  }
 </style>
 
 <footer>

@@ -12,6 +12,7 @@
   import EditBusiness from "./Business/EditBusiness.svelte";
   import BusinessProfile from "./Business/BusinessProfile.svelte";
   import Admin from "./Admin/Admin.svelte";
+  import Navigation from "./Navigation/Navigation.svelte";
 
   onMount(async () => {
     $categories = new Categories(
@@ -44,7 +45,7 @@
   <Route path="/editar-negocio/:id" let:params>
     <EditBusiness id={params.id} />
   </Route>
-  <Route path="/cerca/todos">
+  <Route path="/cerca">
     <NearMe category="todos" />
   </Route>
   <Route path="/cerca/:category" let:params>
@@ -53,4 +54,5 @@
   <Route path="/">
     <Home />
   </Route>
+  <Navigation />
 </Router>
