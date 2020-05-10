@@ -25,6 +25,18 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    max-width: calc(1024px - 2rem);
+  }
+
+  @media screen and (min-width: 768px) {
+    nav {
+      width: 80%;
+      left: 50%;
+      bottom: 2rem;
+      border-radius: 7px;
+      transform: translateX(-50%);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    }
   }
 
   :global(.navigation-item) {
@@ -37,7 +49,7 @@
     text-decoration: none;
     font-size: 0.8rem;
     color: black;
-    width: 5rem;
+    flex: 1;
   }
   i {
     font-size: 1.25rem;

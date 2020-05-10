@@ -13,6 +13,15 @@
     padding: 1rem;
     padding-top: 0;
     font-size: 0.9rem;
+    /* Sadly this depends on the Navigation component. */
+    margin-bottom: 3.5rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    /* Sadly this depends on the Navigation component. */
+    footer {
+      margin-bottom: 5.5rem;
+    }
   }
 
   .interactions {
@@ -73,10 +82,6 @@
 
   .authors ul img {
     margin: 0 1rem;
-  }
-  /* Sadly this depends on the Navigation component. */
-  footer {
-    margin-bottom: 3.5rem;
   }
 </style>
 
