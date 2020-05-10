@@ -11,6 +11,7 @@
   import AddBusiness from "./Business/AddBusiness.svelte";
   import EditBusiness from "./Business/EditBusiness.svelte";
   import BusinessProfile from "./Business/BusinessProfile.svelte";
+  import YourBusiness from "./Business/YourBusiness.svelte";
   import Admin from "./Admin/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
 
@@ -35,6 +36,9 @@
 <Router>
   <Route path="/admin">
     <Admin />
+  </Route>
+  <Route path="/tu-negocio">
+    <YourBusiness />
   </Route>
   <Route path="/negocio/:id" let:params>
     <BusinessProfile id={params.id} />

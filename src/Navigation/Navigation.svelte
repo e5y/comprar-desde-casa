@@ -38,9 +38,8 @@
       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     }
   }
-
   :global(.navigation-item) {
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     text-align: center;
     display: flex;
     align-items: center;
@@ -71,7 +70,7 @@
     <i class="fas fa-map-marker-alt" />
     Cerca mío
   </Link>
-  <Link to="/agregar-negocio" {getProps}>
+  <Link to="/tu-negocio" {getProps}>
     <i class="fas fa-store" />
     Tu negocio
   </Link>

@@ -6,6 +6,7 @@
   import Layout from "../Layout/Layout.svelte";
   import Loader from "../Utility/Loader.svelte";
   import Info from "../Utility/Info.svelte";
+  import Heading from "../Utility/Heading.svelte";
 
   import BusinessCategories from "./BusinessCategories.svelte";
 
@@ -22,7 +23,7 @@
     Si tenés un negocio que hace envíos, sumalo sin ningún costo ni comisión por
     venta
   </Info>
-  <h1>¿Qué buscás?</h1>
+  <Heading>¿Qué buscás?</Heading>
   {#if $categories}
     <BusinessCategories {categories} />
     {#if $eventPWA}

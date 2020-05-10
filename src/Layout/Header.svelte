@@ -11,7 +11,7 @@
     padding: 0.5rem;
   }
   .logo {
-    max-width: 175px;
+    max-width: 150px;
     display: block;
     margin: auto;
     margin-top: 0.25rem;
@@ -20,9 +20,7 @@
   .logo img {
     width: 100%;
   }
-  .logo .icon-image {
-    display: none;
-  }
+
   .topbar {
     background: var(--primary);
     width: 100%;
@@ -45,9 +43,6 @@
   }
 
   @media screen and (min-width: 800px) {
-    .sticky .logo .icon-image {
-      display: none;
-    }
     .sticky .logo .logo-image {
       display: block;
     }
@@ -77,7 +72,6 @@
 <header>
   <section class="logo">
     <a use:link href="/">
-      <img class="icon-image" alt src="/favicon.png" loading="lazy" />
       <img class="logo-image" alt src="/logo.png" loading="lazy" />
     </a>
   </section>

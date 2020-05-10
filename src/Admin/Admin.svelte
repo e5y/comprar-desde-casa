@@ -6,6 +6,7 @@
 
   import Layout from "../Layout/Layout.svelte";
   import Info from "../Utility/Info.svelte";
+  import Heading from "../Utility/Heading.svelte";
 
   import AdminBusinessList from "./AdminBusinessList.svelte";
 
@@ -62,9 +63,6 @@
 </script>
 
 <style>
-  h1 {
-    margin-top: 0;
-  }
   :global(.svelte-tabs .svelte-tabs__tab) {
     font-size: 0.9rem;
   }
@@ -77,7 +75,7 @@
 </style>
 
 <Layout>
-  <h1>
+  <Heading>
     Administrador
     {#if $loggedIn}
       <button class="logout-button" on:click={logOut}>
@@ -85,7 +83,7 @@
         Salir
       </button>
     {/if}
-  </h1>
+  </Heading>
   {#if $loggedIn}
     <Info id="admin-query-limit-notice" rest="1d">
       Cada pestaña muestra un máximo de 10 resultados en orden de creación (los

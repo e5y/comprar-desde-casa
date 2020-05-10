@@ -8,6 +8,7 @@
   import BusinessCard from "./BusinessCard.svelte";
   import Info from "../Utility/Info.svelte";
   import Loader from "../Utility/Loader.svelte";
+  import Heading from "../Utility/Heading.svelte";
 
   let business = new Business();
   let sent = false;
@@ -23,14 +24,8 @@
   };
 </script>
 
-<style>
-  h1 {
-    margin-top: 0;
-  }
-</style>
-
 <Layout>
-  <h1>Agregá tu negocio</h1>
+  <Heading>Agregá tu negocio</Heading>
   <Info id="agrega-tu-negocio" rest="1d">
     Si tenés un negocio y hacés delivery, podés inscribirte para aparecer en los
     listados de Comprá desde Casa

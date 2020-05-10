@@ -11,7 +11,7 @@
     text-align: center;
     margin-top: auto;
     padding: 1rem;
-    padding-top: 0;
+    border-top: 1px solid #eaeaea;
     font-size: 0.9rem;
     /* Sadly this depends on the Navigation component. */
     margin-bottom: 3.5rem;
@@ -104,7 +104,7 @@
             alt="Grupo EON"
             src="/authors/grupoeon.png"
             loading="lazy"
-            style="max-height: 3.5rem;" />
+            style="max-height: 3.5rem; filter: brightness(1.15);" />
         </a>
       </li>
       <li>

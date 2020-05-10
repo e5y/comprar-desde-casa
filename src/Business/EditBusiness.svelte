@@ -10,6 +10,7 @@
   import BusinessCard from "./BusinessCard.svelte";
   import Info from "../Utility/Info.svelte";
   import Loader from "../Utility/Loader.svelte";
+  import Heading from "../Utility/Heading.svelte";
 
   export let id;
 
@@ -51,9 +52,6 @@
 </script>
 
 <style>
-  h1 {
-    margin-top: 0;
-  }
   .delete-business {
     font-family: Roboto;
     padding: 1rem;
@@ -70,7 +68,7 @@
 
 <Layout>
   {#if $loggedIn}
-    <h1>Editando negocio</h1>
+    <Heading>Editando negocio</Heading>
     {#if sent}
       <Info type="success">Tu negocio fue editado correctamente.</Info>
     {:else if business}

@@ -15,6 +15,7 @@
   import Loader from "../Utility/Loader.svelte";
   import Info from "../Utility/Info.svelte";
   import Popup from "../Utility/Popup.svelte";
+  import Heading from "../Utility/Heading.svelte";
 
   import BusinessCard from "../Business/BusinessCard.svelte";
   import Map from "./Map.svelte";
@@ -85,9 +86,6 @@
 </script>
 
 <style>
-  h1 {
-    margin-top: 0;
-  }
   .category {
     text-transform: capitalize;
   }
@@ -127,7 +125,7 @@
   {#if position}
     {#if businesses}
       {#if businesses.length}
-        <h1>
+        <Heading>
           {#if category === 'todos'}
             Cerca mío
           {:else}
@@ -136,7 +134,7 @@
             </span>
             cerca mío
           {/if}
-        </h1>
+        </Heading>
         <Info id="toca-un-negocio" rest="1d">
           Tocá un negocio en el mapa para ver su información disponible
         </Info>
