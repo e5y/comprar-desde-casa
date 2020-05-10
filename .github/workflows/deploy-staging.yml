@@ -17,6 +17,7 @@ jobs:
         run: npm install && cd functions && npm install && cd ..
       - name: Build application
         env:
+          CDC_TITLE: Comprar Desde Casa
           CDC_ENVIRONMENT: staging
           CDC_VERSION: 1
           CDC_FIREBASE_API_KEY: AIzaSyCpsaP2dmFTMWeltITf_SkAIsCU4Wa_KGM

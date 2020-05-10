@@ -1,4 +1,5 @@
 export const config = {
+    title: process.env.CDC_TITLE,
     environment: process.env.CDC_ENVIRONMENT,
     version: process.env.CDC_VERSION,
     firebase: {
