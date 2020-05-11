@@ -14,6 +14,7 @@
   import YourBusiness from "./Business/YourBusiness.svelte";
   import Admin from "./Admin/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
+  import LogIn from "./Account/LogIn.svelte";
 
   onMount(async () => {
     $categories = new Categories(
@@ -36,6 +37,9 @@
 <Router>
   <Route path="/admin">
     <Admin />
+  </Route>
+  <Route path="/iniciar-sesion">
+    <LogIn />
   </Route>
   <Route path="/tu-negocio">
     <YourBusiness />
