@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { Tabs, Tab, TabList, TabPanel } from "svelte-tabs";
 
-  import { loggedIn, db, categories } from "../stores.js";
+  import { user, db, categories } from "../stores.js";
 
   import Layout from "../Layout/Layout.svelte";
   import Info from "../Utility/Info.svelte";
@@ -31,7 +31,7 @@
   let loading = true;
 
   const logOut = async () => {
-    loggedIn.set(false);
+    $user.logOut();
     await firebase.auth().signOut();
     initFirebaseUI(true);
   };
@@ -54,7 +54,7 @@
       signInSuccessUrl: "/admin",
       signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID]
     };
-    if (!$loggedIn) {
+    if (!$user.loggedIn) {
       ui.start("#firebaseui-auth-container", uiConfig);
     }
   };
@@ -77,14 +77,14 @@
 <Layout>
   <Heading>
     Administrador
-    {#if $loggedIn}
+    {#if $user.loggedIn}
       <button class="logout-button" on:click={logOut}>
         <i class="fas fa-sign-out-alt" />
         Salir
       </button>
     {/if}
   </Heading>
-  {#if $loggedIn}
+  {#if $user.loggedIn}
     <Info id="admin-query-limit-notice" rest="1d">
       Cada pestaña muestra un máximo de 10 resultados en orden de creación (los
       primeros en registrarse aparecen primero). Esto será así hasta implementar

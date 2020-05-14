@@ -1,5 +1,5 @@
 <script>
-  import { loggedIn } from "../stores.js";
+  import { user } from "../stores.js";
   import WhatsAppButton from "./Buttons/WhatsAppButton.svelte";
   import PhoneButton from "./Buttons/PhoneButton.svelte";
   import WebsiteButton from "./Buttons/WebsiteButton.svelte";
@@ -89,7 +89,7 @@
     <div>
       <h1>
         {business.name}
-        {#if $loggedIn}
+        {#if $user.isAdmin()}
           <a href="/editar-negocio/{business.id}" style="min-width: 4rem;">
             <i class="fas fa-edit" />
             Editar
@@ -112,7 +112,7 @@
     </p>
   {/if}
   <p class="description">{business.description}</p>
-  {#if $loggedIn}
+  {#if $user.isAdmin()}
     <ul class="admin">
       <li>
         <b>Titular:</b>

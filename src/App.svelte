@@ -3,7 +3,7 @@
   import { Router, Link, Route } from "svelte-routing";
 
   import { config } from "./config.js";
-  import { loggedIn, categories, geo, db, eventPWA } from "./stores.js";
+  import { user, categories, geo, db, eventPWA } from "./stores.js";
   import { Categories } from "./classes/Categories.js";
 
   import Home from "./Home/Home.svelte";

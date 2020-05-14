@@ -91,8 +91,7 @@
       required />
     <input
       type="password"
-      placeholder="Contraseña (mínimo 10 caracteres)"
-      minlength="10"
+      placeholder="Contraseña"
       bind:value={password}
       required />
     <button disabled={!isValid || isSubmitting}>

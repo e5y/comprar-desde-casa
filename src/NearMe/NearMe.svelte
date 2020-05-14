@@ -1,13 +1,7 @@
 <script>
   import { onMount } from "svelte";
 
-  import {
-    googleMapsLoaded,
-    loggedIn,
-    categories,
-    db,
-    geo
-  } from "../stores.js";
+  import { googleMapsLoaded, user, categories, db, geo } from "../stores.js";
 
   import { Businesses } from "../classes/Businesses.js";
 
@@ -143,7 +137,7 @@
         {/if}
         <section class="showing-results">
           Mostrando
-          {#if $loggedIn}
+          {#if $user.isAdmin()}
             <b>{businesses.length}</b>
           {:else}todos los{/if}
           negocios

@@ -1,13 +1,12 @@
 import { get } from "svelte/store";
 import slugify from 'slugify';
-import { categories } from "../stores.js";
+import { categories, db } from "../stores.js";
 import { arrayToDays, makeCommaSeparatedString, randBetween } from "../utilities.js";
 
 export class Business {
     constructor(business, raw = false) {
         Object.assign(this, {
-            owner_name: "",
-            owner_email: "",
+            owner_id: "",
             name: "Sin nombre",
             position: null,
             location: "",
@@ -34,14 +33,24 @@ export class Business {
         };
     }
 
+    async getOwner() {
+        if (!this.owner) {
+            const owner = await get(db)
+                .collection('users')
+                .doc(this.owner_id)
+                .get();
+            this.owner = owner.data();
+        }
+        return this.owner;
+    }
+
     get id() {
         return this._id || slugify(this.name) + '-' + this._rand;
     }
 
     get export() {
         return {
-            owner_name: this.owner_name,
-            owner_email: this.owner_email,
+            owner_id: this.owner_id,
             name: this.name,
             position: this.position,
             location: this.location,

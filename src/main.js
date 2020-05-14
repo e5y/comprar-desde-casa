@@ -1,5 +1,4 @@
-import { get } from "svelte/store";
-import { googleMapsLoaded, db, geo, eventPWA, loggedIn, user } from "./stores.js";
+import { googleMapsLoaded, db, geo, eventPWA, user } from "./stores.js";
 import { config } from "./config.js";
 
 import App from './App.svelte';
@@ -53,18 +52,9 @@ firebase.analytics();
 db.set(firebase.firestore());
 geo.set(geofirex.init(firebase));
 
-firebase.auth().onAuthStateChanged(
-	function (user) {
-		if (user) {
-			loggedIn.set(true);
-		} else {
-			loggedIn.set(false);
-		}
-	},
-	function (error) {
-		console.log('❌ Firebase Auth state change detection failed', error);
-	}
-);
+firebase.auth().onAuthStateChanged(firebaseUser => {
+	user.update(() => new User(firebaseUser));
+});
 
 /**
  * Service Worker setup
@@ -85,13 +75,6 @@ if ('serviceWorker' in navigator) {
 window.addEventListener("beforeinstallprompt", e => {
 	e.preventDefault();
 	eventPWA.set(e);
-});
-
-/**
- * Authentication setup
- */
-firebase.auth().onAuthStateChanged(firebaseUser => {
-	user.update(() => new User(firebaseUser));
 });
 
 /**

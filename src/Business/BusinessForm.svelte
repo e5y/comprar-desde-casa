@@ -3,6 +3,7 @@
   import { categories, geo, googleMapsLoaded } from "../stores.js";
 
   export let business;
+  export let user;
   export let submitText = "Enviar";
 
   const dispatch = createEventDispatcher();
@@ -100,6 +101,7 @@
   }
 </style>
 
+{#if owner}{owner.name}{/if}
 {#if business}
   <form on:submit|preventDefault={submitBusiness}>
     <section class="form-section">
@@ -109,14 +111,21 @@
         placeholder="Nombre del titular *"
         required
         maxlength="50"
-        bind:value={business.owner_name} />
+        bind:value={user.details.displayName} />
       <input
         type="email"
         name="owner_email"
         required
         placeholder="Correo electrónico *"
-        bind:value={business.owner_email} />
+        bind:value={user.details.email} />
       <p class="field-description">Ni tu nombre ni tu correo serán visibles</p>
+      <input
+        type="password"
+        name="owner_password"
+        required
+        placeholder="Contraseña (mínimo 10 caracteres)"
+        minlength="10"
+        bind:value={user.details.password} />
     </section>
     <section class="form-section">
       <input

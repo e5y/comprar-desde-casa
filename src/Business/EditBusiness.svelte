@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { link, navigate } from "svelte-routing";
 
-  import { loggedIn, db } from "../stores.js";
+  import { db, user } from "../stores.js";
   import { Business } from "../classes/Business.js";
 
   import Layout from "../Layout/Layout.svelte";
@@ -67,13 +67,14 @@
 </style>
 
 <Layout>
-  {#if $loggedIn}
+  {#if $user.loggedIn}
     <Heading>Editando negocio</Heading>
     {#if sent}
       <Info type="success">Tu negocio fue editado correctamente.</Info>
     {:else if business}
       <BusinessForm
         bind:business
+        bind:user={$user}
         on:submit={editBusiness}
         submitText="Editar" />
       <BusinessCard {business} />
@@ -84,7 +85,7 @@
   {:else}
     <Info type="error">
       Debes iniciar sesión para editar un negocio.
-      <a use:link href="/admin">Ir al panel de administrador</a>
+      <a use:link href="/iniciar-sesion">Iniciar sesión</a>
     </Info>
   {/if}
 </Layout>

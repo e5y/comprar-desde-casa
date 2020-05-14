@@ -6,7 +6,6 @@ export const db = writable(null);
 export const geo = writable(null);
 
 export const googleMapsLoaded = writable(false);
-export const loggedIn = writable(false);
 export const eventPWA = writable(null);
 
 export const user = writable(new User());

@@ -1,7 +1,8 @@
-import { loggedIn } from "./stores.js";
+import { get } from "svelte/store";
+import { user } from "./stores.js";
 
 export const logOut = async () => {
-    loggedIn.set(false);
+    get(user).logOut();
     await firebase.auth().signOut();
 }
 

@@ -1,5 +1,5 @@
 <script>
-  import { loggedIn } from "../stores.js";
+  import { user } from "../stores.js";
   import { logOut } from "../utilities.js";
   import { link } from "svelte-routing";
 </script>
@@ -57,7 +57,7 @@
   }
 </style>
 
-{#if $loggedIn}
+{#if $user.isAdmin()}
   <section class="topbar">
     <span>
       <i class="fas fa-cogs" />
