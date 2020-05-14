@@ -24,15 +24,17 @@
         displayName: owner.name
       });
       business.owner_id = $user.details.uid;
-      await $db
-        .collection("owners")
-        .doc(business.owner_id)
-        .set(owner.export);
-      await $db
-        .collection(collection)
-        .doc(business.id)
-        .set(business.export);
-      sent = true;
+      setTimeout(async () => {
+        await $db
+          .collection("owners")
+          .doc(business.owner_id)
+          .set(owner.export);
+        await $db
+          .collection(collection)
+          .doc(business.id)
+          .set(business.export);
+        sent = true;
+      }, 1000);
     } catch (e) {
       //TODO: Handle errors better
       console.error(e);

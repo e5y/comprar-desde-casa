@@ -10,4 +10,11 @@ export class Owner {
             Object.assign(this, owner.data());
         }
     }
+
+    get export() {
+        return {
+            name: this.name,
+            email: this.email
+        };
+    }
 }
