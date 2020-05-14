@@ -14,10 +14,13 @@
 
   export let id;
 
-  let business;
+  let business, owner;
   let sent = false;
 
   const editBusiness = async () => {
+    if ($user.loggedIn && owner.password) {
+      await $user.updatePassword(owner.password);
+    }
     await $db
       .collection("approved_businesses")
       .doc(id)
@@ -44,6 +47,7 @@
           .doc(id)
           .get()
       );
+      owner = await business.getOwner();
     } catch (e) {
       // TODO: Handle errors better 😢
       console.error("❌ Business could not be fetched", e);
@@ -71,10 +75,10 @@
     <Heading>Editando negocio</Heading>
     {#if sent}
       <Info type="success">Tu negocio fue editado correctamente.</Info>
-    {:else if business}
+    {:else if business && owner}
       <BusinessForm
         bind:business
-        bind:user={$user}
+        bind:owner
         on:submit={editBusiness}
         submitText="Editar" />
       <BusinessCard {business} />

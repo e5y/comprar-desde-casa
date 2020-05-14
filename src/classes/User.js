@@ -15,6 +15,10 @@ export class User {
         }
     }
 
+    updatePassword(password) {
+        return firebase.auth().currentUser.updatePassword(password);
+    }
+
     isAdmin() {
         return this.loggedIn && this.role === 'administrator';
     }

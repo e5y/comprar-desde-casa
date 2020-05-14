@@ -2,7 +2,7 @@
   import { user, categories, db } from "../stores.js";
 
   import { Business } from "../classes/Business.js";
-  import { User } from "../classes/User.js";
+  import { Owner } from "../classes/Owner.js";
 
   import Layout from "../Layout/Layout.svelte";
   import BusinessForm from "./BusinessForm.svelte";
@@ -12,7 +12,7 @@
   import Heading from "../Utility/Heading.svelte";
 
   let business = new Business();
-  let newUser = new User();
+  let owner = new Owner();
   let sent = false;
 
   const addBusiness = async () => {
@@ -20,10 +20,14 @@
       ? "approved_businesses"
       : "pending_businesses";
     try {
-      await $user.register(newUser.details.email, newUser.details.password, {
-        displayName: newUser.details.displayName
+      await $user.register(owner.email, owner.password, {
+        displayName: owner.name
       });
       business.owner_id = $user.details.uid;
+      await $db
+        .collection("owners")
+        .doc(business.owner_id)
+        .set(owner.export);
       await $db
         .collection(collection)
         .doc(business.id)
@@ -57,7 +61,7 @@
     {:else}
       <BusinessForm
         bind:business
-        bind:user={newUser}
+        bind:owner
         on:submit={addBusiness}
         submitText="Inscribirse" />
       <BusinessCard {business} />

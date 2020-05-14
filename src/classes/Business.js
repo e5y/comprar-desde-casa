@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
 import slugify from 'slugify';
 import { categories, db } from "../stores.js";
+import { Owner } from "../classes/Owner.js";
 import { arrayToDays, makeCommaSeparatedString, randBetween } from "../utilities.js";
 
 export class Business {
@@ -35,11 +36,10 @@ export class Business {
 
     async getOwner() {
         if (!this.owner) {
-            const owner = await get(db)
+            this.owner = new Owner(await get(db)
                 .collection('users')
                 .doc(this.owner_id)
-                .get();
-            this.owner = owner.data();
+                .get());
         }
         return this.owner;
     }

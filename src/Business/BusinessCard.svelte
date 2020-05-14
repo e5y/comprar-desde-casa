@@ -113,30 +113,32 @@
   {/if}
   <p class="description">{business.description}</p>
   {#if $user.isAdmin()}
-    <ul class="admin">
-      <li>
-        <b>Titular:</b>
-        {business.owner_name}
-      </li>
-      <li>
-        <b>Correo:</b>
-        {business.owner_email}
-      </li>
-      <li>
-        <b>Ubicación:</b>
-        {business.location}
-      </li>
-      <li>
-        <b>Teléfono:</b>
-        {business.phone}
-      </li>
-      {#if business.url}
+    {#await business.getOwner() then owner}
+      <ul class="admin">
         <li>
-          <b>Sitio web:</b>
-          {business.url}
+          <b>Titular:</b>
+          {owner.name}
         </li>
-      {/if}
-    </ul>
+        <li>
+          <b>Correo:</b>
+          {owner.email}
+        </li>
+        <li>
+          <b>Ubicación:</b>
+          {business.location}
+        </li>
+        <li>
+          <b>Teléfono:</b>
+          {business.phone}
+        </li>
+        {#if business.url}
+          <li>
+            <b>Sitio web:</b>
+            {business.url}
+          </li>
+        {/if}
+      </ul>
+    {/await}
   {/if}
   {#if !window.location.pathname.includes('/admin')}
     <section class="buttons">
