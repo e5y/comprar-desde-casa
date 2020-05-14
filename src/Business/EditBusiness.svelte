@@ -56,7 +56,8 @@
 </script>
 
 <style>
-  .delete-business {
+  .delete-business,
+  .log-out {
     font-family: Roboto;
     padding: 1rem;
     border: 2px solid red;
@@ -67,6 +68,11 @@
     box-sizing: border-box;
     background: red;
     color: white;
+  }
+
+  .log-out {
+    border-color: black;
+    background: black;
   }
 </style>
 
@@ -82,6 +88,13 @@
         on:submit={editBusiness}
         submitText="Editar" />
       <BusinessCard {business} />
+      <button
+        class="log-out"
+        on:click={() => {
+          $user.logOut();
+        }}>
+        Cerrar sesión
+      </button>
       <button class="delete-business" on:click={deleteBusiness}>Borrar</button>
     {:else}
       <Loader />
