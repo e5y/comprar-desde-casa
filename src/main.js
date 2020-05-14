@@ -1,9 +1,11 @@
-import { googleMapsLoaded, db, geo, eventPWA, loggedIn } from "./stores.js";
+import { get } from "svelte/store";
+import { googleMapsLoaded, db, geo, eventPWA, loggedIn, user } from "./stores.js";
 import { config } from "./config.js";
 
 import App from './App.svelte';
 
 import * as geofirex from "geofirex";
+import { User } from "./classes/User.js";
 
 /**
  * ASCII console signature & build info
@@ -83,6 +85,13 @@ if ('serviceWorker' in navigator) {
 window.addEventListener("beforeinstallprompt", e => {
 	e.preventDefault();
 	eventPWA.set(e);
+});
+
+/**
+ * Authentication setup
+ */
+firebase.auth().onAuthStateChanged(firebaseUser => {
+	user.update(() => new User(firebaseUser));
 });
 
 /**
