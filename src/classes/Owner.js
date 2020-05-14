@@ -5,8 +5,9 @@ export class Owner {
             email: "",
         });
 
-        this.id = owner.id;
-
-        Object.assign(this, owner.data());
+        if (owner) {
+            this.id = owner.id;
+            Object.assign(this, owner.data());
+        }
     }
 }

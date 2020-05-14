@@ -118,7 +118,7 @@
         placeholder="Correo electrónico *"
         bind:value={owner.email} />
       <p class="field-description">Ni tu nombre ni tu correo serán visibles</p>
-      {#if $user.loggedIn && $user.details.uid === owner.id}
+      {#if !$user.loggedIn || ($user.loggedIn && $user.details.uid === owner.id)}
         <input
           type="password"
           name="owner_password"

@@ -37,7 +37,7 @@ export class Business {
     async getOwner() {
         if (!this.owner) {
             this.owner = new Owner(await get(db)
-                .collection('users')
+                .collection('owners')
                 .doc(this.owner_id)
                 .get());
         }
