@@ -33,7 +33,7 @@
     $db
       .collection("approved_businesses")
       .doc(id)
-      .set(data);
+      .set(e.detail.business.export);
     $db
       .collection(collection)
       .doc(id)
@@ -47,7 +47,7 @@
     $db
       .collection("rejected_businesses")
       .doc(id)
-      .set(data);
+      .set(e.detail.business.export);
     $db
       .collection(collection)
       .doc(id)
