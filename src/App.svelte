@@ -3,8 +3,6 @@
   import { Router, Link, Route } from "svelte-routing";
 
   import { config } from "./config.js";
-  import { user, categories, geo, db, eventPWA } from "./stores.js";
-  import { Categories } from "./classes/Categories.js";
 
   import Home from "./Home/Home.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
@@ -15,16 +13,6 @@
   import Admin from "./Admin/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
   import LogIn from "./Account/LogIn.svelte";
-
-  onMount(async () => {
-    $categories = new Categories(
-      await $db
-        .collection("categories")
-        .where("visible", "==", true)
-        .orderBy("order")
-        .get()
-    );
-  });
 </script>
 
 <svelte:head>

@@ -7,5 +7,11 @@ export class Database {
     this.geofirex = geofirex.init(database);
   }
 
-  getCategories() {}
+  getCategories() {
+    return this.database
+      .collection("categories")
+      .where("visible", "==", true)
+      .orderBy("order")
+      .get();
+  }
 }
