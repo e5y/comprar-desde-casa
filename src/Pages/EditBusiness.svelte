@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { link, navigate } from "svelte-routing";
 
-  import { db, session } from "../stores.js";
+  import { appLoaded, db, session } from "../stores.js";
   import { Business } from "../classes/Business.js";
 
   import Layout from "../Layout/Layout.svelte";
@@ -17,42 +17,42 @@
   let business, owner;
   let sent = false;
 
+  $: $appLoaded &&
+    (async () => {
+      try {
+        business = await $db.getApprovedBusiness(id);
+        owner = await $db.getOwner(business);
+      } catch (e) {
+        // TODO: Handle errors better 😢
+        console.error("❌ Business could not be fetched", e);
+      }
+    })();
+
   const editBusiness = async () => {
-    if ($user.loggedIn && owner.password) {
-      await $user.updatePassword(owner.password);
+    try {
+      if ($session.isLoggedIn && owner.password) {
+        await $session.updatePassword(owner.password);
+      }
+      await $db.updateApprovedBusiness(business);
+      sent = true;
+    } catch (e) {
+      // TODO: Handle errors better 😢
+      console.error("❌ Business could not be edited", e);
     }
-    await $db
-      .collection("approved_businesses")
-      .doc(id)
-      .set(business.export);
-    sent = true;
   };
 
   const deleteBusiness = async () => {
     const confirmed = confirm("¿Estás seguro de que querés borrar el negocio?");
     if (confirmed) {
-      await $db
-        .collection("approved_businesses")
-        .doc(id)
-        .delete();
-      navigate("/");
+      try {
+        await $db.deleteApprovedBusiness(business);
+        navigate("/");
+      } catch (e) {
+        // TODO: Handle errors better 😢
+        console.error("❌ Business could not be deleted", e);
+      }
     }
   };
-
-  onMount(async () => {
-    try {
-      business = new Business(
-        await $db
-          .collection("approved_businesses")
-          .doc(id)
-          .get()
-      );
-      owner = await business.getOwner();
-    } catch (e) {
-      // TODO: Handle errors better 😢
-      console.error("❌ Business could not be fetched", e);
-    }
-  });
 </script>
 
 <style>
@@ -77,7 +77,7 @@
 </style>
 
 <Layout>
-  {#if $user.loggedIn}
+  {#if $session.isLoggedIn}
     <Heading>Editando negocio</Heading>
     {#if sent}
       <Info type="success">Tu negocio fue editado correctamente.</Info>
@@ -88,13 +88,7 @@
         on:submit={editBusiness}
         submitText="Editar" />
       <BusinessCard {business} />
-      <button
-        class="log-out"
-        on:click={() => {
-          $user.logOut();
-        }}>
-        Cerrar sesión
-      </button>
+      <button class="log-out" on:click={$session.logOut}>Cerrar sesión</button>
       <button class="delete-business" on:click={deleteBusiness}>Borrar</button>
     {:else}
       <Loader />

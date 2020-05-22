@@ -1,6 +1,5 @@
 export class Session {
   constructor(user) {
-    console.log("Session", user);
     if (user) {
       this._isAdmin = false;
       this._isLoggedIn = true;
