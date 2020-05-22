@@ -21,16 +21,12 @@
     venta
   </Info>
   <Heading>¿Qué buscás?</Heading>
-  {#if $categories}
-    <BusinessCategories {categories} />
-    {#if $installPWAEvent}
-      <Info icon="fas fa-mobile-alt">
-        Agreganos a tu inicio y usá el sitio como cualquier otra app de
-        Android/iOS.
-        <button on:click={installPWA}>Agregar al inicio</button>
-      </Info>
-    {/if}
-  {:else}
-    <Loader />
+  <BusinessCategories categories={$categories} />
+  {#if $installPWAEvent}
+    <Info icon="fas fa-mobile-alt">
+      Agreganos a tu inicio y usá el sitio como cualquier otra app de
+      Android/iOS.
+      <button on:click={installPWA}>Agregar al inicio</button>
+    </Info>
   {/if}
 </Layout>

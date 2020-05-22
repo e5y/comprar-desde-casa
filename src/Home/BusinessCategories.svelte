@@ -18,7 +18,7 @@
 </style>
 
 <ul class="business-categories">
-  {#each $categories as category}
+  {#each categories as category}
     <BusinessCategory {category} />
   {/each}
   <AddBusinessButton />
