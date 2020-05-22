@@ -11,38 +11,22 @@
   import Info from "../Utility/Info.svelte";
   import Loader from "../Utility/Loader.svelte";
 
-  let hasPendingBusinesses = false,
-    loading = true;
+  let loaded, pendingBusinesses;
 
-  user.subscribe(async user => {
-    if (user.loggedIn) {
-      const approvedBusinesses = new Businesses(
-        await $db
-          .collection("approved_businesses")
-          .where("owner_id", "==", user.details.uid)
-          .get()
-      );
-      const pendingBusinesses = new Businesses(
-        await $db
-          .collection("pending_businesses")
-          .where("owner_id", "==", user.details.uid)
-          .get()
-      );
-      if (approvedBusinesses.length) {
-        navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
-          replace: true
-        });
-      } else if (pendingBusinesses.length) {
-        hasPendingBusinesses = true;
+  onMount(async () => {
+    if ($session.loggedIn) {
+      pendingBusinesses = await $db.getPendingBusinesses($session.id);
+      if (!pendingBusinesses.length) {
+        const approvedBusinesses = await $db.getApprovedBusinesses($session.id);
+        if (approvedBusinesses.length) {
+          navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
+            replace: true
+          });
+        }
       }
     }
-    loading = false;
+    loaded = true;
   });
-
-  const onLogoutClick = () => {
-    $user.logOut();
-    hasPendingBusinesses = false;
-  };
 </script>
 
 <style>
@@ -91,15 +75,16 @@
 
 <Layout>
   <Heading>Tu negocio</Heading>
-  {#if loading}
-    <Loader />
-  {:else if hasPendingBusinesses}
-    <Info type="warning">
-      Tenés un negocio pendiente de aprobación, te avisaremos cuando esté listo.
-    </Info>
-    <div class="center">
-      <button class="button" on:click={onLogoutClick}>Cerrar sesión</button>
-    </div>
+  {#if $session.isLoggedIn}
+    {#if pendingBusinesses.length}
+      <Info type="warning">
+        Tenés un negocio pendiente de aprobación, te avisaremos cuando esté
+        listo.
+      </Info>
+      <div class="center">
+        <button class="button" on:click={$session.logOut}>Cerrar sesión</button>
+      </div>
+    {/if}
   {:else}
     <section>
       <h2>Registrate ahora</h2>

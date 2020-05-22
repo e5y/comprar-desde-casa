@@ -4,12 +4,12 @@
 
   import { config } from "./config.js";
 
-  import Home from "./Home/Home.svelte";
+  import Home from "./Pages/Home.svelte";
+  import YourBusiness from "./Pages/YourBusiness.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
   import AddBusiness from "./Business/AddBusiness.svelte";
   import EditBusiness from "./Business/EditBusiness.svelte";
   import BusinessProfile from "./Business/BusinessProfile.svelte";
-  import YourBusiness from "./Business/YourBusiness.svelte";
   import Admin from "./Admin/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
   import LogIn from "./Account/LogIn.svelte";

@@ -56,7 +56,7 @@
   }
 </style>
 
-{#if $loaded && $session.isAdmin()}
+{#if $loaded && $session.isAdmin}
   <section class="topbar">
     <span>
       <i class="fas fa-cogs" />

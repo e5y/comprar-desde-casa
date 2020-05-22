@@ -9,7 +9,7 @@
   import Info from "../Utility/Info.svelte";
   import Heading from "../Utility/Heading.svelte";
 
-  import BusinessCategories from "./BusinessCategories.svelte";
+  import BusinessCategories from "../Business/BusinessCategories.svelte";
 </script>
 
 <Layout>

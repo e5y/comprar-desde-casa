@@ -17,4 +17,18 @@ export class Database {
         .get()
     );
   }
+
+  async getBusinesses(collection, userId) {
+    return new Businesses(
+      await $db.collection(collection).where("owner_id", "==", userId).get()
+    );
+  }
+
+  async getPendingBusinesses(userId) {
+    return this.getBusinesses("pending_businesses", userId);
+  }
+
+  async getApprovedBusinesses(userId) {
+    return this.getBusinesses("approved_businesses", userId);
+  }
 }
