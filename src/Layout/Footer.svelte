@@ -97,7 +97,8 @@
             alt="Grupo EON"
             src="/authors/grupoeon.png"
             loading="lazy"
-            style="max-height: 3.5rem; filter: brightness(1.15);" />
+            style="max-height: 3.5rem; filter: brightness(1.15); z-index: -1;
+            position: relative;" />
         </a>
       </li>
       <li>
