@@ -12,8 +12,11 @@
   export let collection;
   export let businesses;
 
+  /**
+   * TODO: Refactor this entire thing, figure out how to abstract it to our database function.
+   * */
   const fetchBusinesses = async () => {
-    const results = await $db
+    const results = await $db.database
       .collection(collection)
       .orderBy("createdAt", "desc")
       .limit(10)
@@ -30,11 +33,11 @@
   const onApproved = e => {
     const { id, ...data } = e.detail.business;
     const collection = e.detail.collection;
-    $db
+    $db.database
       .collection("approved_businesses")
       .doc(id)
       .set(e.detail.business.export);
-    $db
+    $db.database
       .collection(collection)
       .doc(id)
       .delete();
@@ -44,11 +47,11 @@
   const onRejected = e => {
     const { id, ...data } = e.detail.business;
     const collection = e.detail.collection;
-    $db
+    $db.database
       .collection("rejected_businesses")
       .doc(id)
       .set(e.detail.business.export);
-    $db
+    $db.database
       .collection(collection)
       .doc(id)
       .delete();

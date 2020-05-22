@@ -12,7 +12,7 @@
   import BusinessProfile from "./Pages/BusinessProfile.svelte";
   import NearMe from "./Pages/NearMe.svelte";
   import EditBusiness from "./Pages/EditBusiness.svelte";
-  import Admin from "./Admin/Admin.svelte";
+  import Admin from "./Pages/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
 </script>
 

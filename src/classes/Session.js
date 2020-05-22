@@ -1,7 +1,15 @@
 export class Session {
   constructor(user) {
     if (user) {
-      this._isAdmin = false;
+      /**
+       * This is not frontend validation, just aesthetics.
+       * Administrator privileges are validated at the server level.
+       *
+       * TODO: Implement an actual role system.
+       */
+      this._isAdmin =
+        user.uid === "q6GFYtzXYRXq11Xi7ABlmhvqQMi2" ||
+        user.uid === "pSGqTckqVyfJ6nasmqCt6yU5rvr2";
       this._isLoggedIn = true;
       this._details = {};
       Object.assign(this._details, user);

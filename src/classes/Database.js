@@ -118,24 +118,26 @@ export class Database {
     return this.getBusiness("rejected_businesses", id);
   }
 
-  async getBusinesses(collection, userId) {
+  async getBusinessesForAdmin() {}
+
+  async getBusinessesByOwnerId(collection, ownerId) {
     return new Businesses(
       await this.database
         .collection(collection)
-        .where("owner_id", "==", userId)
+        .where("owner_id", "==", ownerId)
         .get()
     );
   }
 
-  async getApprovedBusinesses(userId) {
-    return this.getBusinesses("approved_businesses", userId);
+  async getApprovedBusinessesByOwnerId(ownerId) {
+    return this.getBusinessesByOwnerId("approved_businesses", ownerId);
   }
 
-  async getPendingBusinesses(userId) {
-    return this.getBusinesses("pending_businesses", userId);
+  async getPendingBusinessesByOwnerId(ownerId) {
+    return this.getBusinessesByOwnerId("pending_businesses", ownerId);
   }
 
-  async getRejectedBusinesses(userId) {
-    return this.getBusinesses("rejected_businesses", userId);
+  async getRejectedBusinessesByOwnerId(ownerId) {
+    return this.getBusinessesByOwnerId("rejected_businesses", ownerId);
   }
 }

@@ -16,9 +16,11 @@
   $: $appLoaded &&
     (async () => {
       if ($session.isLoggedIn) {
-        pendingBusinesses = await $db.getPendingBusinesses($session.id);
+        pendingBusinesses = await $db.getPendingBusinessesByOwnerId(
+          $session.id
+        );
         if (!pendingBusinesses.length) {
-          const approvedBusinesses = await $db.getApprovedBusinesses(
+          const approvedBusinesses = await $db.getApprovedBusinessesByOwnerId(
             $session.id
           );
           if (approvedBusinesses.length) {
