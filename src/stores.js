@@ -1,11 +1,24 @@
-import { writable } from "svelte/store";
-import { User } from "./classes/User";
+import { writable, get } from "svelte/store.js";
 
-export const categories = writable(null);
 export const db = writable(null);
-export const geo = writable(null);
+export const session = writable(null);
+export const categories = writable(null);
+export const googleMapsLoaded = writable(null);
 
-export const googleMapsLoaded = writable(false);
-export const eventPWA = writable(null);
+export const loaded = writable(false);
 
-export const user = writable(new User());
+/**
+ * Every service that loads asynchronously and needs to be available
+ * before Svelte App initialization should call <checkLoaded()> after
+ * loading. This way the lastest necessary service that loads will
+ * set the <loaded> store to true.
+ */
+export const checkLoaded = () =>
+  get(db) &&
+  get(session) &&
+  get(categories) &&
+  get(googleMapsLoaded) &&
+  loaded.set(true) &&
+  console.log("loaded!");
+
+export const installPWAEvent = writable(null);

@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta
+      name="description"
+      content="Encontrá todos los negocios con delivery cerca tuyo. ¿Tenés un negocio? ¡Registralo sin ningún costo!"
+    />
 
-<head>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
-	<link rel="manifest" href="/manifest.webmanifest">
-	<meta name="description"
-		content="Encontrá todos los negocios con delivery cerca tuyo. ¿Tenés un negocio? ¡Registralo sin ningún costo!">
+    <title>Comprar Desde Casa</title>
 
-	<title>Comprar Desde Casa</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/build/bundle.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='/global.css'>
-	<link rel='stylesheet' href='/build/bundle.css'>
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script defer src="/build/bundle.js"></script>
 
-	<script defer src='/build/bundle.js'></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__es.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css"
+    />
+  </head>
 
-	<script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__es.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css" />
-</head>
+  <body>
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
-<body>
-	<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
 
-	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
 
-	<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-	<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
 
-	<!-- Add Firebase products that you want to use -->
-	<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
-
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEzxZX6YQco3Q7sYwz7QjSa9x-5x3NzyU&libraries=places&callback=initMap"
-		defer></script>
-</body>
-
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEzxZX6YQco3Q7sYwz7QjSa9x-5x3NzyU&libraries=places&callback=googleMapsLoaded"
+      defer
+    ></script>
+  </body>
 </html>

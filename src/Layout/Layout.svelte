@@ -1,6 +1,9 @@
 <script>
+  import { loaded } from "../stores";
+
   import Header from "./Header.svelte";
   import Footer from "./Footer.svelte";
+  import Loader from "../Utility/Loader.svelte";
 </script>
 
 <style>
@@ -21,6 +24,10 @@
 
 <Header />
 <section class="content">
-  <slot />
+  {#if $loaded}
+    <slot />
+  {:else}
+    <Loader />
+  {/if}
 </section>
 <Footer />
