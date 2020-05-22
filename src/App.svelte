@@ -8,7 +8,7 @@
   import YourBusiness from "./Pages/YourBusiness.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
   import AddBusiness from "./Business/AddBusiness.svelte";
-  import EditBusiness from "./Business/EditBusiness.svelte";
+  import EditBusiness from "./Pages/EditBusiness.svelte";
   import BusinessProfile from "./Business/BusinessProfile.svelte";
   import Admin from "./Admin/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";

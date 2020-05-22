@@ -6,8 +6,8 @@
   import { Business } from "../classes/Business.js";
 
   import Layout from "../Layout/Layout.svelte";
-  import BusinessForm from "./BusinessForm.svelte";
-  import BusinessCard from "./BusinessCard.svelte";
+  import BusinessForm from "../Business/BusinessForm.svelte";
+  import BusinessCard from "../Business/BusinessCard.svelte";
   import Info from "../Utility/Info.svelte";
   import Loader from "../Utility/Loader.svelte";
   import Heading from "../Utility/Heading.svelte";

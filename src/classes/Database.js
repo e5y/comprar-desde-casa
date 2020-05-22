@@ -1,4 +1,5 @@
 import { Categories } from "../classes/Categories.js";
+import { Businesses } from "../classes/Businesses.js";
 import * as geofirex from "geofirex";
 import { get } from "geofirex";
 
@@ -20,7 +21,10 @@ export class Database {
 
   async getBusinesses(collection, userId) {
     return new Businesses(
-      await $db.collection(collection).where("owner_id", "==", userId).get()
+      await this.database
+        .collection(collection)
+        .where("owner_id", "==", userId)
+        .get()
     );
   }
 
