@@ -9,9 +9,9 @@
   import LogIn from "./Pages/LogIn.svelte";
   import AddBusiness from "./Pages/AddBusiness.svelte";
   import YourBusiness from "./Pages/YourBusiness.svelte";
-  import NearMe from "./NearMe/NearMe.svelte";
+  import BusinessProfile from "./Pages/BusinessProfile.svelte";
+  import NearMe from "./Pages/NearMe.svelte";
   import EditBusiness from "./Pages/EditBusiness.svelte";
-  import BusinessProfile from "./Business/BusinessProfile.svelte";
   import Admin from "./Admin/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
 </script>

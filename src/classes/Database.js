@@ -3,7 +3,7 @@ import { Businesses } from "../classes/Businesses.js";
 import { Business } from "../classes/Business.js";
 import { Owner } from "../classes/Owner.js";
 import * as geofirex from "geofirex";
-import { get } from "geofirex";
+import { get as geoGet } from "geofirex";
 
 export class Database {
   constructor(firebase) {
@@ -13,6 +13,29 @@ export class Database {
 
   createPosition(lat, lng) {
     return this.geofirex.point(lat, lng);
+  }
+
+  async getApprovedBusinessesInRadius(position, radius, category = "todos") {
+    const query =
+      category === "todos"
+        ? this.database.collection("approved_businesses")
+        : this.database
+            .collection("approved_businesses")
+            .where("category", "==", category);
+
+    const geoQuery = this.geofirex
+      .query(query)
+      .within(
+        this.geofirex.point(
+          position.coords.latitude,
+          position.coords.longitude
+        ),
+        radius,
+        "position"
+      );
+
+    // TODO: Remove Geofirex and replace with Geofirestore-js, will break Businesses and Business classes.
+    return new Businesses(await geoGet(geoQuery), true);
   }
 
   async addBusiness(collection, business, owner) {

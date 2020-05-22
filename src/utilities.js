@@ -2,6 +2,15 @@ import { get } from "svelte/store";
 
 export const installPWA = () => get(installPWAEvent).prompt();
 
+export const getPosition = () =>
+  new Promise((res, rej) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => res(position),
+      (e) => rej(e),
+      { enableHighAccuracy: true }
+    );
+  });
+
 export const arrayToDays = (array) => {
   const days = [
     "lunes",

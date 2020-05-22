@@ -8,7 +8,7 @@
   import Loader from "../Utility/Loader.svelte";
   import Info from "../Utility/Info.svelte";
 
-  import BusinessCard from "./BusinessCard.svelte";
+  import BusinessCard from "../Business/BusinessCard.svelte";
   import Map from "../NearMe/Map.svelte";
 
   export let id;
