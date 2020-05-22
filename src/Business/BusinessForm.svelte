@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import { user, categories, geo, googleMapsLoaded } from "../stores.js";
+  import { session, categories, googleMapsLoaded } from "../stores.js";
 
   export let business;
   export let owner;

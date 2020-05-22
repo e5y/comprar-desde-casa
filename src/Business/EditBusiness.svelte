@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { link, navigate } from "svelte-routing";
 
-  import { db, user } from "../stores.js";
+  import { db, session } from "../stores.js";
   import { Business } from "../classes/Business.js";
 
   import Layout from "../Layout/Layout.svelte";

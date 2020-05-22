@@ -1,5 +1,5 @@
 <script>
-  import { user, categories, db } from "../stores.js";
+  import { session, categories, db } from "../stores.js";
 
   import { Business } from "../classes/Business.js";
   import { Owner } from "../classes/Owner.js";

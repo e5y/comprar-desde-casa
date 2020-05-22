@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
 
-  import { googleMapsLoaded, user, categories, db, geo } from "../stores.js";
+  import { db, session, googleMapsLoaded, categories } from "../stores.js";
 
   import { Businesses } from "../classes/Businesses.js";
 
