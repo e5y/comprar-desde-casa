@@ -1,3 +1,4 @@
+import { Categories } from "../classes/Categories.js";
 import * as geofirex from "geofirex";
 import { get } from "geofirex";
 
@@ -7,11 +8,13 @@ export class Database {
     this.geofirex = geofirex.init(database);
   }
 
-  getCategories() {
-    return this.database
-      .collection("categories")
-      .where("visible", "==", true)
-      .orderBy("order")
-      .get();
+  async getCategories() {
+    return new Categories(
+      await this.database
+        .collection("categories")
+        .where("visible", "==", true)
+        .orderBy("order")
+        .get()
+    );
   }
 }
