@@ -1,4 +1,4 @@
-import { writable, get } from "svelte/store.js";
+import { writable, get } from "svelte/store";
 
 export const db = writable(null);
 export const session = writable(null);
@@ -18,7 +18,6 @@ export const checkLoaded = () =>
   get(session) &&
   get(categories) &&
   get(googleMapsLoaded) &&
-  loaded.set(true) &&
-  console.log("loaded!");
+  loaded.set(true);
 
 export const installPWAEvent = writable(null);

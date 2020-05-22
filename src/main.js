@@ -11,6 +11,9 @@ import {
 
 import { config } from "./config.js";
 
+import { Database } from "./classes/Database.js";
+import { Session } from "./classes/Session.js";
+
 import App from "./App.svelte";
 
 import "./console.js";
@@ -20,7 +23,8 @@ import "./console.js";
  *
  * @link https://developers.google.com/maps/documentation/javascript/tutorial
  */
-window.googleMapsLoaded = () => googleMapsLoaded.set(true) && checkLoaded();
+googleMapsLoaded.subscribe(checkLoaded);
+window.googleMapsLoaded = () => googleMapsLoaded.set(true);
 
 /**
  * Firebase initialization (includes App, Database, Analytics & Auth initialization)
@@ -33,11 +37,8 @@ firebase.analytics();
 
 db.set(new Database(firebase.firestore()));
 
-firebase
-  .auth()
-  .onAuthStateChanged(
-    (user) => session.set(new Session(user)) && checkLoaded()
-  );
+session.subscribe(checkLoaded);
+firebase.auth().onAuthStateChanged((user) => session.set(new Session(user)));
 
 /**
  * Service Worker initialization
@@ -71,7 +72,8 @@ window.addEventListener(
 /**
  * Categories initialization
  */
-(async () => categories.set(await get(db).getCategories()) && checkLoaded())();
+categories.subscribe(checkLoaded);
+(async () => categories.set(await get(db).getCategories()))();
 
 /**
  * Svelte initialization
