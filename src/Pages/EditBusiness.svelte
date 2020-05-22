@@ -19,8 +19,8 @@
 
   onMount(async () => {
     try {
-      window.business = business = await $db.getApprovedBusiness(id);
-      window.owner = owner = await $db.getOwner(business);
+      business = await $db.getApprovedBusiness(id);
+      owner = await $db.getOwner(business);
     } catch (e) {
       // TODO: Handle errors better 😢
       console.error("❌ Business could not be fetched", e);

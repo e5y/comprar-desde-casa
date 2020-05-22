@@ -34,9 +34,7 @@
   };
 
   onMount(() => {
-    if ($appLoaded) {
-      if ($session.isLoggedIn) navigate("/tu-negocio", { replace: true });
-    }
+    if ($session.isLoggedIn) navigate("/tu-negocio", { replace: true });
     form.addEventListener("input", () => {
       isValid = form.checkValidity();
     });
