@@ -13,26 +13,23 @@
 
   let loaded, pendingBusinesses;
 
-  onMount(async () => {
-    appLoaded.subscribe(async appLoaded => {
-      if (appLoaded) {
-        if ($session.isLoggedIn) {
-          pendingBusinesses = await $db.getPendingBusinesses($session.id);
-          if (!pendingBusinesses.length) {
-            const approvedBusinesses = await $db.getApprovedBusinesses(
-              $session.id
-            );
-            if (approvedBusinesses.length) {
-              navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
-                replace: true
-              });
-            }
+  $: $appLoaded &&
+    (async () => {
+      if ($session.isLoggedIn) {
+        pendingBusinesses = await $db.getPendingBusinesses($session.id);
+        if (!pendingBusinesses.length) {
+          const approvedBusinesses = await $db.getApprovedBusinesses(
+            $session.id
+          );
+          if (approvedBusinesses.length) {
+            navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
+              replace: true
+            });
           }
         }
-        loaded = true;
       }
-    });
-  });
+      loaded = true;
+    })();
 </script>
 
 <style>
