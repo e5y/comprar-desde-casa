@@ -36,6 +36,7 @@
       sent = true;
     } catch (e) {
       // TODO: Handle errors better 😢
+      // URGENT: Handle error where recent login is required while editing password
       console.error("❌ Business could not be edited", e);
     }
   };

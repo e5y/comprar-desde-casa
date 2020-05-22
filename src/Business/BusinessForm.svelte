@@ -126,7 +126,7 @@
         <input
           type="password"
           name="owner_password"
-          required
+          required={!$session.isLoggedIn}
           placeholder="Contraseña (mínimo 10 caracteres)"
           minlength="10"
           bind:value={owner.password} />

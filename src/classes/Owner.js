@@ -6,7 +6,6 @@ export class Owner {
     });
 
     if (owner) {
-      console.log(owner);
       this.id = owner.id;
       Object.assign(this, owner.data());
     }

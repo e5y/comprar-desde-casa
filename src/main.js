@@ -35,7 +35,7 @@ if (!firebase.apps.length) {
 
 firebase.analytics();
 
-db.set(new Database(firebase.firestore()));
+db.set(new Database(firebase));
 
 session.subscribe(checkLoaded);
 firebase.auth().onAuthStateChanged((user) => session.set(new Session(user)));
