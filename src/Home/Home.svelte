@@ -1,7 +1,8 @@
 <script>
   import { Link } from "svelte-routing";
 
-  import { categories, eventPWA } from "../stores.js";
+  import { categories, installPWAEvent } from "../stores.js";
+  import { installPWA } from "../utilities.js";
 
   import Layout from "../Layout/Layout.svelte";
   import Loader from "../Utility/Loader.svelte";
@@ -9,10 +10,6 @@
   import Heading from "../Utility/Heading.svelte";
 
   import BusinessCategories from "./BusinessCategories.svelte";
-
-  const installPWA = () => {
-    $eventPWA.prompt();
-  };
 </script>
 
 <Layout>
@@ -26,7 +23,7 @@
   <Heading>¿Qué buscás?</Heading>
   {#if $categories}
     <BusinessCategories {categories} />
-    {#if $eventPWA}
+    {#if $installPWAEvent}
       <Info icon="fas fa-mobile-alt">
         Agreganos a tu inicio y usá el sitio como cualquier otra app de
         Android/iOS.

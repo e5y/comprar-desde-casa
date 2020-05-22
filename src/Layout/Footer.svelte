@@ -1,10 +1,3 @@
-<script>
-  import { installPWAEvent } from "../stores.js";
-  const installPWA = () => {
-    $installPWAEvent.prompt();
-  };
-</script>
-
 <style>
   footer {
     color: black;

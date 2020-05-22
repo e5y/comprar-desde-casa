@@ -1,3 +1,7 @@
+import { get } from "svelte/store";
+
+export const installPWA = () => get(installPWAEvent).prompt();
+
 export const arrayToDays = (array) => {
   const days = [
     "lunes",
