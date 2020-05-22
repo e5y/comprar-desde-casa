@@ -1,5 +1,5 @@
 <script>
-  import { loaded, session } from "../stores.js";
+  import { appLoaded, session } from "../stores.js";
   import { link } from "svelte-routing";
 </script>
 
@@ -56,7 +56,7 @@
   }
 </style>
 
-{#if $loaded && $session.isAdmin}
+{#if $appLoaded && $session.isAdmin}
   <section class="topbar">
     <span>
       <i class="fas fa-cogs" />

@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { link, navigate } from "svelte-routing";
 
-  import { db, session } from "../stores.js";
+  import { appLoaded, db, session } from "../stores.js";
 
   import { Businesses } from "../classes/Businesses";
 
@@ -14,14 +14,18 @@
   let loaded, pendingBusinesses;
 
   onMount(async () => {
-    if ($session.loggedIn) {
-      pendingBusinesses = await $db.getPendingBusinesses($session.id);
-      if (!pendingBusinesses.length) {
-        const approvedBusinesses = await $db.getApprovedBusinesses($session.id);
-        if (approvedBusinesses.length) {
-          navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
-            replace: true
-          });
+    if ($appLoaded) {
+      if ($session.isLoggedIn) {
+        pendingBusinesses = await $db.getPendingBusinesses($session.id);
+        if (!pendingBusinesses.length) {
+          const approvedBusinesses = await $db.getApprovedBusinesses(
+            $session.id
+          );
+          if (approvedBusinesses.length) {
+            navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
+              replace: true
+            });
+          }
         }
       }
     }
@@ -75,42 +79,55 @@
 
 <Layout>
   <Heading>Tu negocio</Heading>
-  {#if $session.isLoggedIn}
-    {#if pendingBusinesses.length}
-      <Info type="warning">
-        Tenés un negocio pendiente de aprobación, te avisaremos cuando esté
-        listo.
-      </Info>
-      <div class="center">
-        <button class="button" on:click={$session.logOut}>Cerrar sesión</button>
-      </div>
+  {#if loaded}
+    {#if $session.isLoggedIn}
+      {#if pendingBusinesses}
+        <Info type="warning">
+          Tenés un negocio pendiente de aprobación, te avisaremos cuando esté
+          listo.
+        </Info>
+        <div class="center">
+          <button class="button" on:click={$session.logOut}>
+            Cerrar sesión
+          </button>
+        </div>
+      {:else}
+        <Info>Usted no tiene negocios pendientes ni aprobados.</Info>
+        <div class="center">
+          <button class="button" on:click={$session.logOut}>
+            Cerrar sesión
+          </button>
+        </div>
+      {/if}
+    {:else}
+      <section>
+        <h2>Registrate ahora</h2>
+        <p>
+          Si tenés un negocio que hace envíos, sumalo sin ningún costo ni
+          comisión por venta.
+        </p>
+        <div class="center">
+          <a href="/agregar-negocio" use:link class="button">
+            <i class="fas fa-plus-circle" />
+            Agregar mi negocio
+          </a>
+        </div>
+      </section>
+      <section>
+        <h2>¿Ya estás registrado?</h2>
+        <p>
+          Si ya estás registrado, iniciá sesión para modificar los datos de tu
+          negocio.
+        </p>
+        <div class="center">
+          <a href="/iniciar-sesion" use:link class="button">
+            <i class="fas fa-sign-in-alt" />
+            Iniciar sesión
+          </a>
+        </div>
+      </section>
     {/if}
   {:else}
-    <section>
-      <h2>Registrate ahora</h2>
-      <p>
-        Si tenés un negocio que hace envíos, sumalo sin ningún costo ni comisión
-        por venta.
-      </p>
-      <div class="center">
-        <a href="/agregar-negocio" use:link class="button">
-          <i class="fas fa-plus-circle" />
-          Agregar mi negocio
-        </a>
-      </div>
-    </section>
-    <section>
-      <h2>¿Ya estás registrado?</h2>
-      <p>
-        Si ya estás registrado, iniciá sesión para modificar los datos de tu
-        negocio.
-      </p>
-      <div class="center">
-        <a href="/iniciar-sesion" use:link class="button">
-          <i class="fas fa-sign-in-alt" />
-          Iniciar sesión
-        </a>
-      </div>
-    </section>
+    <Loader />
   {/if}
 </Layout>

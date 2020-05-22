@@ -1,5 +1,5 @@
 <script>
-  import { loaded } from "../stores.js";
+  import { appLoaded } from "../stores.js";
 
   import Header from "./Header.svelte";
   import Footer from "./Footer.svelte";
@@ -24,7 +24,7 @@
 
 <Header />
 <section class="content">
-  {#if $loaded}
+  {#if $appLoaded}
     <slot />
   {:else}
     <Loader />

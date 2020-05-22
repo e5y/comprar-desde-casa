@@ -5,7 +5,7 @@ export const session = writable(null);
 export const categories = writable(null);
 export const googleMapsLoaded = writable(null);
 
-export const loaded = writable(false);
+export const appLoaded = writable(false);
 
 /**
  * Every service that loads asynchronously and needs to be available
@@ -18,6 +18,6 @@ export const checkLoaded = () =>
   get(session) &&
   get(categories) &&
   get(googleMapsLoaded) &&
-  loaded.set(true);
+  appLoaded.set(true);
 
 export const installPWAEvent = writable(null);

@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { navigate } from "svelte-routing";
 
-  import { session } from "../stores.js";
+  import { appLoaded, session } from "../stores.js";
 
   import Layout from "../Layout/Layout.svelte";
   import Heading from "../Utility/Heading.svelte";
@@ -16,7 +16,7 @@
     errorMessage = "";
     try {
       isSubmitting = true;
-      await $user.logIn(email, password);
+      await $session.logIn(email, password);
       isSubmitting = false;
       navigate("/tu-negocio");
     } catch (e) {
@@ -34,7 +34,9 @@
   };
 
   onMount(() => {
-    if ($user.loggedIn) navigate("/tu-negocio", { replace: true });
+    if ($appLoaded) {
+      if ($session.isLoggedIn) navigate("/tu-negocio", { replace: true });
+    }
     form.addEventListener("input", () => {
       isValid = form.checkValidity();
     });
