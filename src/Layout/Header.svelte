@@ -1,6 +1,5 @@
 <script>
-  import { user } from "../stores.js";
-  import { logOut } from "../utilities.js";
+  import { loaded, session } from "../stores.js";
   import { link } from "svelte-routing";
 </script>
 
@@ -57,13 +56,13 @@
   }
 </style>
 
-{#if $user.isAdmin()}
+{#if $loaded && $session.isAdmin()}
   <section class="topbar">
     <span>
       <i class="fas fa-cogs" />
       <a use:link href="/admin">Ir al panel de administración</a>
     </span>
-    <button on:click={logOut}>
+    <button on:click={$session.logOut}>
       <i class="fas fa-sign-out-alt" />
       Salir
     </button>

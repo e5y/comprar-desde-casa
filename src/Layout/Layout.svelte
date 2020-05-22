@@ -1,5 +1,5 @@
 <script>
-  import { loaded } from "../stores";
+  import { loaded } from "../stores.js";
 
   import Header from "./Header.svelte";
   import Footer from "./Footer.svelte";

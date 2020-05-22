@@ -1,7 +1,7 @@
 <script>
-  import { eventPWA } from "../stores.js";
+  import { installPWAEvent } from "../stores.js";
   const installPWA = () => {
-    $eventPWA.prompt();
+    $installPWAEvent.prompt();
   };
 </script>
 
