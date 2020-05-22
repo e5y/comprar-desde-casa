@@ -15,6 +15,17 @@ export class Database {
     return this.geofirex.point(lat, lng);
   }
 
+  async addBusiness(collection, business, owner) {
+    await this.database
+      .collection("owners")
+      .doc(business.owner_id)
+      .set(owner.export);
+    await this.database
+      .collection(collection)
+      .doc(business.id)
+      .set(business.export);
+  }
+
   async getCategories() {
     return new Categories(
       await this.database

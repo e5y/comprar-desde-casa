@@ -7,9 +7,9 @@
   import Layout from "./Layout/Layout.svelte";
   import Home from "./Pages/Home.svelte";
   import LogIn from "./Pages/LogIn.svelte";
+  import AddBusiness from "./Pages/AddBusiness.svelte";
   import YourBusiness from "./Pages/YourBusiness.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
-  import AddBusiness from "./Business/AddBusiness.svelte";
   import EditBusiness from "./Pages/EditBusiness.svelte";
   import BusinessProfile from "./Business/BusinessProfile.svelte";
   import Admin from "./Admin/Admin.svelte";

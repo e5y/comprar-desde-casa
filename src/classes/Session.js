@@ -13,6 +13,10 @@ export class Session {
   get id() {
     return this._details.uid;
   }
+
+  /**
+   * TODO: Implement admin detection.
+   */
   get isAdmin() {
     return this._isAdmin;
   }
