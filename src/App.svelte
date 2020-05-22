@@ -4,7 +4,9 @@
 
   import { config } from "./config.js";
 
+  import Layout from "./Layout/Layout.svelte";
   import Home from "./Pages/Home.svelte";
+  import LogIn from "./Pages/LogIn.svelte";
   import YourBusiness from "./Pages/YourBusiness.svelte";
   import NearMe from "./NearMe/NearMe.svelte";
   import AddBusiness from "./Business/AddBusiness.svelte";
@@ -12,7 +14,6 @@
   import BusinessProfile from "./Business/BusinessProfile.svelte";
   import Admin from "./Admin/Admin.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
-  import LogIn from "./Account/LogIn.svelte";
 </script>
 
 <svelte:head>
@@ -22,33 +23,35 @@
   </title>
 </svelte:head>
 
-<Router>
-  <Route path="/admin">
-    <Admin />
-  </Route>
-  <Route path="/iniciar-sesion">
-    <LogIn />
-  </Route>
-  <Route path="/tu-negocio">
-    <YourBusiness />
-  </Route>
-  <Route path="/negocio/:id" let:params>
-    <BusinessProfile id={params.id} />
-  </Route>
-  <Route path="/agregar-negocio">
-    <AddBusiness />
-  </Route>
-  <Route path="/editar-negocio/:id" let:params>
-    <EditBusiness id={params.id} />
-  </Route>
-  <Route path="/cerca">
-    <NearMe category="todos" />
-  </Route>
-  <Route path="/cerca/:category" let:params>
-    <NearMe category={params.category} />
-  </Route>
-  <Route path="/">
-    <Home />
-  </Route>
-  <Navigation />
-</Router>
+<Layout>
+  <Router>
+    <Route path="/admin">
+      <Admin />
+    </Route>
+    <Route path="/iniciar-sesion">
+      <LogIn />
+    </Route>
+    <Route path="/tu-negocio">
+      <YourBusiness />
+    </Route>
+    <Route path="/negocio/:id" let:params>
+      <BusinessProfile id={params.id} />
+    </Route>
+    <Route path="/agregar-negocio">
+      <AddBusiness />
+    </Route>
+    <Route path="/editar-negocio/:id" let:params>
+      <EditBusiness id={params.id} />
+    </Route>
+    <Route path="/cerca">
+      <NearMe category="todos" />
+    </Route>
+    <Route path="/cerca/:category" let:params>
+      <NearMe category={params.category} />
+    </Route>
+    <Route path="/">
+      <Home />
+    </Route>
+    <Navigation />
+  </Router>
+</Layout>

@@ -12,21 +12,18 @@
   import BusinessCategories from "../Business/BusinessCategories.svelte";
 </script>
 
-<Layout>
-  <Info id="quedate-en-casa" type="primary" rest="1d">
-    Quedate en tu casa y encontrá acá todos los negocios con delivery cerca tuyo
+<Info id="quedate-en-casa" type="primary" rest="1d">
+  Quedate en tu casa y encontrá acá todos los negocios con delivery cerca tuyo
+</Info>
+<Info id="si-tenes-un-negocio" type="primary" icon="fas fa-store" rest="1d">
+  Si tenés un negocio que hace envíos, sumalo sin ningún costo ni comisión por
+  venta
+</Info>
+<Heading>¿Qué buscás?</Heading>
+<BusinessCategories categories={$categories} />
+{#if $installPWAEvent}
+  <Info icon="fas fa-mobile-alt">
+    Agreganos a tu inicio y usá el sitio como cualquier otra app de Android/iOS.
+    <button on:click={installPWA}>Agregar al inicio</button>
   </Info>
-  <Info id="si-tenes-un-negocio" type="primary" icon="fas fa-store" rest="1d">
-    Si tenés un negocio que hace envíos, sumalo sin ningún costo ni comisión por
-    venta
-  </Info>
-  <Heading>¿Qué buscás?</Heading>
-  <BusinessCategories categories={$categories} />
-  {#if $installPWAEvent}
-    <Info icon="fas fa-mobile-alt">
-      Agreganos a tu inicio y usá el sitio como cualquier otra app de
-      Android/iOS.
-      <button on:click={installPWA}>Agregar al inicio</button>
-    </Info>
-  {/if}
-</Layout>
+{/if}

@@ -83,33 +83,31 @@
   }
 </style>
 
-<Layout>
-  <Heading>Iniciar sesión</Heading>
-  <form on:submit={onSubmit} bind:this={form}>
-    <input
-      type="email"
-      placeholder="Correo electrónico *"
-      bind:value={email}
-      required />
-    <input
-      type="password"
-      placeholder="Contraseña"
-      bind:value={password}
-      required />
-    <button disabled={!isValid || isSubmitting}>
-      {#if isSubmitting}
-        <Loader size="inherit" />
-      {:else}
-        <i class="fas fa-sign-in-alt" />
-        Iniciar sesión
-      {/if}
-    </button>
-    <button type="button" on:click={onRegisterClick}>
-      <i class="fas fa-plus-circle" />
-      Registrarse
-    </button>
-    {#if errorMessage}
-      <Info type="error">{errorMessage}</Info>
+<Heading>Iniciar sesión</Heading>
+<form on:submit={onSubmit} bind:this={form}>
+  <input
+    type="email"
+    placeholder="Correo electrónico *"
+    bind:value={email}
+    required />
+  <input
+    type="password"
+    placeholder="Contraseña"
+    bind:value={password}
+    required />
+  <button disabled={!isValid || isSubmitting}>
+    {#if isSubmitting}
+      <Loader size="inherit" />
+    {:else}
+      <i class="fas fa-sign-in-alt" />
+      Iniciar sesión
     {/if}
-  </form>
-</Layout>
+  </button>
+  <button type="button" on:click={onRegisterClick}>
+    <i class="fas fa-plus-circle" />
+    Registrarse
+  </button>
+  {#if errorMessage}
+    <Info type="error">{errorMessage}</Info>
+  {/if}
+</form>

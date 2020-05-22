@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { link, navigate } from "svelte-routing";
 
-  import { appLoaded, db, session } from "../stores.js";
+  import { db, session } from "../stores.js";
   import { Business } from "../classes/Business.js";
 
   import Layout from "../Layout/Layout.svelte";
@@ -17,16 +17,15 @@
   let business, owner;
   let sent = false;
 
-  $: $appLoaded &&
-    (async () => {
-      try {
-        business = await $db.getApprovedBusiness(id);
-        owner = await $db.getOwner(business);
-      } catch (e) {
-        // TODO: Handle errors better 😢
-        console.error("❌ Business could not be fetched", e);
-      }
-    })();
+  onMount(async () => {
+    try {
+      window.business = business = await $db.getApprovedBusiness(id);
+      window.owner = owner = await $db.getOwner(business);
+    } catch (e) {
+      // TODO: Handle errors better 😢
+      console.error("❌ Business could not be fetched", e);
+    }
+  });
 
   const editBusiness = async () => {
     try {
@@ -76,27 +75,25 @@
   }
 </style>
 
-<Layout>
-  {#if $session.isLoggedIn}
-    <Heading>Editando negocio</Heading>
-    {#if sent}
-      <Info type="success">Tu negocio fue editado correctamente.</Info>
-    {:else if business && owner}
-      <BusinessForm
-        bind:business
-        bind:owner
-        on:submit={editBusiness}
-        submitText="Editar" />
-      <BusinessCard {business} />
-      <button class="log-out" on:click={$session.logOut}>Cerrar sesión</button>
-      <button class="delete-business" on:click={deleteBusiness}>Borrar</button>
-    {:else}
-      <Loader />
-    {/if}
+{#if $session.isLoggedIn}
+  <Heading>Editando negocio</Heading>
+  {#if sent}
+    <Info type="success">Tu negocio fue editado correctamente.</Info>
+  {:else if business && owner}
+    <BusinessForm
+      bind:business
+      bind:owner
+      on:submit={editBusiness}
+      submitText="Editar" />
+    <BusinessCard {business} />
+    <button class="log-out" on:click={$session.logOut}>Cerrar sesión</button>
+    <button class="delete-business" on:click={deleteBusiness}>Borrar</button>
   {:else}
-    <Info type="error">
-      Debes iniciar sesión para editar un negocio.
-      <a use:link href="/iniciar-sesion">Iniciar sesión</a>
-    </Info>
+    <Loader />
   {/if}
-</Layout>
+{:else}
+  <Info type="error">
+    Debes iniciar sesión para editar un negocio.
+    <a use:link href="/iniciar-sesion">Iniciar sesión</a>
+  </Info>
+{/if}

@@ -89,7 +89,7 @@
     <div>
       <h1>
         {business.name}
-        {#if $session.isAdmin()}
+        {#if $session.isAdmin}
           <a href="/editar-negocio/{business.id}" style="min-width: 4rem;">
             <i class="fas fa-edit" />
             Editar
@@ -112,7 +112,7 @@
     </p>
   {/if}
   <p class="description">{business.description}</p>
-  {#if $session.isAdmin()}
+  {#if $session.isAdmin}
     {#await business.getOwner() then owner}
       <ul class="admin">
         <li>

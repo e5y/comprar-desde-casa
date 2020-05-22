@@ -76,57 +76,51 @@
   }
 </style>
 
-<Layout>
-  <Heading>Tu negocio</Heading>
-  {#if loaded}
-    {#if $session.isLoggedIn}
-      {#if pendingBusinesses}
-        <Info type="warning">
-          Tenés un negocio pendiente de aprobación, te avisaremos cuando esté
-          listo.
-        </Info>
-        <div class="center">
-          <button class="button" on:click={$session.logOut}>
-            Cerrar sesión
-          </button>
-        </div>
-      {:else}
-        <Info>Usted no tiene negocios pendientes ni aprobados.</Info>
-        <div class="center">
-          <button class="button" on:click={$session.logOut}>
-            Cerrar sesión
-          </button>
-        </div>
-      {/if}
+<Heading>Tu negocio</Heading>
+{#if loaded}
+  {#if $session.isLoggedIn}
+    {#if pendingBusinesses}
+      <Info type="warning">
+        Tenés un negocio pendiente de aprobación, te avisaremos cuando esté
+        listo.
+      </Info>
+      <div class="center">
+        <button class="button" on:click={$session.logOut}>Cerrar sesión</button>
+      </div>
     {:else}
-      <section>
-        <h2>Registrate ahora</h2>
-        <p>
-          Si tenés un negocio que hace envíos, sumalo sin ningún costo ni
-          comisión por venta.
-        </p>
-        <div class="center">
-          <a href="/agregar-negocio" use:link class="button">
-            <i class="fas fa-plus-circle" />
-            Agregar mi negocio
-          </a>
-        </div>
-      </section>
-      <section>
-        <h2>¿Ya estás registrado?</h2>
-        <p>
-          Si ya estás registrado, iniciá sesión para modificar los datos de tu
-          negocio.
-        </p>
-        <div class="center">
-          <a href="/iniciar-sesion" use:link class="button">
-            <i class="fas fa-sign-in-alt" />
-            Iniciar sesión
-          </a>
-        </div>
-      </section>
+      <Info>Usted no tiene negocios pendientes ni aprobados.</Info>
+      <div class="center">
+        <button class="button" on:click={$session.logOut}>Cerrar sesión</button>
+      </div>
     {/if}
   {:else}
-    <Loader />
+    <section>
+      <h2>Registrate ahora</h2>
+      <p>
+        Si tenés un negocio que hace envíos, sumalo sin ningún costo ni comisión
+        por venta.
+      </p>
+      <div class="center">
+        <a href="/agregar-negocio" use:link class="button">
+          <i class="fas fa-plus-circle" />
+          Agregar mi negocio
+        </a>
+      </div>
+    </section>
+    <section>
+      <h2>¿Ya estás registrado?</h2>
+      <p>
+        Si ya estás registrado, iniciá sesión para modificar los datos de tu
+        negocio.
+      </p>
+      <div class="center">
+        <a href="/iniciar-sesion" use:link class="button">
+          <i class="fas fa-sign-in-alt" />
+          Iniciar sesión
+        </a>
+      </div>
+    </section>
   {/if}
-</Layout>
+{:else}
+  <Loader />
+{/if}

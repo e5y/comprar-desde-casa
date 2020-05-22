@@ -1,6 +1,12 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import { session, categories, googleMapsLoaded } from "../stores.js";
+  import {
+    appLoaded,
+    db,
+    session,
+    categories,
+    googleMapsLoaded
+  } from "../stores.js";
 
   export let business;
   export let owner;
@@ -19,7 +25,7 @@
     const autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
-      business.position = $geo.point(
+      business.position = $db.createPosition(
         place.geometry.location.lat(),
         place.geometry.location.lng()
       );
@@ -27,9 +33,7 @@
     });
   };
 
-  onMount(() => {
-    if ($googleMapsLoaded) setupInput();
-  });
+  onMount(setupInput);
 </script>
 
 <style>
@@ -118,7 +122,7 @@
         placeholder="Correo electrónico *"
         bind:value={owner.email} />
       <p class="field-description">Ni tu nombre ni tu correo serán visibles</p>
-      {#if !$user.loggedIn || ($user.loggedIn && $user.details.uid === owner.id)}
+      {#if !$session.isLoggedIn || ($session.isLoggedIn && $session.id === owner.id)}
         <input
           type="password"
           name="owner_password"

@@ -11,6 +11,10 @@ export class Database {
     this.geofirex = geofirex.init(database);
   }
 
+  createPosition(lat, lng) {
+    return this.geofirex.point(lat, lng);
+  }
+
   async getCategories() {
     return new Categories(
       await this.database
@@ -23,7 +27,7 @@ export class Database {
 
   async getOwner(business) {
     return new Owner(
-      await this.database.collection("owners").doc(business.id).get()
+      await this.database.collection("owners").doc(business.owner_id).get()
     );
   }
 
