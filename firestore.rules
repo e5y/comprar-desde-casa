@@ -21,7 +21,9 @@ service cloud.firestore {
       							&& ( request.auth.uid == 'q6GFYtzXYRXq11Xi7ABlmhvqQMi2' || request.auth.uid == 'pSGqTckqVyfJ6nasmqCt6yU5rvr2' );
     }
     match /owners/{owner} {
-    	allow read, write: if true;
+    	allow read, write: if request.auth != null 
+      						&& ( ( request.auth.uid == 'q6GFYtzXYRXq11Xi7ABlmhvqQMi2' || request.auth.uid == 'pSGqTckqVyfJ6nasmqCt6yU5rvr2' )
+                  || request.auth.uid == owner );
     }
   }
 }

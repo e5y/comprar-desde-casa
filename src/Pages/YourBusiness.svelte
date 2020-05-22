@@ -13,25 +13,22 @@
 
   let loaded, pendingBusinesses;
 
-  $: $appLoaded &&
-    (async () => {
-      if ($session.isLoggedIn) {
-        pendingBusinesses = await $db.getPendingBusinessesByOwnerId(
+  onMount(async () => {
+    if ($session.isLoggedIn) {
+      pendingBusinesses = await $db.getPendingBusinessesByOwnerId($session.id);
+      if (!pendingBusinesses || !pendingBusinesses.length) {
+        const approvedBusinesses = await $db.getApprovedBusinessesByOwnerId(
           $session.id
         );
-        if (!pendingBusinesses.length) {
-          const approvedBusinesses = await $db.getApprovedBusinessesByOwnerId(
-            $session.id
-          );
-          if (approvedBusinesses.length) {
-            navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
-              replace: true
-            });
-          }
+        if (approvedBusinesses.length) {
+          navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
+            replace: true
+          });
         }
       }
-      loaded = true;
-    })();
+    }
+    loaded = true;
+  });
 </script>
 
 <style>
@@ -81,7 +78,7 @@
 <Heading>Tu negocio</Heading>
 {#if loaded}
   {#if $session.isLoggedIn}
-    {#if pendingBusinesses}
+    {#if pendingBusinesses && pendingBusinesses.length}
       <Info type="warning">
         Tenés un negocio pendiente de aprobación, te avisaremos cuando esté
         listo.
