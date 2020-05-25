@@ -3,6 +3,7 @@ import { writable, get } from "svelte/store";
 export const db = writable(null);
 export const session = writable(null);
 export const categories = writable(null);
+export const storage = writable(null);
 export const googleMapsLoaded = writable(null);
 
 export const appLoaded = writable(false);

@@ -3,6 +3,7 @@ import { get } from "svelte/store";
 import {
   db,
   session,
+  storage,
   categories,
   googleMapsLoaded,
   installPWAEvent,
@@ -13,6 +14,7 @@ import { config } from "./config.js";
 
 import { Database } from "./classes/Database.js";
 import { Session } from "./classes/Session.js";
+import { Storage } from "./classes/Storage.js";
 
 import App from "./App.svelte";
 
@@ -36,6 +38,7 @@ if (!firebase.apps.length) {
 firebase.analytics();
 
 db.set(new Database(firebase));
+storage.set(new Storage(firebase.storage()));
 
 session.subscribe(checkLoaded);
 firebase.auth().onAuthStateChanged((user) => session.set(new Session(user)));
