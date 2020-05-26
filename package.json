@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "geofirex": "^0.1.0",
+    "glightbox": "^2.0.6",
     "js-cookie": "^2.2.1",
     "rxjs": "^6.5.5",
     "sirv-cli": "^0.4.4",

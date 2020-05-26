@@ -1,9 +1,15 @@
 <script>
+  import { onMount } from "svelte";
   import { session } from "../stores.js";
+
+  import Loader from "../Utility/Loader.svelte";
+
   import WhatsAppButton from "./Buttons/WhatsAppButton.svelte";
   import PhoneButton from "./Buttons/PhoneButton.svelte";
   import WebsiteButton from "./Buttons/WebsiteButton.svelte";
   import ShareButton from "./Buttons/ShareButton.svelte";
+
+  import BusinessImages from "./BusinessImages.svelte";
 
   export let business;
 </script>
@@ -100,6 +106,7 @@
     </div>
     <img src={business.marker} alt loading="lazy" />
   </header>
+  <BusinessImages {business} />
   {#if business.delivery_days && business.delivery_radius}
     <p class="delivery-info">
       <i class="fas fa-biking" />

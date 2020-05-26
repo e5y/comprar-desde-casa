@@ -49,7 +49,7 @@ export class Storage {
    * Firebase Directory Listing
    * @link https://firebase.google.com/docs/storage/web/list-files
    */
-  ls(directoryPath, maxResults = 100, nextPageToken = null) {
-    return this.ref.child(directoryPath).list({ maxResults, nextPageToken });
+  ls(directoryPath, maxResults = 100, pageToken = null) {
+    return this.ref.child(directoryPath).list({ maxResults, pageToken });
   }
 }
