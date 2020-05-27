@@ -48,18 +48,20 @@ export class Business {
   }
 
   async getImages() {
-    const { items } = await get(storage).ls(`businesses/${this.id}/images`);
-    const images = Promise.all(
-      items.map(async (item) => {
-        try {
-          item.url = await item.getDownloadURL();
-          return item;
-        } catch (e) {
-          throw e;
-        }
-      })
-    );
-    return images;
+    if (!this._images) {
+      const { items } = await get(storage).ls(`businesses/${this.id}/images`);
+      this._images = Promise.all(
+        items.map(async (item) => {
+          try {
+            item.url = await item.getDownloadURL();
+            return item;
+          } catch (e) {
+            throw e;
+          }
+        })
+      );
+    }
+    return this._images;
   }
 
   get id() {

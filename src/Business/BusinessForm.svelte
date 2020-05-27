@@ -279,6 +279,12 @@
         </a>
       </p>
     </section>
+    <section class="form-section">
+      <p class="field-description">
+        Subí hasta 3 imágenes que representen tu negocio, productos, listas de
+        precio, etc.
+      </p>
+    </section>
     <input type="submit" value={submitText} />
   </form>
 {/if}
