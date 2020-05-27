@@ -29,7 +29,7 @@
   .images:not(:empty) {
     --margin: 0.25rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 0 calc(-1 * var(--margin));
     height: 6rem;

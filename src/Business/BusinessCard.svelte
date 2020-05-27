@@ -106,7 +106,9 @@
     </div>
     <img src={business.marker} alt loading="lazy" />
   </header>
-  <BusinessImages {business} />
+  {#if !window.location.pathname.match(/(editar|agregar)\-negocio/i)}
+    <BusinessImages {business} />
+  {/if}
   {#if business.delivery_days && business.delivery_radius}
     <p class="delivery-info">
       <i class="fas fa-biking" />

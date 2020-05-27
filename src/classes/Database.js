@@ -5,6 +5,9 @@ import { Owner } from "../classes/Owner.js";
 import * as geofirex from "geofirex";
 import { get as geoGet } from "geofirex";
 
+import { storage } from "../stores.js";
+import { get } from "svelte/store";
+
 export class Database {
   constructor(firebase) {
     this.database = firebase.firestore();
@@ -39,6 +42,7 @@ export class Database {
   }
 
   async addBusiness(collection, business, owner) {
+    await get(storage).updateBusinessImages(business);
     await this.database
       .collection("owners")
       .doc(business.owner_id)
@@ -82,6 +86,7 @@ export class Database {
   }
 
   async updateBusiness(collection, business) {
+    await get(storage).updateBusinessImages(business);
     return this.database
       .collection(collection)
       .doc(business.id)
@@ -117,8 +122,6 @@ export class Database {
   async getRejectedBusiness(id) {
     return this.getBusiness("rejected_businesses", id);
   }
-
-  async getBusinessesForAdmin() {}
 
   async getBusinessesByOwnerId(collection, ownerId) {
     return new Businesses(

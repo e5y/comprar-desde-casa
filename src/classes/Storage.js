@@ -52,4 +52,25 @@ export class Storage {
   ls(directoryPath, maxResults = 100, pageToken = null) {
     return this.ref.child(directoryPath).list({ maxResults, pageToken });
   }
+
+  async deleteBusinessImages(business) {
+    const { items } = await this.ls(`businesses/${business.id}/images`);
+    await Promise.all(items.map(async (item) => this.delete(item.fullPath)));
+  }
+
+  async updateBusinessImages(business) {
+    await this.deleteBusinessImages(business);
+    const images = await business.getImages();
+    const uploads = images
+      .map((image, i) => {
+        return image.type === "file"
+          ? this.upload(
+              `businesses/${business.id}/images/${i}.${image.ext}`,
+              image.itemOrFile
+            )
+          : null;
+      })
+      .filter((truthy) => truthy);
+    await Promise.all(uploads);
+  }
 }

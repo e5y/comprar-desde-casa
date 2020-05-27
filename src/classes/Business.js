@@ -49,18 +49,40 @@ export class Business {
 
   async getImages() {
     if (!this._images) {
+      this._images = [];
       const { items } = await get(storage).ls(`businesses/${this.id}/images`);
-      this._images = Promise.all(
+      const images = await Promise.all(
         items.map(async (item) => {
-          try {
-            item.url = await item.getDownloadURL();
-            return item;
-          } catch (e) {
-            throw e;
-          }
+          item.url = await item.getDownloadURL();
+          let file = await fetch(item.url)
+            .then((r) => r.blob())
+            .then((blobFile) => new File([blobFile], item.name));
+          await this.addImageFromFile(file);
         })
       );
     }
+    return this._images;
+  }
+
+  async removeImage(image) {
+    this._images = this._images.filter((_image) => _image.id !== image.id);
+    return this._images;
+  }
+
+  async addImageFromFile(file) {
+    const dataURL = await new Promise((res, rej) => {
+      try {
+        const reader = new FileReader();
+        reader.addEventListener("load", ({ target: { result } }) =>
+          res(result)
+        );
+        reader.readAsDataURL(file);
+      } catch (e) {
+        rej(e);
+      }
+    });
+    file.url = dataURL;
+    this._images.push(new BusinessImage(file));
     return this._images;
   }
 
@@ -104,5 +126,23 @@ export class Business {
 
   get permalink() {
     return `https://comprardesdecasa.com.ar/negocio/${this.id}`;
+  }
+}
+
+class BusinessImage {
+  constructor(itemOrFile) {
+    this.itemOrFile = itemOrFile;
+    this.type = itemOrFile instanceof File ? "file" : "item";
+  }
+  get ext() {
+    return this.type === "file" ? this.itemOrFile.name.split(".").pop() : "";
+  }
+  get id() {
+    return this.type === "file"
+      ? this.itemOrFile.name
+      : this.itemOrFile.fullPath;
+  }
+  get url() {
+    return this.itemOrFile.url;
   }
 }
