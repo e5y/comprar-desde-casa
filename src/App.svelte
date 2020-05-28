@@ -13,6 +13,7 @@
   import NearMe from "./Pages/NearMe.svelte";
   import EditBusiness from "./Pages/EditBusiness.svelte";
   import Admin from "./Pages/Admin.svelte";
+  import ForgotPassword from "./Pages/ForgotPassword.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
 </script>
 
@@ -45,6 +46,12 @@
     </Route>
     <Route path="/cerca">
       <NearMe category="todos" />
+    </Route>
+    <Route path="/olvide-mi-contrasena">
+      <ForgotPassword />
+    </Route>
+    <Route path="/olvide-mi-contrasena/:email" let:params>
+      <ForgotPassword email={params.email} />
     </Route>
     <Route path="/cerca/:category" let:params>
       <NearMe category={params.category} />

@@ -12,7 +12,6 @@
   let form, email, password, isValid, isSubmitting, errorMessage;
 
   const onSubmit = async e => {
-    e.preventDefault();
     errorMessage = "";
     try {
       isSubmitting = true;
@@ -31,6 +30,10 @@
 
   const onRegisterClick = e => {
     navigate("/agregar-negocio");
+  };
+
+  const onForgottenPasswordClick = () => {
+    navigate("/olvide-mi-contrasena");
   };
 
   onMount(() => {
@@ -82,7 +85,7 @@
 </style>
 
 <Heading>Iniciar sesión</Heading>
-<form on:submit={onSubmit} bind:this={form}>
+<form on:submit|preventDefault={onSubmit} bind:this={form}>
   <input
     type="email"
     placeholder="Correo electrónico *"
@@ -104,6 +107,10 @@
   <button type="button" on:click={onRegisterClick}>
     <i class="fas fa-plus-circle" />
     Registrarse
+  </button>
+  <button type="button" on:click={onForgottenPasswordClick}>
+    <i class="fas fa-key" />
+    Olvidé mi contraseña
   </button>
   {#if errorMessage}
     <Info type="error">{errorMessage}</Info>

@@ -32,6 +32,10 @@ export class Session {
     return this._isLoggedIn;
   }
 
+  async sendPasswordReset(email) {
+    await firebase.auth().sendPasswordResetEmail(email);
+  }
+
   updatePassword(password) {
     return firebase.auth().currentUser.updatePassword(password);
   }
