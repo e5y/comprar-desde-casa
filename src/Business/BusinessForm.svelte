@@ -284,8 +284,7 @@
     <section class="form-section">
       <EditBusinessImages {business} />
       <p class="field-description">
-        Subí hasta 3 imágenes que representen tu negocio, productos, listas de
-        precio, etc.
+        Subí hasta 3 imágenes de ofertas y promos.
       </p>
     </section>
     <input type="submit" value={submitText} />

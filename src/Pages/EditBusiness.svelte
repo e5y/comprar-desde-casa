@@ -85,7 +85,7 @@
       bind:business
       bind:owner
       on:submit={editBusiness}
-      submitText="Editar" />
+      submitText="Guardar" />
     <BusinessCard {business} />
     <button class="log-out" on:click={$session.logOut}>Cerrar sesión</button>
     <button class="delete-business" on:click={deleteBusiness}>Borrar</button>
