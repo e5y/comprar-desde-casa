@@ -14,7 +14,7 @@
     Promise.all(
       businesses.map(async business => {
         if (business.owner_email) {
-          emails = [...emails, business.owner_email];
+          emails = [...emails, [business.owner_email, business.owner_name]];
           const owner = new Owner(
             await $db.database
               .collection("owners")
@@ -41,10 +41,13 @@
   });
 </script>
 
-<ul>
+<table>
   {#if emails}
     {#each emails as email}
-      <li>{email}</li>
+      <tr>
+        <td>{email[0]}</td>
+        <td>{email[1]}</td>
+      </tr>
     {/each}
   {/if}
-</ul>
+</table>
