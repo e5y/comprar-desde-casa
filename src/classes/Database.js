@@ -42,6 +42,7 @@ export class Database {
   }
 
   async ownerExists(id) {
+    if (!id) return false;
     const owner = await this.database.collection("owners").doc(id).get();
     return owner.exists;
   }

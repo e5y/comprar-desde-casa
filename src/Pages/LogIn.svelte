@@ -17,7 +17,7 @@
       isSubmitting = true;
       await $session.logIn(email, password);
       isSubmitting = false;
-      navigate("/tu-negocio");
+      navigate("/tus-negocios");
     } catch (e) {
       isSubmitting = false;
       if (e.code === "auth/user-not-found") {
