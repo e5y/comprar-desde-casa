@@ -12,6 +12,7 @@
   import BusinessProfile from "./Pages/BusinessProfile.svelte";
   import NearMe from "./Pages/NearMe.svelte";
   import EditBusiness from "./Pages/EditBusiness.svelte";
+  import EditBusinesses from "./Pages/EditBusinesses.svelte";
   import Admin from "./Pages/Admin.svelte";
   import ForgotPassword from "./Pages/ForgotPassword.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
@@ -32,11 +33,14 @@
     <Route path="/iniciar-sesion">
       <LogIn />
     </Route>
-    <Route path="/tu-negocio">
+    <Route path="/tus-negocios">
       <YourBusiness />
     </Route>
     <Route path="/negocio/:id" let:params>
       <BusinessProfile id={params.id} />
+    </Route>
+    <Route path="/agregar-negocio/:id" let:params>
+      <AddBusiness id={params.id} />
     </Route>
     <Route path="/agregar-negocio">
       <AddBusiness />
@@ -44,6 +48,7 @@
     <Route path="/editar-negocio/:id" let:params>
       <EditBusiness id={params.id} />
     </Route>
+
     <Route path="/cerca">
       <NearMe category="todos" />
     </Route>

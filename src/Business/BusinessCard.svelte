@@ -8,10 +8,12 @@
   import PhoneButton from "./Buttons/PhoneButton.svelte";
   import WebsiteButton from "./Buttons/WebsiteButton.svelte";
   import ShareButton from "./Buttons/ShareButton.svelte";
+  import EditButton from "./Buttons/EditButton.svelte";
 
   import BusinessImages from "./BusinessImages.svelte";
 
   export let business;
+  export let edit = false;
 </script>
 
 <style>
@@ -149,7 +151,7 @@
       </ul>
     {/await}
   {/if}
-  {#if !window.location.pathname.includes('/admin')}
+  {#if !window.location.pathname.includes('/admin') && !edit}
     <section class="buttons">
       {#if business.whatsapp}
         <WhatsAppButton phone={business.phone} />
@@ -159,6 +161,11 @@
         <WebsiteButton url={business.url} />
       {/if}
       <ShareButton {business} />
+    </section>
+  {/if}
+  {#if edit}
+    <section class="buttons">
+      <EditButton {business} />
     </section>
   {/if}
 </article>

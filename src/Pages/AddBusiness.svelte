@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { session, categories, db } from "../stores.js";
 
   import { Business } from "../classes/Business.js";
@@ -11,9 +12,18 @@
   import BusinessForm from "../Business/BusinessForm.svelte";
   import BusinessCard from "../Business/BusinessCard.svelte";
 
-  let business = new Business();
-  let owner = new Owner();
-  let sent = false;
+  export let id = null;
+
+  let business,
+    owner,
+    sent = false,
+    loaded = false;
+
+  onMount(async () => {
+    business = new Business();
+    owner = id ? await $db.getOwnerById(id) : new Owner();
+    loaded = true;
+  });
 
   const addBusiness = async () => {
     const collection = $session.isAdmin
@@ -21,9 +31,11 @@
       : "pending_businesses";
 
     try {
-      await $session.register(owner.email, owner.password, {
-        displayName: owner.name
-      });
+      if (!id) {
+        await $session.register(owner.email, owner.password, {
+          displayName: owner.name
+        });
+      }
       business.owner_id = $session.id;
       await $db.addBusiness(collection, business, owner);
       sent = true;
@@ -46,7 +58,7 @@
     aprobará de manera instantánea
   </Info>
 {/if}
-{#if $categories}
+{#if loaded}
   {#if sent}
     <Info type="success">
       Tu negocio fue enviado y está en revisión, te enviaremos un correo cuando
@@ -56,6 +68,7 @@
     <BusinessForm
       bind:business
       bind:owner
+      enableOwner={!id}
       on:submit={addBusiness}
       submitText="Inscribirse" />
     <BusinessCard {business} />

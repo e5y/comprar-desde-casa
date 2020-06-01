@@ -70,8 +70,8 @@
     <i class="fas fa-map-marker-alt" />
     Cerca mío
   </Link>
-  <Link to="/tu-negocio" {getProps}>
+  <Link to="/tus-negocios" {getProps}>
     <i class="fas fa-store" />
-    Tu negocio
+    Tus negocios
   </Link>
 </nav>

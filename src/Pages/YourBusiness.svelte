@@ -6,26 +6,24 @@
 
   import { Businesses } from "../classes/Businesses";
 
+  import BusinessCard from "../Business/BusinessCard.svelte";
   import Layout from "../Layout/Layout.svelte";
   import Heading from "../Utility/Heading.svelte";
   import Info from "../Utility/Info.svelte";
   import Loader from "../Utility/Loader.svelte";
 
-  let loaded, pendingBusinesses;
+  let loaded, pendingBusinesses, approvedBusinesses;
+
+  const addBusiness = () => {
+    navigate(`/agregar-negocio/${$session.id}`);
+  };
 
   onMount(async () => {
     if ($session.isLoggedIn) {
       pendingBusinesses = await $db.getPendingBusinessesByOwnerId($session.id);
-      if (!pendingBusinesses || !pendingBusinesses.length) {
-        const approvedBusinesses = await $db.getApprovedBusinessesByOwnerId(
-          $session.id
-        );
-        if (approvedBusinesses.length) {
-          navigate(`/editar-negocio/${approvedBusinesses[0].id}`, {
-            replace: true
-          });
-        }
-      }
+      approvedBusinesses = await $db.getApprovedBusinessesByOwnerId(
+        $session.id
+      );
     }
     loaded = true;
   });
@@ -75,7 +73,7 @@
   }
 </style>
 
-<Heading>Tu negocio</Heading>
+<Heading>Tus negocios</Heading>
 {#if loaded}
   {#if $session.isLoggedIn}
     {#if pendingBusinesses && pendingBusinesses.length}
@@ -83,15 +81,24 @@
         Tenés un negocio pendiente de aprobación, te avisaremos cuando esté
         listo.
       </Info>
+    {/if}
+    {#if approvedBusinesses}
+      {#each approvedBusinesses as business}
+        <BusinessCard {business} edit={true} />
+      {/each}
       <div class="center">
-        <button class="button" on:click={$session.logOut}>Cerrar sesión</button>
-      </div>
-    {:else}
-      <Info>Usted no tiene negocios pendientes ni aprobados.</Info>
-      <div class="center">
-        <button class="button" on:click={$session.logOut}>Cerrar sesión</button>
+        <button class="button" on:click={addBusiness}>
+          <i class="fas fa-plus-circle" />
+          Agregar Negocio
+        </button>
       </div>
     {/if}
+    {#if !pendingBusinesses && !approvedBusinesses}
+      <Info>Usted no tiene negocios pendientes ni aprobados.</Info>
+    {/if}
+    <div class="center">
+      <button class="button" on:click={$session.logOut}>Cerrar sesión</button>
+    </div>
   {:else}
     <section>
       <h2>Registrate ahora</h2>

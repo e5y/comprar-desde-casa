@@ -10,6 +10,7 @@
 
   export let business;
   export let owner;
+  export let enableOwner = true;
   export let submitText = "Enviar";
 
   import EditBusinessImages from "./EditBusinessImages.svelte";
@@ -109,31 +110,35 @@
 
 {#if business}
   <form on:submit|preventDefault={submitBusiness}>
-    <section class="form-section">
-      <input
-        type="text"
-        name="owner_name"
-        placeholder="Nombre del titular *"
-        required
-        maxlength="50"
-        bind:value={owner.name} />
-      <input
-        type="email"
-        name="owner_email"
-        required
-        placeholder="Correo electrónico *"
-        bind:value={owner.email} />
-      <p class="field-description">Ni tu nombre ni tu correo serán visibles</p>
-      {#if !$session.isLoggedIn || ($session.isLoggedIn && $session.id === owner.id)}
+    {#if enableOwner}
+      <section class="form-section">
         <input
-          type="password"
-          name="owner_password"
-          required={!$session.isLoggedIn}
-          placeholder="Contraseña (mínimo 10 caracteres)"
-          minlength="10"
-          bind:value={owner.password} />
-      {/if}
-    </section>
+          type="text"
+          name="owner_name"
+          placeholder="Nombre del titular *"
+          required
+          maxlength="50"
+          bind:value={owner.name} />
+        <input
+          type="email"
+          name="owner_email"
+          required
+          placeholder="Correo electrónico *"
+          bind:value={owner.email} />
+        <p class="field-description">
+          Ni tu nombre ni tu correo serán visibles
+        </p>
+        {#if !$session.isLoggedIn || ($session.isLoggedIn && $session.id === owner.id)}
+          <input
+            type="password"
+            name="owner_password"
+            required={!$session.isLoggedIn}
+            placeholder="Contraseña (mínimo 10 caracteres)"
+            minlength="10"
+            bind:value={owner.password} />
+        {/if}
+      </section>
+    {/if}
     <section class="form-section">
       <input
         type="text"

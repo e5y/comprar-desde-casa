@@ -41,12 +41,20 @@ export class Database {
     return new Businesses(await geoGet(geoQuery), true);
   }
 
+  async ownerExists(id) {
+    const owner = await this.database.collection("owners").doc(id).get();
+    return owner.exists;
+  }
+
   async addBusiness(collection, business, owner) {
     await get(storage).updateBusinessImages(business);
-    await this.database
-      .collection("owners")
-      .doc(business.owner_id)
-      .set(owner.export);
+    const ownerExists = await this.ownerExists(owner.id);
+    if (!ownerExists) {
+      await this.database
+        .collection("owners")
+        .doc(business.owner_id)
+        .set(owner.export);
+    }
     await this.database
       .collection(collection)
       .doc(business.id)
@@ -60,6 +68,12 @@ export class Database {
         .where("visible", "==", true)
         .orderBy("order")
         .get()
+    );
+  }
+
+  async getOwnerById(ownerId) {
+    return new Owner(
+      await this.database.collection("owners").doc(ownerId).get()
     );
   }
 
