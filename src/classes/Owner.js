@@ -6,6 +6,10 @@ export class Owner {
     });
 
     if (owner) {
+      if (owner.empty) {
+        this.empty = true;
+        return;
+      }
       this.id = owner.id;
       Object.assign(this, owner.data());
     }

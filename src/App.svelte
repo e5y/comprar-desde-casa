@@ -15,6 +15,7 @@
   import EditBusinesses from "./Pages/EditBusinesses.svelte";
   import Admin from "./Pages/Admin.svelte";
   import ForgotPassword from "./Pages/ForgotPassword.svelte";
+  import DatabaseUpgrade from "./Pages/DatabaseUpgrade.svelte";
   import Navigation from "./Navigation/Navigation.svelte";
 </script>
 
@@ -60,6 +61,9 @@
     </Route>
     <Route path="/cerca/:category" let:params>
       <NearMe category={params.category} />
+    </Route>
+    <Route path="/dbupgrade">
+      <DatabaseUpgrade />
     </Route>
     <Route path="/">
       <Home />
